@@ -1,0 +1,93 @@
+@startuml e-commerce
+
+skinparam nodesep 70
+skinparam ranksep 70
+skinparam linetype ortho
+
+' =====================
+' ENUMS
+' =====================
+
+enum GeneroQuadrinho {
+  ACAO
+  AVENTURA
+  FICCAO_CIENTIFICA
+  FANTASIA
+  TERROR
+}
+
+enum TipoCapa {
+  BROCHURA
+  CAPA_DURA
+  ESPECIAL
+  LUXO
+}
+
+' =====================
+' CLASSES
+' =====================
+
+abstract class Produto {
+  - id: Long
+  - nome: String
+  - descricao: String
+  - preco: Decimal
+  - dataCadastro: LocalDateTime
+}
+
+class Edicao {
+  - numero: int
+  - dataPublicacao: Date
+  - isbn: String
+  - tipoCapa: TipoCapa
+  - tiragem: int
+  - dimensoes: String
+}
+
+class Quadrinho {
+  - id: Long
+  - titulo: String
+  - sinopse: String
+  - genero: GeneroQuadrinho
+}
+
+class Colecao {
+  - id: Long
+  - nome: String
+  - descricao: String
+  - dataInicoPublicacao: Date
+  - dataFimPublicacao: Date
+}
+
+class Editora {
+  - id: Long
+  - nome: String
+  - cnpj: String
+}
+
+class Pessoa {
+  - id: Long
+  - nome: String
+  - nacionalidade: String
+  - dataNascimento: Date
+}
+
+class Credito {
+  - funcao: String  
+}
+
+' =====================
+' RELACIONAMENTOS
+' =====================
+
+Produto <|-- Edicao
+
+Quadrinho "1" -down- "1..*" Edicao
+Quadrinho "1" *-- "1..*" Credito
+Pessoa "1" -- "0..*" Credito
+
+Editora "1" -left- "0..*" Edicao
+
+Colecao "1" o-right- "0..*" Edicao
+
+@enduml
