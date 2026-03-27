@@ -1,7 +1,10 @@
 package br.unitins.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+import br.unitins.model.enums.GeneroQuadrinho;
 import br.unitins.model.enums.TipoCapa;
 
 public class Edicao extends Produto {
@@ -11,4 +14,106 @@ public class Edicao extends Produto {
     private Integer tiragem;
     private TipoCapa tipoCapa;
     private String dimensoes;
+    private GeneroQuadrinho genero;
+
+    public Edicao() {
+        super();
+    }
+
+    public Edicao(Long id, String nome, String descricao, BigDecimal preco, LocalDateTime dataCadastro, Integer numero,
+            LocalDate dataPublicacao, String isbn, Integer tiragem, TipoCapa tipoCapa, String dimensoes,
+            GeneroQuadrinho genero) {
+        super(id, nome, descricao, preco, dataCadastro);
+        this.numero = numero;
+        this.dataPublicacao = dataPublicacao;
+        this.isbn = isbn;
+        this.tiragem = tiragem;
+        this.tipoCapa = tipoCapa;
+        this.dimensoes = dimensoes;
+        this.genero = genero;
+    }
+
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
+
+    public LocalDate getDataPublicacao() {
+        return dataPublicacao;
+    }
+
+    public void setDataPublicacao(LocalDate dataPublicacao) {
+        this.dataPublicacao = dataPublicacao;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public Integer getTiragem() {
+        return tiragem;
+    }
+
+    public void setTiragem(Integer tiragem) {
+        this.tiragem = tiragem;
+    }
+
+    public TipoCapa getTipoCapa() {
+        return tipoCapa;
+    }
+
+    public void setTipoCapa(TipoCapa tipoCapa) {
+        this.tipoCapa = tipoCapa;
+    }
+
+    public String getDimensoes() {
+        return dimensoes;
+    }
+
+    public void setDimensoes(String dimensoes) {
+        this.dimensoes = dimensoes;
+    }
+
+    public GeneroQuadrinho getGenero() {
+        return genero;
+    }
+
+    public void setGenero(GeneroQuadrinho genero) {
+        this.genero = genero;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + ((isbn == null) ? 0 : isbn.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Edicao other = (Edicao) obj;
+        if (isbn == null) {
+            if (other.isbn != null)
+                return false;
+        } else if (!isbn.equals(other.isbn))
+            return false;
+        return true;
+    }
+
 }

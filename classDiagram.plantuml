@@ -29,7 +29,6 @@ enum TipoCapa {
 
 abstract class Produto {
   - id: Long
-  - nome: String
   - descricao: String
   - preco: Decimal
   - dataCadastro: LocalDateTime
