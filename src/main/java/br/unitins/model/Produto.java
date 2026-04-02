@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.PrePersist;
 
 @MappedSuperclass
 public abstract class Produto {
@@ -28,6 +29,11 @@ public abstract class Produto {
         this.descricao = descricao;
         this.preco = preco;
         this.dataCadastro = dataCadastro;
+    }
+
+    @PrePersist
+    protected void preencheDataCadastro() {
+        this.dataCadastro = LocalDateTime.now();
     }
 
     public Long getId() {

@@ -6,14 +6,36 @@ import java.time.LocalDateTime;
 
 import br.unitins.model.enums.GeneroQuadrinho;
 import br.unitins.model.enums.TipoCapa;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "tb_edicao")
 public class Edicao extends Produto {
+
+    @Column(nullable = false)
     private Integer numero;
+
+    @Column(name = "data_publicacao")
     private LocalDate dataPublicacao;
+
+    @Column(nullable = false, unique = true, length = 20)
     private String isbn;
+
     private Integer tiragem;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private TipoCapa tipoCapa;
+
+    @Column(length = 50)
     private String dimensoes;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private GeneroQuadrinho genero;
 
     public Edicao() {
