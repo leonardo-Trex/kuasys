@@ -27,8 +27,7 @@ public class EdicaoServiceImpl implements EdicaoService {
 
     @Override
     public List<Edicao> findByNome(String nome) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findByNome'");
+        return repository.findByNome(nome).list();
     }
 
     @Override
