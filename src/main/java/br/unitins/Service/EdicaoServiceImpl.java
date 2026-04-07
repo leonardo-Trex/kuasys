@@ -50,6 +50,7 @@ public class EdicaoServiceImpl implements EdicaoService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         repository.deleteById(id);
     }
