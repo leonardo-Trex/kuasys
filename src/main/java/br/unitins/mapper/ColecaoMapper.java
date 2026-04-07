@@ -3,7 +3,6 @@ package br.unitins.mapper;
 import br.unitins.dto.ColecaoRequestDTO;
 import br.unitins.dto.ColecaoResponseDTO;
 import br.unitins.model.Colecao;
-import jakarta.enterprise.context.ApplicationScoped;
 
 public class ColecaoMapper {
 
