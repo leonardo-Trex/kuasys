@@ -41,12 +41,16 @@ public class EdicaoServiceImpl implements EdicaoService {
     @Transactional
     public void update(Long id, Edicao edicao) {
         Edicao e = findById(id);
-        e.setNumero(null);
-        e.setDimensoes(null);
-        e.setDataPublicacao(null);
-        e.setTiragem(null);
-        e.setTipoCapa(null);
-        e.setGenero(null);
+        e.setNome(edicao.getNome());
+        e.setDescricao(edicao.getDescricao());
+        e.setPreco(edicao.getPreco());
+        e.setNumero(edicao.getNumero());
+        e.setDataPublicacao(edicao.getDataPublicacao());
+        e.setIsbn(edicao.getIsbn());
+        e.setTiragem(e.getTiragem());
+        e.setTipoCapa(e.getTipoCapa());
+        e.setDimensoes(edicao.getDimensoes());
+        e.setGenero(e.getGenero());
     }
 
     @Override
