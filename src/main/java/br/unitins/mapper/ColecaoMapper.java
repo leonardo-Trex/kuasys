@@ -28,6 +28,7 @@ public class ColecaoMapper {
                 colecao.getNome(),
                 colecao.getDescricao(),
                 colecao.getDataInicioPublicacao(),
-                colecao.getDataFimPublicacao());
+                colecao.getDataFimPublicacao(),
+                colecao.getEdicoes());
     }
 }
