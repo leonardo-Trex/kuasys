@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.unitins.model.enums.GeneroQuadrinho;
 import br.unitins.model.enums.TipoCapa;
 import jakarta.persistence.Column;
@@ -40,6 +42,7 @@ public class Edicao extends Produto {
     @JoinColumn(name = "colecao_id")
     // @ManyToOne(fetch = FetchType.LAZY)
     @ManyToOne
+    @JsonIgnore
     private Colecao colecao;
 
     public Edicao() {
