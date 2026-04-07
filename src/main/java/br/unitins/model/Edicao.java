@@ -27,15 +27,13 @@ public class Edicao extends Produto {
 
     private Integer tiragem;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "codigo_tipo_capa", nullable = false)
     private TipoCapa tipoCapa;
 
     @Column(length = 50)
     private String dimensoes;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "codigo_genero", nullable = false)
     private GeneroQuadrinho genero;
 
     public Edicao() {
