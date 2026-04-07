@@ -4,12 +4,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -33,8 +33,7 @@ public class Colecao {
     @Column(name = "data_fim_publicacao", nullable = false)
     private LocalDate dataFimPublicacao;
 
-    @OneToMany
-    @JoinColumn
+    @OneToMany(mappedBy = "colecao", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Edicao> edicoes = new ArrayList<>();
 
     public Colecao() {
@@ -87,6 +86,10 @@ public class Colecao {
 
     public void setDataFimPublicacao(LocalDate dataFimPublicacao) {
         this.dataFimPublicacao = dataFimPublicacao;
+    }
+
+    public List<Edicao> getEdicoes() {
+        return edicoes;
     }
 
     @Override

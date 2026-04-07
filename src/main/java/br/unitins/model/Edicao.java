@@ -8,6 +8,9 @@ import br.unitins.model.enums.GeneroQuadrinho;
 import br.unitins.model.enums.TipoCapa;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -34,13 +37,17 @@ public class Edicao extends Produto {
     @Column(name = "codigo_genero", nullable = false)
     private GeneroQuadrinho genero;
 
+    @JoinColumn(name = "colecao_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Colecao colecao;
+
     public Edicao() {
         super();
     }
 
     public Edicao(Long id, String nome, String descricao, BigDecimal preco, LocalDateTime dataCadastro, Integer numero,
             LocalDate dataPublicacao, String isbn, Integer tiragem, TipoCapa tipoCapa, String dimensoes,
-            GeneroQuadrinho genero) {
+            GeneroQuadrinho genero, Colecao colecao) {
         super(id, nome, descricao, preco, dataCadastro);
         this.numero = numero;
         this.dataPublicacao = dataPublicacao;
@@ -49,6 +56,7 @@ public class Edicao extends Produto {
         this.tipoCapa = tipoCapa;
         this.dimensoes = dimensoes;
         this.genero = genero;
+        this.colecao = colecao;
     }
 
     public Integer getNumero() {
@@ -105,6 +113,14 @@ public class Edicao extends Produto {
 
     public void setGenero(GeneroQuadrinho genero) {
         this.genero = genero;
+    }
+
+    public Colecao getColecao() {
+        return colecao;
+    }
+
+    public void setColecao(Colecao colecao) {
+        this.colecao = colecao;
     }
 
     @Override
