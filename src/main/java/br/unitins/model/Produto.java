@@ -3,6 +3,7 @@ package br.unitins.model;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,6 +19,8 @@ public abstract class Produto {
     private String nome;
     private String descricao;
     private BigDecimal preco;
+
+    @Column(name = "data_cadastro")
     private LocalDateTime dataCadastro;
 
     public Produto() {
