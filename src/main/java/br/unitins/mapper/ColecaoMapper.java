@@ -6,7 +6,7 @@ import br.unitins.model.Colecao;
 
 public class ColecaoMapper {
 
-    public Colecao toEntity(ColecaoRequestDTO dto) {
+    public static Colecao toEntity(ColecaoRequestDTO dto) {
         if (dto == null)
             return null;
 
@@ -19,7 +19,7 @@ public class ColecaoMapper {
         return colecao;
     }
 
-    public ColecaoResponseDTO toResponseDTO(Colecao colecao) {
+    public static ColecaoResponseDTO toResponseDTO(Colecao colecao) {
         if (colecao == null)
             return null;
 
