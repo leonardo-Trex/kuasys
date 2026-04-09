@@ -40,8 +40,7 @@ public class Edicao extends Produto {
     private GeneroQuadrinho genero;
 
     @JoinColumn(name = "colecao_id")
-    // @ManyToOne(fetch = FetchType.LAZY)
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     private Colecao colecao;
 
