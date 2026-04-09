@@ -35,3 +35,12 @@ VALUES
 ('Watchmen', 'A graphic novel que mudou a história dos quadrinhos.', 199.00, CURRENT_TIMESTAMP, 12, '2019-11-20', '9788583683933', 2000, 1, '19x28 cm', 1, 1),
 -- Edição 05: Turma da Mônica - Laços
 ('Graphic MSP: Laços', 'Uma releitura emocionante dos personagens de Mauricio de Sousa.', 45.50, CURRENT_TIMESTAMP, 1, '2013-06-01', '9788583680215', 10000, 1, '19x26 cm', 2, 1);
+
+-- Pessoa
+INSERT INTO pessoa (nome, nacionalidade, data_nascimento) 
+VALUES 
+('João Silva', 'Brasileira', '1995-05-20'),
+('Marie Curie', 'Polonesa', '1867-11-07'),
+('Linus Torvalds', 'Finlandesa', '1969-12-28'),
+('Ada Lovelace', 'Britânica', '1815-12-10'),
+('Gabriel Garcia Marquez', 'Colombiana', '1927-03-06');
