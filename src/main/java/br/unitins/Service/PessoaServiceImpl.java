@@ -5,9 +5,11 @@ import java.util.List;
 import br.unitins.Service.interfaces.PessoaService;
 import br.unitins.model.Pessoa;
 import br.unitins.repository.PessoaRepository;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 
+@ApplicationScoped
 public class PessoaServiceImpl implements PessoaService {
 
     @Inject
@@ -46,6 +48,7 @@ public class PessoaServiceImpl implements PessoaService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         repository.deleteById(id);
     }
