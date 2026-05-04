@@ -44,6 +44,8 @@ public class Edicao extends Produto {
     @JsonIgnore
     private Colecao colecao;
 
+    private Editora editora;
+
     public Edicao() {
         super();
     }
