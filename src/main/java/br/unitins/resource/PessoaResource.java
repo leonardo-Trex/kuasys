@@ -3,10 +3,8 @@ package br.unitins.resource;
 import java.util.List;
 
 import br.unitins.Service.interfaces.PessoaService;
-import br.unitins.dto.EdicaoRequestDTO;
 import br.unitins.dto.PessoaRequestDTO;
 import br.unitins.dto.PessoaResponseDTO;
-import br.unitins.mapper.EdicaoMapper;
 import br.unitins.mapper.PessoaMapper;
 import br.unitins.model.Pessoa;
 import jakarta.inject.Inject;
