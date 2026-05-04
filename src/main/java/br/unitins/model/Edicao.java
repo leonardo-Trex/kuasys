@@ -52,7 +52,7 @@ public class Edicao extends Produto {
 
     public Edicao(Long id, String nome, String descricao, BigDecimal preco, LocalDateTime dataCadastro, Integer numero,
             LocalDate dataPublicacao, String isbn, Integer tiragem, TipoCapa tipoCapa, String dimensoes,
-            GeneroQuadrinho genero, Colecao colecao) {
+            GeneroQuadrinho genero, Colecao colecao, Editora editora) {
         super(id, nome, descricao, preco, dataCadastro);
         this.numero = numero;
         this.dataPublicacao = dataPublicacao;
@@ -62,6 +62,7 @@ public class Edicao extends Produto {
         this.dimensoes = dimensoes;
         this.genero = genero;
         this.colecao = colecao;
+        this.editora = editora;
     }
 
     public Integer getNumero() {
@@ -126,6 +127,14 @@ public class Edicao extends Produto {
 
     public void setColecao(Colecao colecao) {
         this.colecao = colecao;
+    }
+
+    public Editora getEditora() {
+        return editora;
+    }
+
+    public void setEditora(Editora editora) {
+        this.editora = editora;
     }
 
     @Override
