@@ -44,7 +44,13 @@ public class Edicao extends Produto {
     @JsonIgnore
     private Colecao colecao;
 
+    @JoinColumn(name = "editora_id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Editora editora;
+
+    @JoinColumn(name = "quadrinho_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Quadrinho quadrinho;
 
     public Edicao() {
         super();
@@ -52,7 +58,7 @@ public class Edicao extends Produto {
 
     public Edicao(Long id, String nome, String descricao, BigDecimal preco, LocalDateTime dataCadastro, Integer numero,
             LocalDate dataPublicacao, String isbn, Integer tiragem, TipoCapa tipoCapa, String dimensoes,
-            GeneroQuadrinho genero, Colecao colecao, Editora editora) {
+            GeneroQuadrinho genero, Colecao colecao, Editora editora, Quadrinho quadrinho) {
         super(id, nome, descricao, preco, dataCadastro);
         this.numero = numero;
         this.dataPublicacao = dataPublicacao;
@@ -63,6 +69,7 @@ public class Edicao extends Produto {
         this.genero = genero;
         this.colecao = colecao;
         this.editora = editora;
+        this.quadrinho = quadrinho;
     }
 
     public Integer getNumero() {
@@ -135,6 +142,14 @@ public class Edicao extends Produto {
 
     public void setEditora(Editora editora) {
         this.editora = editora;
+    }
+
+    public Quadrinho getQuadrinho() {
+        return quadrinho;
+    }
+
+    public void setQuadrinho(Quadrinho quadrinho) {
+        this.quadrinho = quadrinho;
     }
 
     @Override
