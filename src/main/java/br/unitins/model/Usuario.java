@@ -5,15 +5,11 @@ import java.time.LocalDateTime;
 import br.unitins.model.enums.Perfil;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "usuario")
-public class Usuario {
+public class Usuario extends DefaultEntity {
 
     @Column(unique = true, nullable = false)
     private String login;
@@ -21,9 +17,6 @@ public class Usuario {
     @Column(name = "senha_hash", nullable = false)
     private String senhaHash;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String nome;
 
     @Column(unique = true)
@@ -32,38 +25,18 @@ public class Usuario {
     private Perfil perfil;
     private Boolean ativo;
 
-    @Column(name = "data_cadastro")
-    private LocalDateTime dataCadastro;
-
     public Usuario() {
     }
 
-    public Usuario(Long id, String nome, String email, String senha, Perfil perfil, Boolean ativo, LocalDateTime dataCadastro) {
-        this.id = id;
+    public Usuario(Long id, String login, String nome, String email, String senha, String senhaHash, Perfil perfil, Boolean ativo, LocalDateTime dataCadastro) {
+        this.login = login;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+        this.senhaHash = senhaHash;
         this.perfil = perfil;
         this.ativo = ativo;
-        this.dataCadastro = dataCadastro;
-    }
-
-    @PrePersist
-    protected void preencheDataCadastro() {
-        if (this.dataCadastro == null) {
-            this.dataCadastro = LocalDateTime.now();
-        }
-        if (this.ativo == null) {
-            this.ativo = Boolean.TRUE;
-        }
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+     
     }
 
     public String getNome() {
@@ -90,6 +63,14 @@ public class Usuario {
         this.senha = senha;
     }
 
+    public String getSenhaHash() {
+        return senhaHash;
+    }
+
+    public void setSenhaHash(String senhaHash) {
+        this.senhaHash = senhaHash;
+    }
+
     public Perfil getPerfil() {
         return perfil;
     }
@@ -106,13 +87,7 @@ public class Usuario {
         this.ativo = ativo;
     }
 
-    public LocalDateTime getDataCadastro() {
-        return dataCadastro;
-    }
 
-    public void setDataCadastro(LocalDateTime dataCadastro) {
-        this.dataCadastro = dataCadastro;
-    }
 
     public String getLogin() {
         return login;
@@ -126,7 +101,7 @@ public class Usuario {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((super.getId() == null) ? 0 : getId().hashCode());
         return result;
     }
 
@@ -139,10 +114,10 @@ public class Usuario {
         if (getClass() != obj.getClass())
             return false;
         Usuario other = (Usuario) obj;
-        if (id == null) {
-            if (other.id != null)
+        if (getId() == null) {
+            if (other.getId() != null)
                 return false;
-        } else if (!id.equals(other.id))
+        } else if (!getId().equals(other.getId()))
             return false;
         return true;
     }
