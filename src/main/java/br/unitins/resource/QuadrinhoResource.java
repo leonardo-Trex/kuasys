@@ -9,6 +9,8 @@ import br.unitins.mapper.QuadrinhoMapper;
 import br.unitins.model.Quadrinho;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
+import jakarta.annotation.security.RolesAllowed;
+import io.quarkus.security.Authenticated;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -23,6 +25,7 @@ import jakarta.ws.rs.core.Response.Status;
 @Path("/quadrinhos")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Authenticated
 public class QuadrinhoResource {
 
     @Inject
@@ -46,6 +49,7 @@ public class QuadrinhoResource {
 
     @DELETE
     @Path("/{id}")
+    @RolesAllowed("ADMIN")
     public Response deletar(Long id) {
         service.delete(id);
 
@@ -53,6 +57,7 @@ public class QuadrinhoResource {
     }
 
     @POST
+    @RolesAllowed("ADMIN")
     public Response incluir(@Valid QuadrinhoRequestDTO dto) {
         Quadrinho quadrinho = service.create(QuadrinhoMapper.toEntity(dto));
 
@@ -64,6 +69,7 @@ public class QuadrinhoResource {
 
     @PUT
     @Path("/{id}")
+    @RolesAllowed("ADMIN")
     public Response alterar(Long id, QuadrinhoRequestDTO dto) {
         service.update(id, QuadrinhoMapper.toEntity(dto));
 

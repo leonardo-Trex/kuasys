@@ -9,6 +9,8 @@ import br.unitins.mapper.EditoraMapper;
 import br.unitins.model.Editora;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
+import jakarta.annotation.security.RolesAllowed;
+import io.quarkus.security.Authenticated;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -23,6 +25,7 @@ import jakarta.ws.rs.core.Response.Status;
 @Path("/editoras")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Authenticated
 public class EditoraResource {
 
     @Inject
@@ -46,6 +49,7 @@ public class EditoraResource {
 
     @DELETE
     @Path("/{id}")
+    @RolesAllowed("ADMIN")
     public Response deletar(Long id) {
         service.delete(id);
 
@@ -53,6 +57,7 @@ public class EditoraResource {
     }
 
     @POST
+    @RolesAllowed("ADMIN")
     public Response incluir(@Valid EditoraRequestDTO dto) {
         Editora editora = service.create(EditoraMapper.toEntity(dto));
 
@@ -64,6 +69,7 @@ public class EditoraResource {
 
     @PUT
     @Path("/{id}")
+    @RolesAllowed("ADMIN")
     public Response alterar(Long id, EditoraRequestDTO dto) {
         service.update(id, EditoraMapper.toEntity(dto));
 

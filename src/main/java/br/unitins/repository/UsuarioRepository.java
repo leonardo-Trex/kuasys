@@ -16,4 +16,8 @@ public class UsuarioRepository implements PanacheRepository<Usuario> {
         return find("email", email).firstResult();
     }
 
+    public Usuario findByLogin(String login) {
+        return find("login", login).firstResult();
+    }
+
 }

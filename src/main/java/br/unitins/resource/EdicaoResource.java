@@ -9,6 +9,8 @@ import br.unitins.mapper.EdicaoMapper;
 import br.unitins.model.Edicao;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
+import jakarta.annotation.security.RolesAllowed;
+import io.quarkus.security.Authenticated;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -23,6 +25,7 @@ import jakarta.ws.rs.core.Response.Status;
 @Path("/edicoes")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Authenticated
 public class EdicaoResource {
 
     @Inject
@@ -50,6 +53,7 @@ public class EdicaoResource {
 
     @DELETE
     @Path("/{id}")
+    @RolesAllowed("ADMIN")
     public Response deletar(Long id) {
         service.delete(id);
 
@@ -57,6 +61,7 @@ public class EdicaoResource {
     }
 
     @POST
+    @RolesAllowed("ADMIN")
     public Response incluir(@Valid EdicaoRequestDTO dto) {
         Edicao edicao = service.create(EdicaoMapper.toEntity(dto));
 
@@ -68,6 +73,7 @@ public class EdicaoResource {
 
     @PUT
     @Path("/{id}")
+    @RolesAllowed("ADMIN")
     public Response alterar(Long id, EdicaoRequestDTO dto) {
         service.update(id, EdicaoMapper.toEntity(dto));
 

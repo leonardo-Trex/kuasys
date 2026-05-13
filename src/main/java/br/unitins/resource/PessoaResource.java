@@ -9,6 +9,8 @@ import br.unitins.mapper.PessoaMapper;
 import br.unitins.model.Pessoa;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
+import jakarta.annotation.security.RolesAllowed;
+import io.quarkus.security.Authenticated;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -23,6 +25,7 @@ import jakarta.ws.rs.core.Response.Status;
 @Path("/pessoas")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Authenticated
 public class PessoaResource {
 
     @Inject
@@ -46,6 +49,7 @@ public class PessoaResource {
 
     @DELETE
     @Path("/{id}")
+    @RolesAllowed("ADMIN")
     public Response deletar(Long id) {
         service.delete(id);
 
@@ -53,6 +57,7 @@ public class PessoaResource {
     }
 
     @POST
+    @RolesAllowed("ADMIN")
     public Response incluir(@Valid PessoaRequestDTO dto) {
         Pessoa pessoa = service.create(PessoaMapper.toEntity(dto));
 
@@ -64,6 +69,7 @@ public class PessoaResource {
 
     @PUT
     @Path("/{id}")
+    @RolesAllowed("ADMIN")
     public Response alterar(Long id, PessoaRequestDTO dto) {
         service.update(id, PessoaMapper.toEntity(dto));
 
