@@ -17,6 +17,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -47,21 +48,21 @@ public class ColecaoResource {
 
     @GET
     @Path("/{id}")
-    public Response buscarPeloId(Long id) {
+    public Response buscarPeloId(@PathParam("id") Long id) {
         return Response.ok(ColecaoMapper.toResponseDTO(service.findById(id))).build();
     }
 
     @DELETE
     @Path("/{id}")
-    @RolesAllowed("ADMIN")
-    public Response deletar(Long id) {
+    @RolesAllowed("admin")
+    public Response deletar(@PathParam("id") Long id) {
         service.delete(id);
 
         return Response.noContent().build();
     }
 
     @POST
-    @RolesAllowed("ADMIN")
+    @RolesAllowed("admin")
     public Response incluir(@Valid ColecaoRequestDTO dto) {
         Colecao colecao = service.create(ColecaoMapper.toEntity(dto));
 
@@ -73,8 +74,8 @@ public class ColecaoResource {
 
     @PUT
     @Path("/{id}")
-    @RolesAllowed("ADMIN")
-    public Response alterar(Long id, ColecaoRequestDTO dto) {
+    @RolesAllowed("admin")
+    public Response alterar(@PathParam("id") Long id, ColecaoRequestDTO dto) {
         service.update(id, ColecaoMapper.toEntity(dto));
 
         return Response.ok().build();

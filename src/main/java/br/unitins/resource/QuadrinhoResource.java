@@ -17,6 +17,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -43,21 +44,21 @@ public class QuadrinhoResource {
 
     @GET
     @Path("/{id}")
-    public Response buscarPeloId(Long id) {
+    public Response buscarPeloId(@PathParam("id") Long id) {
         return Response.ok(QuadrinhoMapper.toResponseDTO(service.findById(id))).build();
     }
 
     @DELETE
     @Path("/{id}")
-    @RolesAllowed("ADMIN")
-    public Response deletar(Long id) {
+    @RolesAllowed("admin")
+    public Response deletar(@PathParam("id") Long id) {
         service.delete(id);
 
         return Response.noContent().build();
     }
 
     @POST
-    @RolesAllowed("ADMIN")
+    @RolesAllowed("admin")
     public Response incluir(@Valid QuadrinhoRequestDTO dto) {
         Quadrinho quadrinho = service.create(QuadrinhoMapper.toEntity(dto));
 
@@ -69,8 +70,8 @@ public class QuadrinhoResource {
 
     @PUT
     @Path("/{id}")
-    @RolesAllowed("ADMIN")
-    public Response alterar(Long id, QuadrinhoRequestDTO dto) {
+    @RolesAllowed("admin")
+    public Response alterar(@PathParam("id") Long id, QuadrinhoRequestDTO dto) {
         service.update(id, QuadrinhoMapper.toEntity(dto));
 
         return Response.ok().build();

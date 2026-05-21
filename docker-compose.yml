@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # Serviço do Banco de Dados
+  postgres-db:
+    image: postgres:15-alpine
+    container_name: postgres-ecommerce
+    environment:
+      - POSTGRES_USER=kuasys
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=kuasys_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - ecommerce-network
+
+  # Serviço do Keycloak
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak-ecommerce
+    command: start-dev
+    environment:
+      - KC_BOOTSTRAP_ADMIN_USERNAME=admin
+      - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
+      - KC_DB=postgres
+      - KC_DB_URL=jdbc:postgresql://postgres-db:5432/kuasys_db
+      - KC_DB_USERNAME=kuasys
+      - KC_DB_PASSWORD=123456
+      - KC_DB_SCHEMA=keycloak
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres-db
+    networks:
+      - ecommerce-network
+
+# Definição dos recursos globais (Redes e Volumes)
+networks:
+  ecommerce-network:
+    driver: bridge
+
+volumes:
+  pgdata:

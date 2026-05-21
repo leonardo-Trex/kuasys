@@ -6,9 +6,10 @@ import br.unitins.Service.interfaces.UsuarioService;
 import br.unitins.dto.UsuarioRequestDTO;
 import br.unitins.dto.UsuarioResponseDTO;
 import br.unitins.mapper.UsuarioMapper;
-import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
+import jakarta.annotation.security.RolesAllowed;
+import io.quarkus.security.Authenticated;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -19,7 +20,6 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import io.quarkus.security.Authenticated;
 
 @Path("/usuarios")
 @Produces(MediaType.APPLICATION_JSON)
@@ -78,7 +78,7 @@ public class UsuarioResource {
 
     @PUT
     @Path("/{id}")
-    @RolesAllowed("ADMIN")
+    @RolesAllowed("admin")
     public Response alterar(@PathParam("id") Long id, @Valid UsuarioRequestDTO dto) {
         service.update(id, UsuarioMapper.toEntity(dto));
         return Response.ok().build();
@@ -86,7 +86,7 @@ public class UsuarioResource {
 
     @DELETE
     @Path("/{id}")
-    @RolesAllowed("ADMIN")
+    @RolesAllowed("admin")
     public Response deletar(@PathParam("id") Long id) {
         service.delete(id);
         return Response.noContent().build();
