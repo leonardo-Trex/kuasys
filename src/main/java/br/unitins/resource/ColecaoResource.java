@@ -54,7 +54,6 @@ public class ColecaoResource {
 
     @DELETE
     @Path("/{id}")
-    @RolesAllowed("admin")
     public Response deletar(@PathParam("id") Long id) {
         service.delete(id);
 
@@ -62,7 +61,6 @@ public class ColecaoResource {
     }
 
     @POST
-    @RolesAllowed("admin")
     public Response incluir(@Valid ColecaoRequestDTO dto) {
         Colecao colecao = service.create(ColecaoMapper.toEntity(dto));
 
@@ -74,7 +72,6 @@ public class ColecaoResource {
 
     @PUT
     @Path("/{id}")
-    @RolesAllowed("admin")
     public Response alterar(@PathParam("id") Long id, ColecaoRequestDTO dto) {
         service.update(id, ColecaoMapper.toEntity(dto));
 
