@@ -58,8 +58,8 @@ public class Edicao extends Produto {
 
     public Edicao(Long id, String nome, String descricao, BigDecimal preco, LocalDateTime dataCadastro, Integer numero,
             LocalDate dataPublicacao, String isbn, Integer tiragem, TipoCapa tipoCapa, String dimensoes,
-            GeneroQuadrinho genero, Colecao colecao, Editora editora, Quadrinho quadrinho) {
-        super(id, nome, descricao, preco, dataCadastro);
+            GeneroQuadrinho genero, Colecao colecao, Editora editora, Quadrinho quadrinho, String nomeImagem) {
+        super(id, nome, descricao, preco, dataCadastro, nomeImagem);
         this.numero = numero;
         this.dataPublicacao = dataPublicacao;
         this.isbn = isbn;

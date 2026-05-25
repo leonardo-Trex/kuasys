@@ -7,10 +7,10 @@ import br.unitins.dto.EditoraRequestDTO;
 import br.unitins.dto.EditoraResponseDTO;
 import br.unitins.mapper.EditoraMapper;
 import br.unitins.model.Editora;
+import jakarta.annotation.security.PermitAll;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
-import jakarta.annotation.security.RolesAllowed;
-import io.quarkus.security.Authenticated;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -26,7 +26,7 @@ import jakarta.ws.rs.core.Response.Status;
 @Path("/editoras")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@Authenticated
+@PermitAll
 public class EditoraResource {
 
     @Inject
