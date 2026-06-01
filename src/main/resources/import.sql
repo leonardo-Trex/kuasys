@@ -24,17 +24,17 @@ VALUES ('X-Men: Dinastia M', 'O evento que mudou a realidade dos mutantes da Mar
 
 -- Edição 01: Homem-Aranha
 INSERT INTO tb_edicao 
-(nome, descricao, preco, data_cadastro, numero, data_publicacao, isbn, tiragem, codigo_tipo_capa, dimensoes, codigo_genero, colecao_id) 
+(nome, descricao, preco, data_cadastro, numero, data_publicacao, isbn, tiragem, codigo_tipo_capa, dimensoes, codigo_genero, colecao_id, nome_imagem) 
 VALUES 
-('Homem-Aranha: Edição Definitiva Vol. 1', 'A origem do herói mais amado da Marvel em capa dura.', 159.90, CURRENT_TIMESTAMP, 1, '2023-05-15', '9786559511235', 5000, 1, '17x26 cm', 1, 1),
+('Homem-Aranha: Edição Definitiva Vol. 1', 'A origem do herói mais amado da Marvel em capa dura.', 159.90, CURRENT_TIMESTAMP, 1, '2023-05-15', '9786559511235', 5000, 1, '17x26 cm', 1, 1, 'batima_dia_buxa.jpeg'),
 -- Edição 02: Batman: A Piada Mortal
-('Batman: A Piada Mortal', 'A clássica história de Alan Moore sobre a dualidade entre Batman e Coringa.', 64.00, CURRENT_TIMESTAMP, 1, '2020-03-10', '9788573514831', 3000, 1, '18x27 cm', 1, 1),
+('Batman: A Piada Mortal', 'A clássica história de Alan Moore sobre a dualidade entre Batman e Coringa.', 64.00, CURRENT_TIMESTAMP, 1, '2020-03-10', '9788573514831', 3000, 1, '18x27 cm', 1, 1, 'batima_dia_buxa.jpeg'),
 -- Edição 03: Akira Vol. 1
-('Akira - Vol. 1', 'O clássico cyberpunk de Katsuhiro Otomo em edição de luxo.', 89.00, CURRENT_TIMESTAMP, 1, '2017-06-01', '9788545702870', 4500, 1, '18x25 cm', 2, 1),
+('Akira - Vol. 1', 'O clássico cyberpunk de Katsuhiro Otomo em edição de luxo.', 89.00, CURRENT_TIMESTAMP, 1, '2017-06-01', '9788545702870', 4500, 1, '18x25 cm', 2, 1, 'batima_dia_buxa.jpeg'),
 -- Edição 04: Watchmen - Edição Definitiva
-('Watchmen', 'A graphic novel que mudou a história dos quadrinhos.', 199.00, CURRENT_TIMESTAMP, 12, '2019-11-20', '9788583683933', 2000, 1, '19x28 cm', 1, 1),
+('Watchmen', 'A graphic novel que mudou a história dos quadrinhos.', 199.00, CURRENT_TIMESTAMP, 12, '2019-11-20', '9788583683933', 2000, 1, '19x28 cm', 1, 1, 'batima_dia_buxa.jpeg'),
 -- Edição 05: Turma da Mônica - Laços
-('Graphic MSP: Laços', 'Uma releitura emocionante dos personagens de Mauricio de Sousa.', 45.50, CURRENT_TIMESTAMP, 1, '2013-06-01', '9788583680215', 10000, 1, '19x26 cm', 2, 1);
+('Graphic MSP: Laços', 'Uma releitura emocionante dos personagens de Mauricio de Sousa.', 45.50, CURRENT_TIMESTAMP, 1, '2013-06-01', '9788583680215', 10000, 1, '19x26 cm', 2, 1, 'batima_dia_buxa.jpeg');
 
 -- Pessoa
 INSERT INTO pessoa (nome, nacionalidade, data_nascimento) 

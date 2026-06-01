@@ -20,6 +20,7 @@ public abstract class Produto {
     private String descricao;
     private BigDecimal preco;
 
+    @Column(name = "nome_imagem")
     private String nomeImagem;
 
     
