@@ -11,8 +11,10 @@ public class CarrinhoMapper {
     public static ItemCarrinhoDTO toItemDTO(ItemCarrinho item) {
         return new ItemCarrinhoDTO(
             item.getId(),
-            item.getProdutoId(),
-            item.getQuantidade()
+            item.getEdicao().getId(),
+            item.getEdicao().getNome(),
+            item.getQuantidade(),
+            item.getPrecoUnitario()
         );
     }
 

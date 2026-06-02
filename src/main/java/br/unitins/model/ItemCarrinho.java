@@ -1,16 +1,26 @@
 package br.unitins.model;
 
-import jakarta.persistence.*;
+import java.math.BigDecimal;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "item_carrinho")
 public class ItemCarrinho extends DefaultEntity {
-
-    @Column(name = "produto_id", nullable = false)
-    private String produtoId;
-
     @Column(name = "quantidade", nullable = false)
     private int quantidade;
+
+    @Column(name = "preco_unitario", nullable = false)
+    private BigDecimal precoUnitario;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "edicao_id", nullable = false)
+    private Edicao edicao;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "carrinho_id", nullable = false)
@@ -19,18 +29,34 @@ public class ItemCarrinho extends DefaultEntity {
     public ItemCarrinho() {
     }
 
-    public ItemCarrinho(String produtoId, int quantidade, Carrinho carrinho) {
-        this.produtoId = produtoId;
+    public ItemCarrinho(Edicao edicao, int quantidade, Carrinho carrinho) {
+        this.edicao = edicao;
         this.quantidade = quantidade;
+        this.precoUnitario = edicao.getPreco();
         this.carrinho = carrinho;
     }
 
-    public String getProdutoId() {
-        return produtoId;
+    public ItemCarrinho(Edicao edicao, int quantidade, BigDecimal precoUnitario, Carrinho carrinho) {
+        this.edicao = edicao;
+        this.quantidade = quantidade;
+        this.precoUnitario = precoUnitario;
+        this.carrinho = carrinho;
     }
 
-    public void setProdutoId(String produtoId) {
-        this.produtoId = produtoId;
+    public BigDecimal getPrecoUnitario() {
+        return precoUnitario;
+    }
+
+    public void setPrecoUnitario(BigDecimal precoUnitario) {
+        this.precoUnitario = precoUnitario;
+    }
+
+    public Edicao getEdicao() {
+        return edicao;
+    }
+
+    public void setEdicao(Edicao edicao) {
+        this.edicao = edicao;
     }
 
     public int getQuantidade() {
@@ -48,4 +74,5 @@ public class ItemCarrinho extends DefaultEntity {
     public void setCarrinho(Carrinho carrinho) {
         this.carrinho = carrinho;
     }
+
 }

@@ -1,9 +1,13 @@
 package br.unitins.dto;
 
+import java.math.BigDecimal;
+
 public record ItemCarrinhoDTO(
     Long id,
-    String produtoId,
-    int quantidade
+    Long edicaoId,
+    String nome,
+    int quantidade,
+    BigDecimal precoUnitario
 ) {
 
 }

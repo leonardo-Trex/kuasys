@@ -39,16 +39,16 @@ public class PedidoService {
         pedido.setStatusPedido(StatusPedido.AGUARDANDO_PAGAMENTO);
 
         BigDecimal valorTotal = BigDecimal.ZERO;
-        BigDecimal precoPadrao = new BigDecimal("10.00");
 
         for (ItemCarrinho itemCarrinho : carrinho.getItens()) {
-            BigDecimal itemTotal = precoPadrao.multiply(BigDecimal.valueOf(itemCarrinho.getQuantidade()));
+            BigDecimal precoUnitario = itemCarrinho.getPrecoUnitario();
+            BigDecimal itemTotal = precoUnitario.multiply(BigDecimal.valueOf(itemCarrinho.getQuantidade()));
             valorTotal = valorTotal.add(itemTotal);
 
             ItemPedido itemPedido = new ItemPedido(
-                    itemCarrinho.getProdutoId(),
+                    itemCarrinho.getEdicao().getId().toString(),
                     itemCarrinho.getQuantidade(),
-                    precoPadrao,
+                    precoUnitario,
                     pedido
             );
             pedido.addItem(itemPedido);
