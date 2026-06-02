@@ -11,28 +11,32 @@ public class UsuarioMapper {
             return null;
         }
 
-        Usuario usuario = new Usuario();
-        usuario.setLogin(dto.login());
-        usuario.setSenhaHash(dto.senha());
-        usuario.setNome(dto.nome());
-        usuario.setEmail(dto.email());
-        usuario.setPerfil(dto.perfil());
-        usuario.setAtivo(dto.ativo());
-
-        return usuario;
+        // Map to the current Usuario entity which stores Keycloak ID and profile data
+        return new Usuario(
+                null,
+                dto.keycloakId(),
+                dto.nome(),
+                dto.email(),
+                dto.cpf(),
+                dto.telefone()
+        );
     }
 
     public static UsuarioResponseDTO toResponseDTO(Usuario usuario) {
         if (usuario == null) {
             return null;
         }
-
+        // Some legacy fields in DTO may not exist on the current entity; set them to null/defaults
         return new UsuarioResponseDTO(
                 usuario.getId(),
-                usuario.getLogin(),
+                null,
                 usuario.getNome(),
                 usuario.getEmail(),
-                usuario.getPerfil(),
-                usuario.getAtivo());
+                null,
+                null,
+                usuario.getCpf(),
+                usuario.getTelefone(),
+                usuario.getKeycloakId()
+        );
     }
 }

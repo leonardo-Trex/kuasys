@@ -1,42 +1,45 @@
 package br.unitins.model;
 
-import java.time.LocalDateTime;
-
-import br.unitins.model.enums.Perfil;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
-@Table(name = "usuario")
-public class Usuario extends DefaultEntity {
+public class Usuario {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
+    // 🔥 Esse campo é a chave para tudo: guarda o ID gerado pelo Keycloak (UUID)
     @Column(unique = true, nullable = false)
-    private String login;
-
-    @Column(name = "senha_hash", nullable = false)
-    private String senhaHash;
+    private String keycloakId;
 
     private String nome;
-
-    @Column(unique = true)
     private String email;
-    
-    @Column(nullable = false)
-    private Perfil perfil;
-    private Boolean ativo;
+    private String cpf;
+    private String telefone;
 
-    public Usuario() {
+    public Long getId() {
+        return id;
     }
 
-    public Usuario(Long id, String login, String nome, String email, String senha, String senhaHash, Perfil perfil, Boolean ativo, LocalDateTime dataCadastro) {
-        this.login = login;
+    public Usuario(Long id, String keycloakId, String nome, String email, String cpf, String telefone) {
+        this.id = id;
+        this.keycloakId = keycloakId;
         this.nome = nome;
         this.email = email;
-        this.senhaHash = senhaHash;
-        this.perfil = perfil;
-        this.ativo = ativo;
-     
+        this.cpf = cpf;
+        this.telefone = telefone;
+    }
+
+    public String getKeycloakId() {
+        return keycloakId;
+    }
+
+    public void setKeycloakId(String keycloakId) {
+        this.keycloakId = keycloakId;
     }
 
     public String getNome() {
@@ -55,45 +58,27 @@ public class Usuario extends DefaultEntity {
         this.email = email;
     }
 
-    public String getSenhaHash() {
-        return senhaHash;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setSenhaHash(String senhaHash) {
-        this.senhaHash = senhaHash;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
-    public Perfil getPerfil() {
-        return perfil;
+    public String getTelefone() {
+        return telefone;
     }
 
-    public void setPerfil(Perfil perfil) {
-        this.perfil = perfil;
-    }
-
-    public Boolean getAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(Boolean ativo) {
-        this.ativo = ativo;
-    }
-
-
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((super.getId() == null) ? 0 : getId().hashCode());
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
 
@@ -106,13 +91,12 @@ public class Usuario extends DefaultEntity {
         if (getClass() != obj.getClass())
             return false;
         Usuario other = (Usuario) obj;
-        if (getId() == null) {
-            if (other.getId() != null)
+        if (id == null) {
+            if (other.id != null)
                 return false;
-        } else if (!getId().equals(other.getId()))
+        } else if (!id.equals(other.id))
             return false;
         return true;
     }
 
 }
-

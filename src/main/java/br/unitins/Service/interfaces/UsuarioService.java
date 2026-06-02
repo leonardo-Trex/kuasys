@@ -20,4 +20,13 @@ public interface UsuarioService {
     void update(Long id, Usuario usuario);
 
     void delete(Long id);
+
+    // DTO-based helper methods
+    br.unitins.dto.UsuarioResponseDTO criar(br.unitins.dto.UsuarioRequestDTO dto);
+
+    br.unitins.dto.UsuarioResponseDTO atualizarDto(Long id, br.unitins.dto.UsuarioRequestDTO dto);
+
+    br.unitins.dto.UsuarioResponseDTO buscarPorKeycloakId(String keycloakId);
+
+    boolean deletarPorId(Long id);
 }

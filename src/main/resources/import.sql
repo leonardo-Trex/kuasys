@@ -45,9 +45,4 @@ VALUES
 ('Ada Lovelace', 'Britânica', '1815-12-10'),
 ('Gabriel Garcia Marquez', 'Colombiana', '1927-03-06');
 
--- Usuario admin de teste (senha: admin123)
---INSERT INTO usuario (login, senha_hash, perfil, data_cadastro)
---VALUES ('admin', '$2a$10$TkB2wCdCdgmiy.Z/q3GSIuOT7QEiSk4kzKYxvzk8UC2CO2TgF3CMe', 'ADMIN', NOW());
 
-INSERT INTO usuario (login, senha_hash, nome, email, perfil, ativo, data_cadastro)
-VALUES ('john_doe', '$2a$10$TkB2wCdCdgmiy.Z/q3GSIuOT7QEiSk4kzKYxvzk8UC2CO2TgF3CMe', 'John Doe', 'john.doe@example.com', 1, true, NOW());

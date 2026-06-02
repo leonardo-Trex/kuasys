@@ -1,6 +1,7 @@
 package br.unitins.model.enums;
 
 public enum StatusPedido {
+    PENDENTE(0l, "Pendente"),
     AGUARDANDO_PAGAMENTO(1l, "Aguardando Pagamento"),
     PAGO(2l, "Pago"),
     ENVIADO(3l, "Enviado"),

@@ -24,13 +24,13 @@ import jakarta.ws.rs.core.Response;
 @Path("/usuarios")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@Authenticated
 public class UsuarioResource {
 
     @Inject
     UsuarioService service;
 
     @GET
+    @RolesAllowed("admin")
     public Response buscarTodos() {
         List<UsuarioResponseDTO> lista = service.findAll()
                 .stream()
@@ -78,7 +78,7 @@ public class UsuarioResource {
 
     @PUT
     @Path("/{id}")
-    @RolesAllowed("admin")
+    @Authenticated
     public Response alterar(@PathParam("id") Long id, @Valid UsuarioRequestDTO dto) {
         service.update(id, UsuarioMapper.toEntity(dto));
         return Response.ok().build();

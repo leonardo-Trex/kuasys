@@ -8,6 +8,9 @@ public record UsuarioResponseDTO(
         String nome,
         String email,
         Perfil perfil,
-        Boolean ativo) {
+        Boolean ativo,
+        String cpf,
+        String telefone,
+        String keycloakId) {
 
 }

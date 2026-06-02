@@ -10,6 +10,9 @@ public record UsuarioRequestDTO(
         @NotBlank(message = "O nome do usuário é obrigatório.") String nome,
         String email,
         @NotNull(message = "O perfil do usuário é obrigatório.") Perfil perfil,
-        @NotNull(message = "O campo ativo é obrigatório.") Boolean ativo) {
+        @NotNull(message = "O campo ativo é obrigatório.") Boolean ativo,
+        String cpf,
+        String telefone,
+        String keycloakId) {
 
 }

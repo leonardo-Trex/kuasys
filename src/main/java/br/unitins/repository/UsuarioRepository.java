@@ -20,4 +20,8 @@ public class UsuarioRepository implements PanacheRepository<Usuario> {
         return find("login", login).firstResult();
     }
 
+    public Usuario findByKeycloakId(String keycloakId) {
+        return find("keycloakId", keycloakId).firstResult();
+    }
+
 }
