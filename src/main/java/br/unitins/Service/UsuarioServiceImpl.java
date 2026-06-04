@@ -8,7 +8,9 @@ import br.unitins.dto.UsuarioRequestDTO;
 import br.unitins.dto.UsuarioResponseDTO;
 import br.unitins.mapper.UsuarioMapper;
 import org.keycloak.admin.client.Keycloak;
+import org.keycloak.admin.client.resource.RoleScopeResource;
 import org.keycloak.representations.idm.CredentialRepresentation;
+import org.keycloak.representations.idm.RoleRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import jakarta.ws.rs.core.Response;
@@ -29,6 +31,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @ConfigProperty(name = "quarkus.keycloak.admin-client.realm", defaultValue = "master")
     String keycloakRealm;
+
+    // Realm onde os usuários da aplicação são gerenciados
+    private static final String TARGET_REALM = "realm-kuasys";
 
     @Override
     public List<Usuario> findAll() {
@@ -69,7 +74,12 @@ public class UsuarioServiceImpl implements UsuarioService {
         // 2) Set Keycloak ID in the usuario object
         usuario.setKeycloakId(keycloakId);
 
-        // 3) Persist to local database
+        // 3) Atribui a role correspondente ao perfil no Keycloak
+        if (usuario.getPerfil() != null) {
+            atribuirRoleNoKeycloak(keycloakId, usuario.getPerfil());
+        }
+
+        // 4) Persist to local database
         repository.persist(usuario);
         return usuario;
     }
@@ -83,6 +93,12 @@ public class UsuarioServiceImpl implements UsuarioService {
         // 2) Persist local Usuario with keycloakId
         Usuario u = UsuarioMapper.toEntity(dto);
         u.setKeycloakId(keycloakId);
+
+        // 3) Atribui a role correspondente ao perfil no Keycloak
+        if (u.getPerfil() != null) {
+            atribuirRoleNoKeycloak(keycloakId, u.getPerfil());
+        }
+
         repository.persist(u);
         return UsuarioMapper.toResponseDTO(u);
     }
@@ -127,16 +143,19 @@ public class UsuarioServiceImpl implements UsuarioService {
         if (dto.login() != null)
             existing.setLogin(dto.login());
 
-        // Se você tiver o enum/campo de perfil e ativo na entidade:
+        // Detecta mudança de perfil antes de atualizar
+        Perfil perfilAntigo = existing.getPerfil();
+        Perfil perfilNovo = dto.perfil() != null ? Perfil.valueOf(dto.perfil()) : perfilAntigo;
+        boolean mudouPerfil = perfilNovo != null && !perfilNovo.equals(perfilAntigo);
+
         if (dto.perfil() != null)
-            existing.setPerfil(Perfil.valueOf(dto.perfil()));
+            existing.setPerfil(perfilNovo);
         existing.setAtivo(dto.ativo());
 
         // 3) Sincroniza com o Keycloak se Nome ou E-mail mudaram
         if (mudouEmail || mudouNome) {
             try {
-                // Busca a representação atual do usuário lá no Keycloak
-                UserRepresentation keycloakUser = keycloak.realm(keycloakRealm)
+                UserRepresentation keycloakUser = keycloak.realm(TARGET_REALM)
                         .users()
                         .get(existing.getKeycloakId())
                         .toRepresentation();
@@ -146,8 +165,7 @@ public class UsuarioServiceImpl implements UsuarioService {
                 if (mudouNome)
                     keycloakUser.setFirstName(dto.nome());
 
-                // Envia a atualização para o Keycloak
-                keycloak.realm(keycloakRealm)
+                keycloak.realm(TARGET_REALM)
                         .users()
                         .get(existing.getKeycloakId())
                         .update(keycloakUser);
@@ -155,6 +173,11 @@ public class UsuarioServiceImpl implements UsuarioService {
             } catch (Exception e) {
                 throw new RuntimeException("Erro ao atualizar dados cadastrais no Keycloak: " + e.getMessage(), e);
             }
+        }
+
+        // 4) Sincroniza a role no Keycloak se o perfil mudou
+        if (mudouPerfil) {
+            sincronizarRoleNoKeycloak(existing.getKeycloakId(), perfilAntigo, perfilNovo);
         }
 
         // O Hibernate já sincroniza o 'existing' no banco ao fim da transação
@@ -168,7 +191,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         if (existing != null) {
             // 1) Deleta do Keycloak usando o UUID salvo
             try {
-                keycloak.realm(keycloakRealm).users().get(existing.getKeycloakId()).remove();
+                keycloak.realm(TARGET_REALM).users().get(existing.getKeycloakId()).remove();
             } catch (Exception e) {
                 // Logue ou trate o erro se o usuário já não existir lá
             }
@@ -200,7 +223,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         cred.setTemporary(false);
         user.setCredentials(Collections.singletonList(cred));
 
-        Response resp = keycloak.realm(keycloakRealm).users().create(user);
+        Response resp = keycloak.realm(TARGET_REALM).users().create(user);
         if (resp.getStatus() != 201 && resp.getStatus() != 204) {
             throw new RuntimeException("Erro ao criar usuário no Keycloak: status=" + resp.getStatus());
         }
@@ -214,7 +237,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         // Fallback: search by username
         if (keycloakId == null || keycloakId.isBlank()) {
-            List<UserRepresentation> found = keycloak.realm(keycloakRealm).users().search(login, 0, 1);
+            List<UserRepresentation> found = keycloak.realm(TARGET_REALM).users().search(login, 0, 1);
             if (found != null && !found.isEmpty()) {
                 keycloakId = found.get(0).getId();
             }
@@ -225,5 +248,78 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
 
         return keycloakId;
+    }
+
+    /**
+     * Converte o enum Perfil para o nome da role no Keycloak.
+     * Perfil.ADMIN  -> "admin"
+     * Perfil.USUARIO -> "usuario"
+     */
+    private String getRealmRoleName(Perfil perfil) {
+        return perfil.getNOME().toLowerCase();
+    }
+
+    /**
+     * Atribui a realm role correspondente ao perfil do usuário no Keycloak.
+     * Utilizado no momento da criação do usuário.
+     */
+    private void atribuirRoleNoKeycloak(String keycloakId, Perfil perfil) {
+        try {
+            String roleName = getRealmRoleName(perfil);
+
+            // Busca a representação da role no realm
+            RoleRepresentation role = keycloak.realm(TARGET_REALM)
+                    .roles()
+                    .get(roleName)
+                    .toRepresentation();
+
+            // Atribui a role ao usuário
+            keycloak.realm(TARGET_REALM)
+                    .users()
+                    .get(keycloakId)
+                    .roles()
+                    .realmLevel()
+                    .add(Collections.singletonList(role));
+
+        } catch (Exception e) {
+            throw new RuntimeException(
+                    "Erro ao atribuir role '" + perfil.getNOME() + "' no Keycloak: " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Sincroniza a role do usuário no Keycloak quando o perfil é alterado.
+     * Remove a role antiga e adiciona a nova.
+     */
+    private void sincronizarRoleNoKeycloak(String keycloakId, Perfil perfilAntigo, Perfil perfilNovo) {
+        try {
+            RoleScopeResource roleScopeResource = keycloak.realm(TARGET_REALM)
+                    .users()
+                    .get(keycloakId)
+                    .roles()
+                    .realmLevel();
+
+            // Remove a role antiga (se existir)
+            if (perfilAntigo != null) {
+                String roleAntigaName = getRealmRoleName(perfilAntigo);
+                RoleRepresentation roleAntiga = keycloak.realm(TARGET_REALM)
+                        .roles()
+                        .get(roleAntigaName)
+                        .toRepresentation();
+                roleScopeResource.remove(Collections.singletonList(roleAntiga));
+            }
+
+            // Adiciona a nova role
+            String roleNovaName = getRealmRoleName(perfilNovo);
+            RoleRepresentation roleNova = keycloak.realm(TARGET_REALM)
+                    .roles()
+                    .get(roleNovaName)
+                    .toRepresentation();
+            roleScopeResource.add(Collections.singletonList(roleNova));
+
+        } catch (Exception e) {
+            throw new RuntimeException(
+                    "Erro ao sincronizar roles no Keycloak: " + e.getMessage(), e);
+        }
     }
 }

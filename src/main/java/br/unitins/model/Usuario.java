@@ -30,6 +30,7 @@ public class Usuario {
     private String telefone;
     private String login;
 
+    @Transient
     private Perfil perfil;
 
     private Boolean ativo;
@@ -53,6 +54,9 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public Usuario() {
     }
 
     public Usuario(Long id, String keycloakId, String nome, String email, String cpf, String telefone, String login,
