@@ -1,0 +1,18 @@
+openapi: 3.0.3
+info:
+  title: Kuasys e-Commerce API
+  version: 1.0.0
+
+components:
+  securitySchemes:
+    # Usando o nome exato que o Quarkus gera, nós engolimos o esquema automático dele!
+    SecurityScheme: 
+      type: oauth2
+      description: Insira as credenciais do Keycloak para a apresentação
+      flows:
+        password:
+          tokenUrl: http://localhost:8080/realms/realm-kuasys/protocol/openid-connect/token
+
+# Aplica o nosso cadeado unificado globalmente
+security:
+  - SecurityScheme: []

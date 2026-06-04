@@ -1,11 +1,18 @@
 package br.unitins.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.unitins.model.enums.Perfil;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Transient;
 
 @Entity
@@ -14,7 +21,6 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // 🔥 Esse campo é a chave para tudo: guarda o ID gerado pelo Keycloak (UUID)
     @Column(unique = true, nullable = false)
     private String keycloakId;
 
@@ -28,7 +34,12 @@ public class Usuario {
 
     private Boolean ativo;
 
-    // Campo transiente para senha - apenas para criação no Keycloak (não persiste no BD)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "cliente_wishlist", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "edicao_id"))
+    private List<Edicao> wishlist = new ArrayList<>();
+
+    // Campo transiente para senha - apenas para criação no Keycloak (não persiste
+    // no BD)
     @Transient
     private String senha;
 
@@ -111,6 +122,14 @@ public class Usuario {
 
     public void setPerfil(Perfil perfil) {
         this.perfil = perfil;
+    }
+
+    public List<Edicao> getWishlist() {
+        return wishlist;
+    }
+
+    public void setWishlist(List<Edicao> wishlist) {
+        this.wishlist = wishlist;
     }
 
     @Override
