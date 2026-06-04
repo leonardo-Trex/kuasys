@@ -16,6 +16,7 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.BadRequestException;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @ApplicationScoped
 public class PedidoServiceImpl implements PedidoService {

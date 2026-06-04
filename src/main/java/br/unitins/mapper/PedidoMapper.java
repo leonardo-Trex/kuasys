@@ -4,6 +4,7 @@ import br.unitins.dto.ItemPedidoDTO;
 import br.unitins.dto.PedidoResponseDTO;
 import br.unitins.model.ItemPedido;
 import br.unitins.model.Pedido;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class PedidoMapper {
@@ -30,5 +31,11 @@ public class PedidoMapper {
                         .map(PedidoMapper::toItemDTO)
                         .collect(Collectors.toList())
         );
+    }
+
+    public static List<PedidoResponseDTO> toResponseDTOList(List<Pedido> pedidos) {
+        return pedidos.stream()
+                .map(PedidoMapper::toResponseDTO)
+                .collect(Collectors.toList());
     }
 }
