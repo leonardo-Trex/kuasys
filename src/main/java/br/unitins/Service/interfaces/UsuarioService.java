@@ -28,5 +28,4 @@ public interface UsuarioService {
 
     br.unitins.dto.UsuarioResponseDTO buscarPorKeycloakId(String keycloakId);
 
-    boolean deletarPorId(Long id);
 }

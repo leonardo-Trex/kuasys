@@ -34,6 +34,16 @@ services:
     networks:
       - ecommerce-network
 
+      # Servidor de E-mail de Testes (Mailpit)
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: mailpit-ecommerce
+    ports:
+      - "1025:1025" # Porta SMTP para o Keycloak enviar os e-mails
+      - "8025:8025" # Porta Web UI para você abrir no navegador e ver as caixas de entrada
+    networks:
+      - ecommerce-network
+
 # Definição dos recursos globais (Redes e Volumes)
 networks:
   ecommerce-network:

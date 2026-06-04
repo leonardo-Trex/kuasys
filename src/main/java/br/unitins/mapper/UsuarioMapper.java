@@ -3,6 +3,7 @@ package br.unitins.mapper;
 import br.unitins.dto.UsuarioRequestDTO;
 import br.unitins.dto.UsuarioResponseDTO;
 import br.unitins.model.Usuario;
+import br.unitins.model.enums.Perfil;
 
 public class UsuarioMapper {
 
@@ -12,14 +13,19 @@ public class UsuarioMapper {
         }
 
         // Map to the current Usuario entity which stores Keycloak ID and profile data
-        return new Usuario(
+        Usuario usuario = new Usuario(
                 null,
-                dto.keycloakId(),
+                null,
                 dto.nome(),
                 dto.email(),
                 dto.cpf(),
-                dto.telefone()
+                dto.telefone(),
+                dto.login(),
+                Perfil.valueOf(dto.perfil()),
+                dto.ativo()
         );
+        usuario.setSenha(dto.senha());
+        return usuario;
     }
 
     public static UsuarioResponseDTO toResponseDTO(Usuario usuario) {

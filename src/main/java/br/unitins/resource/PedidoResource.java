@@ -1,7 +1,7 @@
 package br.unitins.resource;
 
+import br.unitins.Service.interfaces.PedidoService;
 import br.unitins.dto.PedidoResponseDTO;
-import br.unitins.service.interfaces.PedidoService;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.POST;
@@ -21,7 +21,7 @@ public class PedidoResource {
     JsonWebToken jwt;
 
     @POST
-    @RolesAllowed({"user", "customer"})
+    @RolesAllowed({"usuario", "customer"})
     public Response finalizarCompra() {
         String usuarioId = jwt.getSubject();
         PedidoResponseDTO pedido = pedidoService.finalizarCompra(usuarioId);

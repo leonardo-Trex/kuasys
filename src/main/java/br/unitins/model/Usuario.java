@@ -1,10 +1,12 @@
 package br.unitins.model;
 
+import br.unitins.model.enums.Perfil;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Usuario {
@@ -20,18 +22,39 @@ public class Usuario {
     private String email;
     private String cpf;
     private String telefone;
+    private String login;
+
+    private Perfil perfil;
+
+    private Boolean ativo;
+
+    // Campo transiente para senha - apenas para criação no Keycloak (não persiste no BD)
+    @Transient
+    private String senha;
 
     public Long getId() {
         return id;
     }
 
-    public Usuario(Long id, String keycloakId, String nome, String email, String cpf, String telefone) {
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public Usuario(Long id, String keycloakId, String nome, String email, String cpf, String telefone, String login,
+            Perfil perfil, Boolean ativo) {
         this.id = id;
         this.keycloakId = keycloakId;
         this.nome = nome;
         this.email = email;
         this.cpf = cpf;
         this.telefone = telefone;
+        this.login = login;
+        this.perfil = perfil;
+        this.ativo = ativo;
     }
 
     public String getKeycloakId() {
@@ -74,6 +97,22 @@ public class Usuario {
         this.telefone = telefone;
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -97,6 +136,18 @@ public class Usuario {
         } else if (!id.equals(other.id))
             return false;
         return true;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
     }
 
 }

@@ -2,6 +2,7 @@ package br.unitins.Service;
 
 import br.unitins.Service.interfaces.UsuarioService;
 import br.unitins.model.Usuario;
+import br.unitins.model.enums.Perfil;
 import br.unitins.repository.UsuarioRepository;
 import br.unitins.dto.UsuarioRequestDTO;
 import br.unitins.dto.UsuarioResponseDTO;
@@ -57,6 +58,18 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     @Transactional
     public Usuario create(Usuario usuario) {
+        if (usuario.getSenha() == null || usuario.getSenha().isBlank()) {
+            throw new RuntimeException("Senha é obrigatória para criar um novo usuário");
+        }
+
+        // 1) Create user in Keycloak
+        String keycloakId = criarNoKeycloak(usuario.getLogin(), usuario.getEmail(), usuario.getNome(),
+                usuario.getSenha());
+
+        // 2) Set Keycloak ID in the usuario object
+        usuario.setKeycloakId(keycloakId);
+
+        // 3) Persist to local database
         repository.persist(usuario);
         return usuario;
     }
@@ -64,43 +77,10 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     @Transactional
     public UsuarioResponseDTO criar(UsuarioRequestDTO dto) {
-        // 1) Create user in Keycloak
-        UserRepresentation user = new UserRepresentation();
-        user.setUsername(dto.login());
-        user.setEmail(dto.email());
-        user.setEnabled(true);
-        user.setFirstName(dto.nome());
+        // 1) Create user in Keycloak and get the UUID
+        String keycloakId = criarNoKeycloak(dto.login(), dto.email(), dto.nome(), dto.senha());
 
-        CredentialRepresentation cred = new CredentialRepresentation();
-        cred.setType(CredentialRepresentation.PASSWORD);
-        cred.setValue(dto.senha());
-        cred.setTemporary(false);
-        user.setCredentials(Collections.singletonList(cred));
-
-        Response resp = keycloak.realm(keycloakRealm).users().create(user);
-        if (resp.getStatus() != 201 && resp.getStatus() != 204) {
-            throw new RuntimeException("Erro ao criar usuário no Keycloak: status=" + resp.getStatus());
-        }
-
-        // 2) Capture generated Keycloak ID
-        String keycloakId = null;
-        if (resp.getLocation() != null) {
-            String path = resp.getLocation().getPath();
-            keycloakId = path.substring(path.lastIndexOf('/') + 1);
-        }
-        // fallback: search by username
-        if (keycloakId == null || keycloakId.isBlank()) {
-            List<UserRepresentation> found = keycloak.realm(keycloakRealm).users().search(dto.login(), 0, 1);
-            if (found != null && !found.isEmpty()) {
-                keycloakId = found.get(0).getId();
-            }
-        }
-
-        if (keycloakId == null || keycloakId.isBlank()) {
-            throw new RuntimeException("Não foi possível recuperar o ID do usuário criado no Keycloak");
-        }
-
-        // 3) Persist local Usuario with keycloakId
+        // 2) Persist local Usuario with keycloakId
         Usuario u = UsuarioMapper.toEntity(dto);
         u.setKeycloakId(keycloakId);
         repository.persist(u);
@@ -125,13 +105,17 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     @Transactional
     public UsuarioResponseDTO atualizarDto(Long id, UsuarioRequestDTO dto) {
-        Usuario existing = findById(id);
+        Usuario existing = repository.findById(id); // Certifique-se de usar o seu repository aqui
         if (existing == null) {
             return null;
         }
-        // update existing entity with DTO values
-        if (dto.keycloakId() != null)
-            existing.setKeycloakId(dto.keycloakId());
+
+        // 1) Verificar se houve alteração de e-mail ou nome para atualizar o Keycloak
+        boolean mudouEmail = dto.email() != null && !dto.email().equals(existing.getEmail());
+        boolean mudouNome = dto.nome() != null && !dto.nome().equals(existing.getNome());
+
+        // 2) Atualiza os dados no banco local (Removido o bloco do keycloakId que dava
+        // erro!)
         if (dto.nome() != null)
             existing.setNome(dto.nome());
         if (dto.email() != null)
@@ -140,14 +124,57 @@ public class UsuarioServiceImpl implements UsuarioService {
             existing.setCpf(dto.cpf());
         if (dto.telefone() != null)
             existing.setTelefone(dto.telefone());
+        if (dto.login() != null)
+            existing.setLogin(dto.login());
 
+        // Se você tiver o enum/campo de perfil e ativo na entidade:
+        if (dto.perfil() != null)
+            existing.setPerfil(Perfil.valueOf(dto.perfil()));
+        existing.setAtivo(dto.ativo());
+
+        // 3) Sincroniza com o Keycloak se Nome ou E-mail mudaram
+        if (mudouEmail || mudouNome) {
+            try {
+                // Busca a representação atual do usuário lá no Keycloak
+                UserRepresentation keycloakUser = keycloak.realm(keycloakRealm)
+                        .users()
+                        .get(existing.getKeycloakId())
+                        .toRepresentation();
+
+                if (mudouEmail)
+                    keycloakUser.setEmail(dto.email());
+                if (mudouNome)
+                    keycloakUser.setFirstName(dto.nome());
+
+                // Envia a atualização para o Keycloak
+                keycloak.realm(keycloakRealm)
+                        .users()
+                        .get(existing.getKeycloakId())
+                        .update(keycloakUser);
+
+            } catch (Exception e) {
+                throw new RuntimeException("Erro ao atualizar dados cadastrais no Keycloak: " + e.getMessage(), e);
+            }
+        }
+
+        // O Hibernate já sincroniza o 'existing' no banco ao fim da transação
         return UsuarioMapper.toResponseDTO(existing);
     }
 
     @Override
     @Transactional
     public void delete(Long id) {
-        repository.deleteById(id);
+        Usuario existing = repository.findById(id);
+        if (existing != null) {
+            // 1) Deleta do Keycloak usando o UUID salvo
+            try {
+                keycloak.realm(keycloakRealm).users().get(existing.getKeycloakId()).remove();
+            } catch (Exception e) {
+                // Logue ou trate o erro se o usuário já não existir lá
+            }
+            // 2) Deleta do banco local
+            repository.deleteById(id);
+        }
     }
 
     @Override
@@ -156,9 +183,47 @@ public class UsuarioServiceImpl implements UsuarioService {
         return UsuarioMapper.toResponseDTO(u);
     }
 
-    @Override
-    @Transactional
-    public boolean deletarPorId(Long id) {
-        return repository.deleteById(id);
+
+    /**
+     * Cria um usuário no Keycloak e retorna o UUID gerado
+     */
+    private String criarNoKeycloak(String login, String email, String nome, String senha) {
+        UserRepresentation user = new UserRepresentation();
+        user.setUsername(login);
+        user.setEmail(email);
+        user.setEnabled(true);
+        user.setFirstName(nome);
+
+        CredentialRepresentation cred = new CredentialRepresentation();
+        cred.setType(CredentialRepresentation.PASSWORD);
+        cred.setValue(senha);
+        cred.setTemporary(false);
+        user.setCredentials(Collections.singletonList(cred));
+
+        Response resp = keycloak.realm(keycloakRealm).users().create(user);
+        if (resp.getStatus() != 201 && resp.getStatus() != 204) {
+            throw new RuntimeException("Erro ao criar usuário no Keycloak: status=" + resp.getStatus());
+        }
+
+        // Capture generated Keycloak ID
+        String keycloakId = null;
+        if (resp.getLocation() != null) {
+            String path = resp.getLocation().getPath();
+            keycloakId = path.substring(path.lastIndexOf('/') + 1);
+        }
+
+        // Fallback: search by username
+        if (keycloakId == null || keycloakId.isBlank()) {
+            List<UserRepresentation> found = keycloak.realm(keycloakRealm).users().search(login, 0, 1);
+            if (found != null && !found.isEmpty()) {
+                keycloakId = found.get(0).getId();
+            }
+        }
+
+        if (keycloakId == null || keycloakId.isBlank()) {
+            throw new RuntimeException("Não foi possível recuperar o ID do usuário criado no Keycloak");
+        }
+
+        return keycloakId;
     }
 }

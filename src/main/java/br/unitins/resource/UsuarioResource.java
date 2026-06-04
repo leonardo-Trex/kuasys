@@ -68,7 +68,7 @@ public class UsuarioResource {
     }
 
     @POST
-    //@RolesAllowed("ADMIN")
+    @RolesAllowed("admin")
     public Response incluir(@Valid UsuarioRequestDTO dto) {
         var criado = service.create(UsuarioMapper.toEntity(dto));
         return Response.status(Response.Status.CREATED)
