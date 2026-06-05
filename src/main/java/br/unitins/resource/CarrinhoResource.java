@@ -132,7 +132,8 @@ public class CarrinhoResource {
 
         // Busca o carrinho anônimo
         try {
-            Carrinho carrinhoFinal = carrinhoService.vincularCarrinho(dto.tokenSessao(), usuarioId);
+            Carrinho carrinhoFinal = carrinhoService.vincularCarrinho(dto.tokenSessao(),
+                    usuarioId);
             if (carrinhoFinal == null) {
                 return Response.status(Status.NOT_FOUND)
                         .entity("Carrinho anônimo não encontrado")

@@ -69,7 +69,7 @@ public class EdicaoResource {
     @POST
     @RolesAllowed("admin")
     public Response incluir(@Valid EdicaoRequestDTO dto) {
-        Edicao edicao = service.create(EdicaoMapper.toEntity(dto));
+        Edicao edicao = service.create(dto);
 
         return Response
                 .status(Status.CREATED)
@@ -80,8 +80,8 @@ public class EdicaoResource {
     @PUT
     @Path("/{id}")
     @RolesAllowed("admin")
-    public Response alterar(@PathParam("id") Long id, EdicaoRequestDTO dto) {
-        service.update(id, EdicaoMapper.toEntity(dto));
+    public Response alterar(@PathParam("id") Long id, @Valid EdicaoRequestDTO dto) {
+        service.update(id, dto);
 
         return Response.ok().build();
     }

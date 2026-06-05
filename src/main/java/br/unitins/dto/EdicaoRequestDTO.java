@@ -9,7 +9,6 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 
@@ -24,7 +23,7 @@ public record EdicaoRequestDTO(
 
                 @PastOrPresent(message = "A data de publicação não pode ser futura") LocalDate dataPublicacao,
 
-                @NotBlank(message = "O ISBN é obrigatório") @Pattern(regexp = "^(?:(?=.{13}$|.{17}$)97[ -]?[0-9]{1,5}[ -]?[0-9]+[ -]?[0-9]+[ -]?[0-9]|(?=.{10}$|.{13}$)[0-9]{1,5}[ -]?[0-9]+[ -]?[0-9]+[ -]?[0-9X])$", message = "ISBN inválido") String isbn,
+                @NotBlank(message = "O ISBN é obrigatório") String isbn,
 
                 @PositiveOrZero(message = "A tiragem não pode ser negativa") Integer tiragem,
 
@@ -32,7 +31,13 @@ public record EdicaoRequestDTO(
 
                 @NotBlank(message = "As dimensões são obrigatórias") String dimensoes,
 
-                @NotNull(message = "O gênero é obrigatório") GeneroQuadrinho genero) {
+                @NotNull(message = "O gênero é obrigatório") GeneroQuadrinho genero,
+
+                @NotNull(message = "A coleção é obrigatória") Long idColecao,
+
+                @NotNull(message = "A editora é obrigatória") Long idEditora,
+
+                @NotNull(message = "O quadrinho é obrigatório") Long idQuadrinho) {
         public String isbnLimpo() {
                 return isbn == null ? null : isbn.replaceAll("[^0-9X]", "");
         }

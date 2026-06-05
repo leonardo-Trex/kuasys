@@ -4,6 +4,10 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import br.unitins.dto.ColecaoResponseDTO;
+import br.unitins.dto.EditoraResponseDTO;
+import br.unitins.dto.QuadrinhoResponseDTO;
+
 public record EdicaoResponseDTO(
                 Long id,
                 String nome,
@@ -16,6 +20,9 @@ public record EdicaoResponseDTO(
                 String tipoCapa,
                 String genero,
                 String dimensoes,
-                LocalDateTime dataCadastro) {
+                LocalDateTime dataCadastro,
+                ColecaoResponseDTO colecao,
+                EditoraResponseDTO editora,
+                QuadrinhoResponseDTO quadrinho) {
 
 }

@@ -11,9 +11,9 @@ public interface EdicaoService {
 
     List<Edicao> findByNome(String nome);
 
-    Edicao create(Edicao edicao);
+    Edicao create(br.unitins.dto.EdicaoRequestDTO dto);
 
-    void update(Long id, Edicao Edicao);
+    void update(Long id, br.unitins.dto.EdicaoRequestDTO dto);
 
     void delete(Long id);
 

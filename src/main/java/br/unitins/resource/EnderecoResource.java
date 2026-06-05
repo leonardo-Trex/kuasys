@@ -1,10 +1,14 @@
 package br.unitins.resource;
 
 import br.unitins.Service.interfaces.EnderecoService;
+import br.unitins.dto.EnderecoRequestDTO;
 import br.unitins.dto.EnderecoResponseDTO;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
+import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -15,6 +19,7 @@ import java.util.List;
 
 @Path("/usuarios/me/enderecos")
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class EnderecoResource {
 
     @Inject
@@ -26,13 +31,10 @@ public class EnderecoResource {
     @GET
     @RolesAllowed({"usuario", "customer"})
     public Response listarEnderecosDoCliente() {
-        String usuarioId = jwt.getSubject();
-        
-        // Converter UUID (string) do JWT para Long
-        Long usuarioIdLong = Long.parseLong(usuarioId);
-        
-        List<EnderecoResponseDTO> enderecos = enderecoService.listarEnderecosDoCliente(usuarioIdLong);
-        
+        String keycloakId = jwt.getSubject();
+
+        List<EnderecoResponseDTO> enderecos = enderecoService.listarEnderecosDoCliente(keycloakId);
+
         return Response.ok(enderecos).build();
     }
 
@@ -40,13 +42,20 @@ public class EnderecoResource {
     @Path("/{id}")
     @RolesAllowed({"usuario", "customer"})
     public Response buscarPorIdECliente(@PathParam("id") Long id) {
-        String usuarioId = jwt.getSubject();
-        
-        // Converter UUID (string) do JWT para Long
-        Long usuarioIdLong = Long.parseLong(usuarioId);
-        
-        EnderecoResponseDTO endereco = enderecoService.buscarPorIdECliente(id, usuarioIdLong);
-        
+        String keycloakId = jwt.getSubject();
+
+        EnderecoResponseDTO endereco = enderecoService.buscarPorIdECliente(id, keycloakId);
+
         return Response.ok(endereco).build();
+    }
+
+    @POST
+    @RolesAllowed({"usuario", "customer"})
+    public Response salvar(@Valid EnderecoRequestDTO dto) {
+        String keycloakId = jwt.getSubject();
+
+        EnderecoResponseDTO endereco = enderecoService.salvar(keycloakId, dto);
+
+        return Response.status(Response.Status.CREATED).entity(endereco).build();
     }
 }

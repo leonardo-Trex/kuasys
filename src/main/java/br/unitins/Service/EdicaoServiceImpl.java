@@ -5,6 +5,12 @@ import java.util.List;
 import br.unitins.Service.interfaces.EdicaoService;
 import br.unitins.model.Edicao;
 import br.unitins.repository.EdicaoRepository;
+import br.unitins.dto.EdicaoRequestDTO;
+import br.unitins.mapper.EdicaoMapper;
+import br.unitins.repository.ColecaoRepository;
+import br.unitins.repository.EditoraRepository;
+import br.unitins.repository.QuadrinhoRepository;
+import jakarta.ws.rs.NotFoundException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -14,6 +20,15 @@ public class EdicaoServiceImpl implements EdicaoService {
 
     @Inject
     EdicaoRepository repository;
+
+    @Inject
+    ColecaoRepository colecaoRepository;
+
+    @Inject
+    EditoraRepository editoraRepository;
+
+    @Inject
+    QuadrinhoRepository quadrinhoRepository;
 
     @Override
     public List<Edicao> findAll() {
@@ -32,25 +47,35 @@ public class EdicaoServiceImpl implements EdicaoService {
 
     @Override
     @Transactional
-    public Edicao create(Edicao edicao) {
+    public Edicao create(EdicaoRequestDTO dto) {
+        Edicao edicao = EdicaoMapper.toEntity(dto);
+        edicao.setColecao(colecaoRepository.findByIdOptional(dto.idColecao()).orElseThrow(() -> new NotFoundException("Coleção não encontrada")));
+        edicao.setEditora(editoraRepository.findByIdOptional(dto.idEditora()).orElseThrow(() -> new NotFoundException("Editora não encontrada")));
+        edicao.setQuadrinho(quadrinhoRepository.findByIdOptional(dto.idQuadrinho()).orElseThrow(() -> new NotFoundException("Quadrinho não encontrado")));
         repository.persist(edicao);
         return edicao;
     }
 
     @Override
     @Transactional
-    public void update(Long id, Edicao edicao) {
+    public void update(Long id, EdicaoRequestDTO dto) {
         Edicao e = findById(id);
-        e.setNome(edicao.getNome());
-        e.setDescricao(edicao.getDescricao());
-        e.setPreco(edicao.getPreco());
-        e.setNumero(edicao.getNumero());
-        e.setDataPublicacao(edicao.getDataPublicacao());
-        e.setIsbn(edicao.getIsbn());
-        e.setTiragem(e.getTiragem());
-        e.setTipoCapa(e.getTipoCapa());
-        e.setDimensoes(edicao.getDimensoes());
-        e.setGenero(e.getGenero());
+        if (e == null) {
+            throw new NotFoundException("Edição não encontrada");
+        }
+        e.setNome(dto.nome());
+        e.setDescricao(dto.descricao());
+        e.setPreco(dto.preco());
+        e.setNumero(dto.numero());
+        e.setDataPublicacao(dto.dataPublicacao());
+        e.setIsbn(dto.isbnLimpo());
+        e.setTiragem(dto.tiragem());
+        e.setTipoCapa(dto.tipoCapa());
+        e.setDimensoes(dto.dimensoes());
+        e.setGenero(dto.genero());
+        e.setColecao(colecaoRepository.findByIdOptional(dto.idColecao()).orElseThrow(() -> new NotFoundException("Coleção não encontrada")));
+        e.setEditora(editoraRepository.findByIdOptional(dto.idEditora()).orElseThrow(() -> new NotFoundException("Editora não encontrada")));
+        e.setQuadrinho(quadrinhoRepository.findByIdOptional(dto.idQuadrinho()).orElseThrow(() -> new NotFoundException("Quadrinho não encontrado")));
     }
 
     @Override

@@ -33,7 +33,6 @@ services:
       - postgres-db
     networks:
       - ecommerce-network
-
       # Servidor de E-mail de Testes (Mailpit)
   mailpit:
     image: axllent/mailpit:latest
@@ -41,6 +40,19 @@ services:
     ports:
       - "1025:1025" # Porta SMTP para o Keycloak enviar os e-mails
       - "8025:8025" # Porta Web UI para você abrir no navegador e ver as caixas de entrada
+    networks:
+      - ecommerce-network
+      # Interface Visual do Banco de Dados (Adicionado para a apresentação)
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin-ecommerce
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    ports:
+      - "8085:80" # Acessível em http://localhost:8085
+    depends_on:
+      - postgres-db
     networks:
       - ecommerce-network
 

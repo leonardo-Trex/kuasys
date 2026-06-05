@@ -24,13 +24,13 @@ import jakarta.ws.rs.core.Response;
 @Path("/usuarios")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@RolesAllowed("admin")
 public class UsuarioResource {
 
     @Inject
     UsuarioService service;
 
     @GET
-    @RolesAllowed("admin")
     public Response buscarTodos() {
         List<UsuarioResponseDTO> lista = service.findAll()
                 .stream()
@@ -68,7 +68,6 @@ public class UsuarioResource {
     }
 
     @POST
-    @RolesAllowed("admin")
     public Response incluir(@Valid UsuarioRequestDTO dto) {
         var criado = service.create(UsuarioMapper.toEntity(dto));
         return Response.status(Response.Status.CREATED)
@@ -78,7 +77,7 @@ public class UsuarioResource {
 
     @PUT
     @Path("/{id}")
-    @Authenticated
+    @RolesAllowed("usuario")
     public Response alterar(@PathParam("id") Long id, @Valid UsuarioRequestDTO dto) {
         service.update(id, UsuarioMapper.toEntity(dto));
         return Response.ok().build();
@@ -86,7 +85,6 @@ public class UsuarioResource {
 
     @DELETE
     @Path("/{id}")
-    @RolesAllowed("admin")
     public Response deletar(@PathParam("id") Long id) {
         service.delete(id);
         return Response.noContent().build();

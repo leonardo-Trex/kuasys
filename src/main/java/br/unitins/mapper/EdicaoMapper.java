@@ -45,6 +45,9 @@ public class EdicaoMapper {
                 edicao.getTipoCapa().name(),
                 edicao.getGenero().name(),
                 edicao.getDimensoes(),
-                edicao.getDataCadastro());
+                edicao.getDataCadastro(),
+                ColecaoMapper.toResponseDTO(edicao.getColecao()),
+                EditoraMapper.toResponseDTO(edicao.getEditora()),
+                QuadrinhoMapper.toResponseDTO(edicao.getQuadrinho()));
     }
 }
