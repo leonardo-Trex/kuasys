@@ -26,7 +26,7 @@ import jakarta.ws.rs.core.Response.Status;
 @Path("/pessoas")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@Authenticated
+//@Authenticated
 public class PessoaResource {
 
     @Inject
@@ -43,14 +43,14 @@ public class PessoaResource {
     }
 
     @GET
-    @Path("/{id}")
+//    @Path("/{id}")
     public Response buscarPeloId(@PathParam("id") Long id) {
         return Response.ok(PessoaMapper.toResponseDTO(service.findById(id))).build();
     }
 
     @DELETE
     @Path("/{id}")
-    @RolesAllowed("admin")
+//    @RolesAllowed("admin")
     public Response deletar(@PathParam("id") Long id) {
         service.delete(id);
 
@@ -58,7 +58,7 @@ public class PessoaResource {
     }
 
     @POST
-    @RolesAllowed("admin")
+//    @RolesAllowed("admin")
     public Response incluir(@Valid PessoaRequestDTO dto) {
         Pessoa pessoa = service.create(PessoaMapper.toEntity(dto));
 
@@ -70,7 +70,7 @@ public class PessoaResource {
 
     @PUT
     @Path("/{id}")
-    @RolesAllowed("admin")
+//    @RolesAllowed("admin")
     public Response alterar(@PathParam("id") Long id, PessoaRequestDTO dto) {
         service.update(id, PessoaMapper.toEntity(dto));
 

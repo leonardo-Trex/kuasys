@@ -23,7 +23,7 @@ import jakarta.ws.rs.core.Response;
 @Path("/usuarios")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@RolesAllowed("admin")
+//@RolesAllowed("admin")
 public class UsuarioResource {
 
     @Inject

@@ -26,7 +26,7 @@ import jakarta.ws.rs.core.Response.Status;
 @Path("/editoras")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@PermitAll
+//@PermitAll
 public class EditoraResource {
 
     @Inject
@@ -50,7 +50,7 @@ public class EditoraResource {
 
     @DELETE
     @Path("/{id}")
-    @RolesAllowed("admin")
+//    @RolesAllowed("admin")
     public Response deletar(@PathParam("id") Long id) {
         service.delete(id);
 
@@ -58,7 +58,7 @@ public class EditoraResource {
     }
 
     @POST
-    @RolesAllowed("admin")
+//    @RolesAllowed("admin")
     public Response incluir(@Valid EditoraRequestDTO dto) {
         Editora editora = service.create(EditoraMapper.toEntity(dto));
 
@@ -70,7 +70,7 @@ public class EditoraResource {
 
     @PUT
     @Path("/{id}")
-    @RolesAllowed("admin")
+//    @RolesAllowed("admin")
     public Response alterar(@PathParam("id") Long id, EditoraRequestDTO dto) {
         service.update(id, EditoraMapper.toEntity(dto));
 

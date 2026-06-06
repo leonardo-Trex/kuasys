@@ -26,7 +26,7 @@ import jakarta.ws.rs.core.Response.Status;
 @Path("/quadrinhos")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@Authenticated
+//@Authenticated
 public class QuadrinhoResource {
 
     @Inject
@@ -50,7 +50,7 @@ public class QuadrinhoResource {
 
     @DELETE
     @Path("/{id}")
-    @RolesAllowed("admin")
+//    @RolesAllowed("admin")
     public Response deletar(@PathParam("id") Long id) {
         service.delete(id);
 
@@ -58,7 +58,7 @@ public class QuadrinhoResource {
     }
 
     @POST
-    @RolesAllowed("admin")
+//    @RolesAllowed("admin")
     public Response incluir(@Valid QuadrinhoRequestDTO dto) {
         Quadrinho quadrinho = service.create(QuadrinhoMapper.toEntity(dto));
 
@@ -70,7 +70,7 @@ public class QuadrinhoResource {
 
     @PUT
     @Path("/{id}")
-    @RolesAllowed("admin")
+//    @RolesAllowed("admin")
     public Response alterar(@PathParam("id") Long id, QuadrinhoRequestDTO dto) {
         service.update(id, QuadrinhoMapper.toEntity(dto));
 
