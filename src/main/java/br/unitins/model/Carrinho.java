@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "carrinho")
-public class Carrinho extends DefaultEntity {
+public class Carrinho extends BaseEntity {
 
     @Column(name = "usuario_id")
     private String usuarioId;
@@ -20,13 +20,6 @@ public class Carrinho extends DefaultEntity {
 
     @OneToMany(mappedBy = "carrinho", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<ItemCarrinho> itens = new ArrayList<>();
-
-    @PrePersist
-    private void preencherDataCriacao() {
-        if (this.dataCriacao == null) {
-            this.dataCriacao = LocalDateTime.now();
-        }
-    }
 
     public Carrinho() {
     }

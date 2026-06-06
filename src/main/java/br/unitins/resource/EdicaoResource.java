@@ -30,6 +30,7 @@ import jakarta.ws.rs.core.Response.Status;
 //@PermitAll
 public class EdicaoResource {
 
+    //sdflknçlknfaslkn
     @Inject
     EdicaoService service;
 

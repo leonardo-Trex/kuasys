@@ -14,9 +14,17 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "tb_edicao")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Edicao extends Produto {
 
     @Column(nullable = false)
@@ -51,106 +59,6 @@ public class Edicao extends Produto {
     @JoinColumn(name = "quadrinho_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Quadrinho quadrinho;
-
-    public Edicao() {
-        super();
-    }
-
-    public Edicao(Long id, String nome, String descricao, BigDecimal preco, LocalDateTime dataCadastro, Integer numero,
-            LocalDate dataPublicacao, String isbn, Integer tiragem, TipoCapa tipoCapa, String dimensoes,
-            GeneroQuadrinho genero, Colecao colecao, Editora editora, Quadrinho quadrinho, String nomeImagem) {
-        super(id, nome, descricao, preco, dataCadastro, nomeImagem);
-        this.numero = numero;
-        this.dataPublicacao = dataPublicacao;
-        this.isbn = isbn;
-        this.tiragem = tiragem;
-        this.tipoCapa = tipoCapa;
-        this.dimensoes = dimensoes;
-        this.genero = genero;
-        this.colecao = colecao;
-        this.editora = editora;
-        this.quadrinho = quadrinho;
-    }
-
-    public Integer getNumero() {
-        return numero;
-    }
-
-    public void setNumero(Integer numero) {
-        this.numero = numero;
-    }
-
-    public LocalDate getDataPublicacao() {
-        return dataPublicacao;
-    }
-
-    public void setDataPublicacao(LocalDate dataPublicacao) {
-        this.dataPublicacao = dataPublicacao;
-    }
-
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
-    public Integer getTiragem() {
-        return tiragem;
-    }
-
-    public void setTiragem(Integer tiragem) {
-        this.tiragem = tiragem;
-    }
-
-    public TipoCapa getTipoCapa() {
-        return tipoCapa;
-    }
-
-    public void setTipoCapa(TipoCapa tipoCapa) {
-        this.tipoCapa = tipoCapa;
-    }
-
-    public String getDimensoes() {
-        return dimensoes;
-    }
-
-    public void setDimensoes(String dimensoes) {
-        this.dimensoes = dimensoes;
-    }
-
-    public GeneroQuadrinho getGenero() {
-        return genero;
-    }
-
-    public void setGenero(GeneroQuadrinho genero) {
-        this.genero = genero;
-    }
-
-    public Colecao getColecao() {
-        return colecao;
-    }
-
-    public void setColecao(Colecao colecao) {
-        this.colecao = colecao;
-    }
-
-    public Editora getEditora() {
-        return editora;
-    }
-
-    public void setEditora(Editora editora) {
-        this.editora = editora;
-    }
-
-    public Quadrinho getQuadrinho() {
-        return quadrinho;
-    }
-
-    public void setQuadrinho(Quadrinho quadrinho) {
-        this.quadrinho = quadrinho;
-    }
 
     @Override
     public int hashCode() {

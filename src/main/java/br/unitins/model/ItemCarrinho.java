@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "item_carrinho")
-public class ItemCarrinho extends DefaultEntity {
+public class ItemCarrinho extends BaseEntity {
     @Column(name = "quantidade", nullable = false)
     private int quantidade;
 
