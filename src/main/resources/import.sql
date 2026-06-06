@@ -1,12 +1,6 @@
--- This file allow to write SQL commands that will be emitted in test and dev.
--- The commands are commented as their support depends of the database
--- insert into myentity (id, field) values(1, 'field-1');
--- insert into myentity (id, field) values(2, 'field-2');
--- insert into myentity (id, field) values(3, 'field-3');
--- alter sequence myentity_seq restart with 4;
 
 
--- Inserindo coleções de quadrinhos
+
 INSERT INTO tb_colecao (nome, descricao, data_inicio_publicacao, data_fim_publicacao) 
 VALUES ('Batman: Lendas do Cavaleiro das Trevas', 'Série focada em arcos fechados e histórias icônicas do herói.', '1989-11-01', '2007-03-01');
 
@@ -32,7 +26,7 @@ VALUES
 ('Graphic MSP: Laços', 'Uma releitura emocionante dos personagens de Mauricio de Sousa.', 45.50, CURRENT_TIMESTAMP, 1, '2013-06-01', '9788583680215', 10000, 1, '19x26 cm', 2, 1, 'batima_dia_buxa.jpeg');
 
 -- Pessoa
-INSERT INTO pessoa (nome, nacionalidade, data_nascimento) 
+INSERT INTO tb_pessoa (nome, nacionalidade, data_nascimento)
 VALUES 
 ('João Silva', 'Brasileira', '1995-05-20'),
 ('Marie Curie', 'Polonesa', '1867-11-07'),
