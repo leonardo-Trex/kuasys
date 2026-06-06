@@ -1,6 +1,6 @@
 package br.unitins.resource;
 
-import br.unitins.Service.interfaces.EnderecoService;
+import br.unitins.service.interfaces.EnderecoService;
 import br.unitins.dto.EnderecoRequestDTO;
 import br.unitins.dto.EnderecoResponseDTO;
 import jakarta.annotation.security.RolesAllowed;

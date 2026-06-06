@@ -1,4 +1,4 @@
-package br.unitins.Service;
+package br.unitins.service;
 
 import br.unitins.exceptions.ValidationException;
 import br.unitins.model.Carrinho;

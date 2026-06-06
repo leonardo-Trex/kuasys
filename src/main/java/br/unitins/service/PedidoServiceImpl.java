@@ -1,7 +1,7 @@
-package br.unitins.Service;
+package br.unitins.service;
 
-import br.unitins.Service.interfaces.CarrinhoService;
-import br.unitins.Service.interfaces.PedidoService;
+import br.unitins.service.interfaces.CarrinhoService;
+import br.unitins.service.interfaces.PedidoService;
 import br.unitins.dto.PedidoResponseDTO;
 import br.unitins.mapper.PedidoMapper;
 import br.unitins.model.Carrinho;

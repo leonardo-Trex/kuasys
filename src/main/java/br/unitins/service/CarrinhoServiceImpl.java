@@ -1,7 +1,7 @@
-package br.unitins.Service;
+package br.unitins.service;
 
-import br.unitins.Service.interfaces.CarrinhoService;
-import br.unitins.Service.interfaces.EdicaoService;
+import br.unitins.service.interfaces.CarrinhoService;
+import br.unitins.service.interfaces.EdicaoService;
 import br.unitins.dto.CarrinhoRequestDTO;
 import br.unitins.model.Carrinho;
 import br.unitins.model.Edicao;

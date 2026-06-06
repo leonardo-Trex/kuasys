@@ -2,7 +2,7 @@ package br.unitins.resource;
 
 import java.util.List;
 
-import br.unitins.Service.interfaces.ColecaoService;
+import br.unitins.service.interfaces.ColecaoService;
 import br.unitins.dto.ColecaoRequestDTO;
 import br.unitins.dto.ColecaoResponseDTO;
 import br.unitins.mapper.ColecaoMapper;
@@ -11,7 +11,6 @@ import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
-import io.quarkus.security.Authenticated;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -27,14 +26,14 @@ import jakarta.ws.rs.core.Response.Status;
 @Path("/colecoes")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@PermitAll
+//@PermitAll
 public class ColecaoResource {
 
     @Inject
     ColecaoService service;
 
     @GET
-    @RolesAllowed("usuario")
+//    @RolesAllowed("usuario")
     public Response buscarTodo() {
         List<ColecaoResponseDTO> lista = service.findAll()
                 .stream()
@@ -50,14 +49,14 @@ public class ColecaoResource {
 
     @GET
     @Path("/{id}")
-    @RolesAllowed("usuario")
+//    @RolesAllowed("usuario")
     public Response buscarPeloId(@PathParam("id") Long id) {
         return Response.ok(ColecaoMapper.toResponseDTO(service.findById(id))).build();
     }
 
     @DELETE
     @Path("/{id}")
-    @RolesAllowed("usuario")
+//    @RolesAllowed("usuario")
     public Response deletar(@PathParam("id") Long id) {
         service.delete(id);
 
@@ -65,7 +64,7 @@ public class ColecaoResource {
     }
 
     @POST
-    @RolesAllowed("usuario")
+//    @RolesAllowed("usuario")
     public Response incluir(@Valid ColecaoRequestDTO dto) {
         Colecao colecao = service.create(ColecaoMapper.toEntity(dto));
 
@@ -77,7 +76,7 @@ public class ColecaoResource {
 
     @PUT
     @Path("/{id}")
-    @RolesAllowed("usuario")
+//    @RolesAllowed("usuario")
     public Response alterar(@PathParam("id") Long id, ColecaoRequestDTO dto) {
         service.update(id, ColecaoMapper.toEntity(dto));
 

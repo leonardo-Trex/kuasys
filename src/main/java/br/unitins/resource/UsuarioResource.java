@@ -2,14 +2,13 @@ package br.unitins.resource;
 
 import java.util.List;
 
-import br.unitins.Service.interfaces.UsuarioService;
+import br.unitins.service.interfaces.UsuarioService;
 import br.unitins.dto.UsuarioRequestDTO;
 import br.unitins.dto.UsuarioResponseDTO;
 import br.unitins.mapper.UsuarioMapper;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.annotation.security.RolesAllowed;
-import io.quarkus.security.Authenticated;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;

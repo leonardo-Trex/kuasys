@@ -1,6 +1,6 @@
-package br.unitins.Service;
+package br.unitins.service;
 
-import br.unitins.Service.interfaces.EnderecoService;
+import br.unitins.service.interfaces.EnderecoService;
 import br.unitins.dto.EnderecoRequestDTO;
 import br.unitins.dto.EnderecoResponseDTO;
 import br.unitins.mapper.EnderecoMapper;

@@ -1,8 +1,8 @@
-package br.unitins.Service;
+package br.unitins.service;
 
 import java.util.List;
 
-import br.unitins.Service.interfaces.WishlistService;
+import br.unitins.service.interfaces.WishlistService;
 import br.unitins.model.Edicao;
 import br.unitins.model.Usuario;
 import br.unitins.repository.EdicaoRepository;

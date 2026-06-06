@@ -1,6 +1,6 @@
-package br.unitins.Service;
+package br.unitins.service;
 
-import br.unitins.Service.interfaces.UsuarioService;
+import br.unitins.service.interfaces.UsuarioService;
 import br.unitins.model.Usuario;
 import br.unitins.model.enums.Perfil;
 import br.unitins.repository.UsuarioRepository;

@@ -2,7 +2,7 @@ package br.unitins.resource;
 
 import java.util.List;
 
-import br.unitins.Service.interfaces.QuadrinhoService;
+import br.unitins.service.interfaces.QuadrinhoService;
 import br.unitins.dto.QuadrinhoRequestDTO;
 import br.unitins.dto.QuadrinhoResponseDTO;
 import br.unitins.mapper.QuadrinhoMapper;

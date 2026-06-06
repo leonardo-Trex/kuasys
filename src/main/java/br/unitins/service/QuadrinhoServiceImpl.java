@@ -1,8 +1,8 @@
-package br.unitins.Service;
+package br.unitins.service;
 
 import java.util.List;
 
-import br.unitins.Service.interfaces.QuadrinhoService;
+import br.unitins.service.interfaces.QuadrinhoService;
 import br.unitins.model.Quadrinho;
 import br.unitins.repository.QuadrinhoRepository;
 import jakarta.enterprise.context.ApplicationScoped;

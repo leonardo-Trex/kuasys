@@ -1,8 +1,8 @@
-package br.unitins.Service;
+package br.unitins.service;
 
 import java.util.List;
 
-import br.unitins.Service.interfaces.CreditoService;
+import br.unitins.service.interfaces.CreditoService;
 import br.unitins.model.Credito;
 import br.unitins.repository.CreditoRepository;
 import jakarta.enterprise.context.ApplicationScoped;

@@ -2,7 +2,7 @@ package br.unitins.resource;
 
 import java.util.List;
 
-import br.unitins.Service.interfaces.PessoaService;
+import br.unitins.service.interfaces.PessoaService;
 import br.unitins.dto.PessoaRequestDTO;
 import br.unitins.dto.PessoaResponseDTO;
 import br.unitins.mapper.PessoaMapper;

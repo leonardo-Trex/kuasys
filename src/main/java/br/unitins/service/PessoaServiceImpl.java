@@ -1,8 +1,8 @@
-package br.unitins.Service;
+package br.unitins.service;
 
 import java.util.List;
 
-import br.unitins.Service.interfaces.PessoaService;
+import br.unitins.service.interfaces.PessoaService;
 import br.unitins.model.Pessoa;
 import br.unitins.repository.PessoaRepository;
 import jakarta.enterprise.context.ApplicationScoped;

@@ -2,7 +2,7 @@ package br.unitins.resource;
 
 import java.util.List;
 
-import br.unitins.Service.interfaces.EditoraService;
+import br.unitins.service.interfaces.EditoraService;
 import br.unitins.dto.EditoraRequestDTO;
 import br.unitins.dto.EditoraResponseDTO;
 import br.unitins.mapper.EditoraMapper;

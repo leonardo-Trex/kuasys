@@ -1,8 +1,8 @@
-package br.unitins.Service;
+package br.unitins.service;
 
 import java.util.List;
 
-import br.unitins.Service.interfaces.EdicaoService;
+import br.unitins.service.interfaces.EdicaoService;
 import br.unitins.model.Edicao;
 import br.unitins.repository.EdicaoRepository;
 import br.unitins.dto.EdicaoRequestDTO;

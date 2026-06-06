@@ -1,4 +1,4 @@
-package br.unitins.Service.interfaces;
+package br.unitins.service.interfaces;
 
 import br.unitins.dto.PedidoResponseDTO;
 

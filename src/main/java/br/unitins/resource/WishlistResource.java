@@ -2,7 +2,7 @@ package br.unitins.resource;
 
 import java.util.List;
 
-import br.unitins.Service.interfaces.WishlistService;
+import br.unitins.service.interfaces.WishlistService;
 import br.unitins.model.Edicao;
 import io.quarkus.security.Authenticated;
 import jakarta.inject.Inject;
