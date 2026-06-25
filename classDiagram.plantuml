@@ -23,6 +23,19 @@ enum TipoCapa {
   LUXO
 }
 
+enum StatusPedido {
+    PAGAMENTO_PENDENTE
+    PAGO
+    ENVIADO
+    ENTREGUE
+    CANCELADO
+}
+
+enum Perfil {
+    ADMIM
+    USUARIO
+}
+
 ' =====================
 ' CLASSES
 ' =====================
@@ -32,6 +45,49 @@ abstract class Produto {
   - descricao: String
   - preco: Decimal
   - dataCadastro: LocalDateTime
+}
+
+abstract class BaseEntity << geral >>{
+    - id: Long
+    - dataCadastro: LocalDateTime
+    - preencherDataCadastro(): void
+}
+
+class Usuario {
+    - keycloakId: String
+    - nome: String
+    - email:    String
+    - cpf:  String
+    - telefone:  String
+    - isAtivo:  Boolean
+    - senha: String
+}
+
+class WishList {
+
+}
+
+class Pedido {
+    - tokenSessao: String
+    - dataPedido: LocalDateTime
+    - valorTotal: BigDecimal
+}
+
+class ItemPedido {
+    - produtoId: Long
+    - quantidade: Integer
+    - precoUnitário: BigDecimal
+}
+
+class Endereco {
+    - cep: String
+    - logradouro: String
+    - numero: String
+    - complemento: String
+    - bairro: String
+    - cidade: String
+    - estado: String
+    - isPrincipal: Boolean
 }
 
 class Edicao {
@@ -44,35 +100,33 @@ class Edicao {
 }
 
 class Quadrinho {
-  - id: Long
   - titulo: String
   - sinopse: String
   - genero: GeneroQuadrinho
 }
 
 class Colecao {
-  - id: Long
   - nome: String
   - descricao: String
   - dataInicioPublicacao: Date
   - dataFimPublicacao: Date
+'  Esse cara aqui pode ser calculado, se dataFimPublicação == null
+  - isCompleta: Boolean
 }
 
 class Editora {
-  - id: Long
   - nome: String
   - cnpj: String
 }
 
 class Pessoa {
-  - id: Long
   - nome: String
   - nacionalidade: String
   - dataNascimento: Date
 }
 
 class Credito {
-  - funcao: String  
+  - papel: String
 }
 
 ' =====================
@@ -88,5 +142,23 @@ Pessoa "1" -- "0..*" Credito
 Editora "1" -left- "0..*" Edicao
 
 Colecao "1" o-right- "0..*" Edicao
+
+Pedido "1" --* "1..*" ItemPedido
+Pedido "1..*" --* "1" StatusPedido
+Pedido "1" *-right- "1" Usuario
+
+Usuario -- Endereco
+Usuario -- Perfil
+
+Edicao -- TipoCapa
+Quadrinho -- GeneroQuadrinho
+
+' ======================
+'         NOTAS
+' ======================
+
+note "Todas as classes do model herdam dessa aqui" as N1
+
+N1 .. BaseEntity
 
 @enduml
