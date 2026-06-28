@@ -40,18 +40,20 @@ enum Perfil {
 ' CLASSES
 ' =====================
 
-abstract class Produto {
-  - id: Long
-  - descricao: String
-  - preco: Decimal
-  - dataCadastro: LocalDateTime
-}
-
 abstract class BaseEntity << geral >>{
     - id: Long
     - dataCadastro: LocalDateTime
     - preencherDataCadastro(): void
 }
+
+abstract class Produto {
+  - descricao: String
+  - preco: BigDecimal
+  - nome: String
+  - estoque: Integer
+}
+
+
 
 class Usuario {
     - keycloakId: String
@@ -74,7 +76,6 @@ class Pedido {
 }
 
 class ItemPedido {
-    - produtoId: Long
     - quantidade: Integer
     - precoUnitário: BigDecimal
 }
@@ -152,6 +153,10 @@ Usuario -- Perfil
 
 Edicao -- TipoCapa
 Quadrinho -- GeneroQuadrinho
+
+ItemPedido -- Produto
+WishList -- Usuario
+WishList -- Produto
 
 ' ======================
 '         NOTAS
