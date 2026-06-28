@@ -18,6 +18,9 @@ public class Pedido {
     @Column(name = "usuario_id")
     private String usuarioId;
 
+    // Pensamento OOP!
+    // private Usuario usuario;
+
     @Column(name = "token_sessao")
     private String tokenSessao;
 

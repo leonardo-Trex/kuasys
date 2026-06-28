@@ -1,6 +1,7 @@
 package br.unitins.model;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
@@ -25,5 +26,18 @@ public class BaseEntity {
     @PrePersist
     private void preencherDataCadastro() {
         setDataCadastro(LocalDateTime.now());
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof BaseEntity that)) return false;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    @Column(updatable = false)
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }
