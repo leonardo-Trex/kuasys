@@ -9,35 +9,36 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Setter
 @MappedSuperclass
-public class BaseEntity {
+abstract public class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter(AccessLevel.PROTECTED)
     private Long id;
 
-    @Column(name = "data_cadastro")
+    @Column(name = "data_cadastro", updatable = false, nullable = false)
     private LocalDateTime dataCadastro;
 
     @PrePersist
     private void preencherDataCadastro() {
-        setDataCadastro(LocalDateTime.now());
+        this.dataCadastro = LocalDateTime.now();
     }
 
 
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof BaseEntity that)) return false;
+        if (this.id == null || that.id == null) return false;
         return Objects.equals(id, that.id);
     }
 
     @Override
-    @Column(updatable = false)
     public int hashCode() {
-        return Objects.hashCode(id);
+        return getClass().hashCode();
     }
 }
