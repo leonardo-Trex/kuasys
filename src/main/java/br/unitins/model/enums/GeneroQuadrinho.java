@@ -2,14 +2,16 @@ package br.unitins.model.enums;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+import lombok.Getter;
 
 @JsonFormat(shape = Shape.OBJECT)
+@Getter
 public enum GeneroQuadrinho {
-    ACAO(1l, "Ação"),
-    AVENTURA(2l, "Aventura"),
-    FICCAO_CIENTIFICA(3l, "Ficção Cientifica"),
-    FANTASIA(4l, "Fantasia"),
-    TERROR(5l, "Terror");
+    ACAO(1L, "Ação"),
+    AVENTURA(2L, "Aventura"),
+    FICCAO_CIENTIFICA(3L, "Ficção Cientifica"),
+    FANTASIA(4L, "Fantasia"),
+    TERROR(5L, "Terror");
 
     private final Long ID;
     private final String NOME;
@@ -17,14 +19,6 @@ public enum GeneroQuadrinho {
     private GeneroQuadrinho(Long id, String nome) {
         this.ID = id;
         this.NOME = nome;
-    }
-
-    public Long getID() {
-        return ID;
-    }
-
-    public String getNOME() {
-        return NOME;
     }
 
     public static GeneroQuadrinho valueOf(Long id) {

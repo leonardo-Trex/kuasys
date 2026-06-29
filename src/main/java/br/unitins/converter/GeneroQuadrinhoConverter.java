@@ -14,7 +14,7 @@ public class GeneroQuadrinhoConverter implements AttributeConverter<GeneroQuadri
 
     @Override
     public GeneroQuadrinho convertToEntityAttribute(Long id) {
-        return GeneroQuadrinho.valueOf(id);
+        return id == null ? null : GeneroQuadrinho.valueOf(id);
     }
 
 }
