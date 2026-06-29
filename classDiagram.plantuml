@@ -139,7 +139,7 @@ Quadrinho "1" -down- "1..*" Edicao
 Quadrinho "1" *-- "1..*" Credito
 Pessoa "1" -- "0..*" Credito
 
-Editora "1" -left- "0..*" Edicao
+Editora "1" -right- "0..*" Colecao
 
 Colecao "1" o-right- "0..*" Edicao
 
