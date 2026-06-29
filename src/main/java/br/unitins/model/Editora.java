@@ -20,20 +20,15 @@ public class Editora extends BaseEntity {
     private String cnpj;
 
     @OneToMany(mappedBy = "editora", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
-    private List<Colecao> colecoes = new ArrayList<>();
-
-    public Editora(String nome, String cnpj) {
-        this.nome = nome;
-        this.cnpj = cnpj;
-    }
+    private final List<Colecao> colecoes = new ArrayList<>(); // Essa lista não pode ser alterada! só extendida!
 
     public void addColecao(Colecao c) {
-        // TODO: Descomentar a linha abaixo assim que a classe Colecao possuir o atributo e setter de Editora
-//        c.setEditora(this);
+        c.setEditora(this);
         this.colecoes.add(c);
     }
 
+    public void removeColecao(Colecao c) {
+        this.colecoes.remove(c);
+    }
 
-
-    
 }
