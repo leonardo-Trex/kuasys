@@ -1,13 +1,13 @@
 package br.unitins.service;
 
-import java.util.List;
-
-import br.unitins.service.interfaces.PessoaService;
-import br.unitins.model.Pessoa;
+import br.unitins.model.Quadrinista;
 import br.unitins.repository.PessoaRepository;
+import br.unitins.service.interfaces.PessoaService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+
+import java.util.List;
 
 @ApplicationScoped
 public class PessoaServiceImpl implements PessoaService {
@@ -16,34 +16,34 @@ public class PessoaServiceImpl implements PessoaService {
     PessoaRepository repository;
 
     @Override
-    public List<Pessoa> findAll() {
+    public List<Quadrinista> findAll() {
         return repository.findAll().list();
     }
 
     @Override
-    public Pessoa findById(Long id) {
+    public Quadrinista findById(Long id) {
         return repository.findById(id);
     }
 
     @Override
-    public List<Pessoa> findByNome(String nome) {
+    public List<Quadrinista> findByNome(String nome) {
         return repository.findByNome(nome).list();
     }
 
     @Override
     @Transactional
-    public Pessoa create(Pessoa pessoa) {
-        repository.persist(pessoa);
-        return pessoa;
+    public Quadrinista create(Quadrinista quadrinista) {
+        repository.persist(quadrinista);
+        return quadrinista;
     }
 
     @Override
     @Transactional
-    public void update(Long id, Pessoa pessoa) {
-        Pessoa p = findById(id);
-        p.setNome(pessoa.getNome());
-        p.setNacionalidade(pessoa.getNacionalidade());
-        p.setDataNascimento(pessoa.getDataNascimento());
+    public void update(Long id, Quadrinista quadrinista) {
+        Quadrinista p = findById(id);
+        p.setNome(quadrinista.getNome());
+        p.setNacionalidade(quadrinista.getNacionalidade());
+        p.setDataNascimento(quadrinista.getDataNascimento());
 
     }
 

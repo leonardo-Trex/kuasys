@@ -10,10 +10,10 @@ import lombok.Setter;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "tb_pessoa")
+@Table(name = "tb_quadrinista")
 @Getter
 @NoArgsConstructor
-public class Pessoa extends BaseEntity {
+public class Quadrinista extends BaseEntity {
 
     @Setter
     private String nome;

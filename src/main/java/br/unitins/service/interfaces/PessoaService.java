@@ -1,19 +1,19 @@
 package br.unitins.service.interfaces;
 
+import br.unitins.model.Quadrinista;
+
 import java.util.List;
 
-import br.unitins.model.Pessoa;
-
 public interface PessoaService {
-    List<Pessoa> findAll();
+    List<Quadrinista> findAll();
 
-    Pessoa findById(Long id);
+    Quadrinista findById(Long id);
 
-    List<Pessoa> findByNome(String nome);
+    List<Quadrinista> findByNome(String nome);
 
-    Pessoa create(Pessoa edicao);
+    Quadrinista create(Quadrinista edicao);
 
-    void update(Long id, Pessoa Edicao);
+    void update(Long id, Quadrinista Edicao);
 
     void delete(Long id);
 }
