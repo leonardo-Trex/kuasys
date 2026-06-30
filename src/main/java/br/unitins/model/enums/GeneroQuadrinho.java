@@ -1,10 +1,7 @@
 package br.unitins.model.enums;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import lombok.Getter;
 
-@JsonFormat(shape = Shape.OBJECT)
 @Getter
 public enum GeneroQuadrinho {
     ACAO(1L, "Ação"),

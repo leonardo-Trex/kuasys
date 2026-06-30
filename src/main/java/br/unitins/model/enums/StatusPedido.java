@@ -1,12 +1,15 @@
 package br.unitins.model.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum StatusPedido {
-    PENDENTE(0l, "Pendente"),
-    AGUARDANDO_PAGAMENTO(1l, "Aguardando Pagamento"),
-    PAGO(2l, "Pago"),
-    ENVIADO(3l, "Enviado"),
-    ENTREGUE(4l, "Entregue"),
-    CANCELADO(5l, "Cancelado");
+    PENDENTE(1L, "Pendente"),
+    AGUARDANDO_PAGAMENTO(2L, "Aguardando Pagamento"),
+    PAGO(3L, "Pago"),
+    ENVIADO(4L, "Enviado"),
+    ENTREGUE(5L, "Entregue"),
+    CANCELADO(6L, "Cancelado");
 
     private final Long ID;
     private final String NOME;
@@ -14,14 +17,6 @@ public enum StatusPedido {
     private StatusPedido(Long id, String nome) {
         this.ID = id;
         this.NOME = nome;
-    }
-
-    public Long getID() {
-        return ID;
-    }
-
-    public String getNOME() {
-        return NOME;
     }
 
     public static StatusPedido valueOf(Long id) {

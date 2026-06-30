@@ -1,14 +1,13 @@
 package br.unitins.model.enums;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+import lombok.Getter;
 
-@JsonFormat(shape = Shape.OBJECT)
+@Getter
 public enum TipoCapa {
-    BROCHURA(1l, "Brochura"),
-    CAPA_DURA(2l, "Capa Dura"),
-    ESPECIAL(3l, "Especial"),
-    LUXO(4l, "Luxo");
+    BROCHURA(1L, "Brochura"),
+    CAPA_DURA(2L, "Capa Dura"),
+    ESPECIAL(3L, "Especial"),
+    LUXO(4L, "Luxo");
 
     private final Long ID;
     private final String NOME;
@@ -16,14 +15,6 @@ public enum TipoCapa {
     private TipoCapa(Long id, String nome) {
         this.ID = id;
         this.NOME = nome;
-    }
-
-    public Long getID() {
-        return ID;
-    }
-
-    public String getNOME() {
-        return NOME;
     }
 
     public static TipoCapa valueOf(Long id) {
