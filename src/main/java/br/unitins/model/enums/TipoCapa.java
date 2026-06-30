@@ -9,12 +9,12 @@ public enum TipoCapa {
     ESPECIAL(3L, "Especial"),
     LUXO(4L, "Luxo");
 
-    private final Long ID;
-    private final String NOME;
+    private final Long id;
+    private final String nome;
 
     private TipoCapa(Long id, String nome) {
-        this.ID = id;
-        this.NOME = nome;
+        this.id = id;
+        this.nome = nome;
     }
 
     public static TipoCapa valueOf(Long id) {
@@ -22,7 +22,7 @@ public enum TipoCapa {
             return null;
 
         for (TipoCapa tc : values()) {
-            if (tc.getID().equals(id))
+            if (tc.getId().equals(id))
                 return tc;
         }
         return null;

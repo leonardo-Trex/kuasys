@@ -11,12 +11,12 @@ public enum StatusPedido {
     ENTREGUE(5L, "Entregue"),
     CANCELADO(6L, "Cancelado");
 
-    private final Long ID;
-    private final String NOME;
+    private final Long id;
+    private final String nome;
 
     private StatusPedido(Long id, String nome) {
-        this.ID = id;
-        this.NOME = nome;
+        this.id = id;
+        this.nome = nome;
     }
 
     public static StatusPedido valueOf(Long id) {
@@ -24,7 +24,7 @@ public enum StatusPedido {
             return null;
 
         for (StatusPedido tc : values()) {
-            if (tc.getID().equals(id))
+            if (tc.getId().equals(id))
                 return tc;
         }
         return null;

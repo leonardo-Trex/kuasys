@@ -10,12 +10,12 @@ public enum GeneroQuadrinho {
     FANTASIA(4L, "Fantasia"),
     TERROR(5L, "Terror");
 
-    private final Long ID;
-    private final String NOME;
+    private final Long id;
+    private final String nome;
 
     private GeneroQuadrinho(Long id, String nome) {
-        this.ID = id;
-        this.NOME = nome;
+        this.id = id;
+        this.nome = nome;
     }
 
     public static GeneroQuadrinho valueOf(Long id) {
@@ -23,7 +23,7 @@ public enum GeneroQuadrinho {
             return null;
 
         for (GeneroQuadrinho gq : values()) {
-            if (gq.getID().equals(id))
+            if (gq.getId().equals(id))
                 return gq;
         }
         return null;
