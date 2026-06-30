@@ -16,11 +16,13 @@ import java.time.LocalDate;
 public class Quadrinista extends BaseEntity {
 
     @Setter
+    @Column(nullable = false)
     private String nome;
     @Setter
+    @Column(nullable = false, length = 50)
     private String nacionalidade;
 
-    @Column(name = "data_nascimento")
+    @Column(name = "data_nascimento", nullable = false)
     @Setter
     private LocalDate dataNascimento;
 }

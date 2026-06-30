@@ -1,120 +1,30 @@
 package br.unitins.model;
 
+import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.PrePersist;
 
-@MappedSuperclass
-public abstract class Produto {
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo_produto", discriminatorType = DiscriminatorType.STRING)
+@Table(name = "tb_produto")
+@Getter
+@Setter(AccessLevel.PROTECTED)
+@NoArgsConstructor
+public abstract class Produto extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(nullable = false)
     private String nome;
+    @Column(length = 1000, nullable = false)
     private String descricao;
+    @Column(precision = 10, scale = 2, nullable = false)
     private BigDecimal preco;
 
     @Column(name = "nome_imagem")
     private String nomeImagem;
-
-    
-    @Column(name = "data_cadastro")
-    private LocalDateTime dataCadastro;
-    
-    public Produto() {
-    }
-    
-    public Produto(Long id, String nome, String descricao, BigDecimal preco, LocalDateTime dataCadastro, String nomeImagem) {
-        this.id = id;
-        this.nome = nome;
-        this.descricao = descricao;
-        this.preco = preco;
-        this.dataCadastro = dataCadastro;
-        this.nomeImagem = nomeImagem;
-    }
-    
-    @PrePersist
-    protected void preencheDataCadastro() {
-        this.dataCadastro = LocalDateTime.now();
-    }
-
-    public Long getId() {
-        return id;
-    }
-    
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
-    public String getNome() {
-        return nome;
-    }
-    
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-    
-    public String getDescricao() {
-        return descricao;
-    }
-    
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-    
-    public BigDecimal getPreco() {
-        return preco;
-    }
-    
-    public void setPreco(BigDecimal preco) {
-        this.preco = preco;
-    }
-    
-    public LocalDateTime getDataCadastro() {
-        return dataCadastro;
-    }
-
-    public void setDataCadastro(LocalDateTime dataCadastro) {
-        this.dataCadastro = dataCadastro;
-    }
-    
-    public String getNomeImagem() {
-        return nomeImagem;
-    }
-
-    public void setNomeImagem(String nomeImagem) {
-        this.nomeImagem = nomeImagem;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Produto other = (Produto) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
-    }
-
 }

@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -38,4 +39,22 @@ public class Colecao extends BaseEntity {
     @JoinColumn(name = "editora_id")
     @Setter
     private Editora editora;
+
+    public List<Edicao> getEdicoes() {
+        return Collections.unmodifiableList(this.edicoes);
+    }
+
+    public void addEdicao(Edicao e) {
+        if (e != null) {
+            e.setColecao(this);
+            this.edicoes.add(e);
+        }
+    }
+
+    public void removeEdicao(Edicao e) {
+        if (e != null) {
+            e.setColecao(null);
+            this.edicoes.remove(e);
+        }
+    }
 }

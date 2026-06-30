@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -23,12 +24,21 @@ public class Editora extends BaseEntity {
     private final List<Colecao> colecoes = new ArrayList<>(); // Essa lista não pode ser alterada! só extendida!
 
     public void addColecao(Colecao c) {
-        c.setEditora(this);
-        this.colecoes.add(c);
+        if (c != null) {
+            c.setEditora(this);
+            this.colecoes.add(c);
+        }
     }
 
     public void removeColecao(Colecao c) {
-        this.colecoes.remove(c);
+        if (c != null) {
+            c.setEditora(null);
+            this.colecoes.remove(c);
+        }
+    }
+
+    public List<Colecao> getColecoes() {
+        return Collections.unmodifiableList(this.colecoes);
     }
 
 }

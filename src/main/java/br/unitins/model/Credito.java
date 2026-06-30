@@ -17,9 +17,12 @@ public class Credito extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "quadrinho_id", nullable = false)
+    @Setter
     private Quadrinho quadrinho;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "quadrinista_id", nullable = false)
     private Quadrinista quadrinista;
+
+
 }
