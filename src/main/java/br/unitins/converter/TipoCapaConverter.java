@@ -9,12 +9,12 @@ public class TipoCapaConverter implements AttributeConverter<TipoCapa, Long> {
 
     @Override
     public Long convertToDatabaseColumn(TipoCapa tipoCapa) {
-        return tipoCapa == null ? null : tipoCapa.getID();
+        return tipoCapa == null ? null : tipoCapa.getId();
     }
 
     @Override
     public TipoCapa convertToEntityAttribute(Long id) {
-        return TipoCapa.valueOf(id);
+        return id == null ? null : TipoCapa.valueOf(id);
     }
 
 }

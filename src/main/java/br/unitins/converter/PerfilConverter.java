@@ -9,7 +9,7 @@ public class PerfilConverter implements AttributeConverter<Perfil, Long> {
 
     @Override
     public Long convertToDatabaseColumn(Perfil perfil) {
-        return perfil == null ? null : perfil.getID();
+        return perfil == null ? null : perfil.getId();
     }
 
     @Override

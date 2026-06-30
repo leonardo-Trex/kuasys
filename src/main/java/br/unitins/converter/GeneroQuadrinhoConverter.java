@@ -9,7 +9,7 @@ public class GeneroQuadrinhoConverter implements AttributeConverter<GeneroQuadri
 
     @Override
     public Long convertToDatabaseColumn(GeneroQuadrinho genero) {
-        return genero == null ? null : genero.getID();
+        return genero == null ? null : genero.getId();
     }
 
     @Override
