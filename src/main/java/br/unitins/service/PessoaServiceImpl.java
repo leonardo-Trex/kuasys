@@ -1,7 +1,7 @@
 package br.unitins.service;
 
 import br.unitins.model.Quadrinista;
-import br.unitins.repository.PessoaRepository;
+import br.unitins.repository.QuadrinistaRepository;
 import br.unitins.service.interfaces.PessoaService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -13,7 +13,7 @@ import java.util.List;
 public class PessoaServiceImpl implements PessoaService {
 
     @Inject
-    PessoaRepository repository;
+    QuadrinistaRepository repository;
 
     @Override
     public List<Quadrinista> findAll() {
