@@ -64,9 +64,9 @@ class Usuario {
     - isAtivo:  Boolean
 }
 
-class WishList {
-
-}
+'class WishList {
+'
+'}
 
 class Pedido {
     - tokenSessao: String
@@ -155,15 +155,19 @@ Edicao -- TipoCapa
 Quadrinho -- GeneroQuadrinho
 
 ItemPedido -- Produto
-WishList -- Usuario
-WishList -- Produto
+
+' WishList -- Usuario
+' WishList -- Produto
 
 ' ======================
 '         NOTAS
 ' ======================
 
-note "Todas as classes do model herdam dessa aqui" as N1
+note "Todas as classes do model herdam\ndessa aqui" as N1
+note "Edição não herda dessa classe\n(Ela já herda produto)" as N2
 
 N1 .. BaseEntity
+N2 .. BaseEntity
+
 
 @enduml
