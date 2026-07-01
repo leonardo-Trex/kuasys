@@ -1,8 +1,9 @@
 package br.unitins.service.interfaces;
 
-import java.util.List;
-
+import br.unitins.dto.edicao.EdicaoRequestDTO;
 import br.unitins.model.Edicao;
+
+import java.util.List;
 
 public interface EdicaoService {
     List<Edicao> findAll();
@@ -11,9 +12,9 @@ public interface EdicaoService {
 
     List<Edicao> findByNome(String nome);
 
-    Edicao create(br.unitins.dto.EdicaoRequestDTO dto);
+    Edicao create(EdicaoRequestDTO dto);
 
-    void update(Long id, br.unitins.dto.EdicaoRequestDTO dto);
+    void update(Long id, EdicaoRequestDTO dto);
 
     void delete(Long id);
 
