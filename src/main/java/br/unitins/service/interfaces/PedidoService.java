@@ -1,6 +1,6 @@
 package br.unitins.service.interfaces;
 
-import br.unitins.dto.PedidoResponseDTO;
+import br.unitins.dto.pedido.PedidoResponseDTO;
 
 public interface PedidoService {
 

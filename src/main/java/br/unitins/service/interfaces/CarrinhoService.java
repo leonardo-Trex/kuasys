@@ -1,6 +1,6 @@
 package br.unitins.service.interfaces;
 
-import br.unitins.dto.CarrinhoRequestDTO;
+import br.unitins.dto.carrinho.CarrinhoRequestDTO;
 import br.unitins.model.Carrinho;
 
 public interface CarrinhoService {

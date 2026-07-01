@@ -1,8 +1,6 @@
 package br.unitins.service;
 
-import br.unitins.service.interfaces.CarrinhoService;
-import br.unitins.service.interfaces.PedidoService;
-import br.unitins.dto.PedidoResponseDTO;
+import br.unitins.dto.pedido.PedidoResponseDTO;
 import br.unitins.mapper.PedidoMapper;
 import br.unitins.model.Carrinho;
 import br.unitins.model.ItemPedido;
@@ -10,6 +8,8 @@ import br.unitins.model.Pedido;
 import br.unitins.model.enums.StatusPedido;
 import br.unitins.repository.CarrinhoRepository;
 import br.unitins.repository.PedidoRepository;
+import br.unitins.service.interfaces.CarrinhoService;
+import br.unitins.service.interfaces.PedidoService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -64,7 +64,7 @@ public class PedidoServiceImpl implements PedidoService {
 
         return PedidoMapper.toResponseDTO(pedido);
     }
-    
+
     public List<PedidoResponseDTO> listarPedidosDoCliente(String usuarioId) {
         List<Pedido> pedidos = pedidoRepository.findByUsuarioId(usuarioId);
         return PedidoMapper.toResponseDTOList(pedidos);

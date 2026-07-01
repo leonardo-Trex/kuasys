@@ -1,19 +1,19 @@
 package br.unitins.service;
 
-import java.util.List;
-
-import br.unitins.service.interfaces.EdicaoService;
-import br.unitins.model.Edicao;
-import br.unitins.repository.EdicaoRepository;
-import br.unitins.dto.EdicaoRequestDTO;
+import br.unitins.dto.edicao.EdicaoRequestDTO;
 import br.unitins.mapper.EdicaoMapper;
+import br.unitins.model.Edicao;
 import br.unitins.repository.ColecaoRepository;
+import br.unitins.repository.EdicaoRepository;
 import br.unitins.repository.EditoraRepository;
 import br.unitins.repository.QuadrinhoRepository;
-import jakarta.ws.rs.NotFoundException;
+import br.unitins.service.interfaces.EdicaoService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import jakarta.ws.rs.NotFoundException;
+
+import java.util.List;
 
 @ApplicationScoped
 public class EdicaoServiceImpl implements EdicaoService {

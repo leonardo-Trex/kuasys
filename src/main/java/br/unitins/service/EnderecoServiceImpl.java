@@ -1,17 +1,18 @@
 package br.unitins.service;
 
-import br.unitins.service.interfaces.EnderecoService;
-import br.unitins.dto.EnderecoRequestDTO;
-import br.unitins.dto.EnderecoResponseDTO;
+import br.unitins.dto.endereco.EnderecoRequestDTO;
+import br.unitins.dto.endereco.EnderecoResponseDTO;
 import br.unitins.mapper.EnderecoMapper;
 import br.unitins.model.Endereco;
 import br.unitins.model.Usuario;
 import br.unitins.repository.EnderecoRepository;
 import br.unitins.repository.UsuarioRepository;
+import br.unitins.service.interfaces.EnderecoService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.NotFoundException;
+
 import java.util.List;
 
 @ApplicationScoped

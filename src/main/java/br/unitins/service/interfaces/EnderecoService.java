@@ -1,7 +1,8 @@
 package br.unitins.service.interfaces;
 
-import br.unitins.dto.EnderecoRequestDTO;
-import br.unitins.dto.EnderecoResponseDTO;
+import br.unitins.dto.endereco.EnderecoRequestDTO;
+import br.unitins.dto.endereco.EnderecoResponseDTO;
+
 import java.util.List;
 
 public interface EnderecoService {

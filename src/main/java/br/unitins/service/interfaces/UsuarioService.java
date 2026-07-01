@@ -1,31 +1,28 @@
 package br.unitins.service.interfaces;
 
+import br.unitins.dto.usuario.UsuarioCreateDTO;
+import br.unitins.dto.usuario.UsuarioResponseDTO;
+
 import java.util.List;
 
-import br.unitins.model.Usuario;
-
 public interface UsuarioService {
-    List<Usuario> findAll();
+    UsuarioResponseDTO create(UsuarioCreateDTO dto);
 
-    Usuario findById(Long id);
+    UsuarioResponseDTO update(Long id, UsuarioCreateDTO dto);
 
-    List<Usuario> findByNome(String nome);
+    List<UsuarioResponseDTO> findAll();
 
-    Usuario findByLogin(String login);
+    UsuarioResponseDTO findById(Long id);
 
-    Usuario findByEmail(String email);
+    List<UsuarioResponseDTO> findByNome(String nome);
 
-    Usuario create(Usuario usuario);
+    UsuarioResponseDTO findByLogin(String login);
 
-    void update(Long id, Usuario usuario);
+    UsuarioResponseDTO findByEmail(String email);
 
     void delete(Long id);
 
-    // DTO-based helper methods
-    br.unitins.dto.UsuarioResponseDTO criar(br.unitins.dto.UsuarioRequestDTO dto);
-
-    br.unitins.dto.UsuarioResponseDTO atualizarDto(Long id, br.unitins.dto.UsuarioRequestDTO dto);
-
-    br.unitins.dto.UsuarioResponseDTO buscarPorKeycloakId(String keycloakId);
+//    TODO: Necessário só no futuro.
+//    UsuarioResponseDTO findByKeycloakId(String keycloakId);
 
 }

@@ -1,12 +1,12 @@
 package br.unitins.service;
 
-import br.unitins.service.interfaces.CarrinhoService;
-import br.unitins.service.interfaces.EdicaoService;
-import br.unitins.dto.CarrinhoRequestDTO;
+import br.unitins.dto.carrinho.CarrinhoRequestDTO;
 import br.unitins.model.Carrinho;
 import br.unitins.model.Edicao;
 import br.unitins.model.ItemCarrinho;
 import br.unitins.repository.CarrinhoRepository;
+import br.unitins.service.interfaces.CarrinhoService;
+import br.unitins.service.interfaces.EdicaoService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -19,7 +19,7 @@ public class CarrinhoServiceImpl implements CarrinhoService {
 
     @Inject
     CarrinhoRepository carrinhoRepository;
-    
+
     @Inject
     EdicaoService edicaoService;
 
