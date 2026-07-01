@@ -1,7 +1,7 @@
 package br.unitins.mapper;
 
-import br.unitins.dto.QuadrinhoRequestDTO;
-import br.unitins.dto.QuadrinhoResponseDTO;
+import br.unitins.dto.quadrinho.QuadrinhoRequestDTO;
+import br.unitins.dto.quadrinho.QuadrinhoResponseDTO;
 import br.unitins.model.Quadrinho;
 
 public class QuadrinhoMapper {

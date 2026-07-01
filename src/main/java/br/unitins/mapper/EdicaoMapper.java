@@ -1,7 +1,7 @@
 package br.unitins.mapper;
 
-import br.unitins.dto.EdicaoRequestDTO;
-import br.unitins.dto.EdicaoResponseDTO;
+import br.unitins.dto.edicao.EdicaoRequestDTO;
+import br.unitins.dto.edicao.EdicaoResponseDTO;
 import br.unitins.model.Edicao;
 
 public class EdicaoMapper {

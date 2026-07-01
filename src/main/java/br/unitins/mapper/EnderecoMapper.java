@@ -1,7 +1,7 @@
 package br.unitins.mapper;
 
-import br.unitins.dto.EnderecoRequestDTO;
-import br.unitins.dto.EnderecoResponseDTO;
+import br.unitins.dto.endereco.EnderecoRequestDTO;
+import br.unitins.dto.endereco.EnderecoResponseDTO;
 import br.unitins.model.Endereco;
 import br.unitins.model.Usuario;
 

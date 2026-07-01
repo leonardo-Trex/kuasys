@@ -1,7 +1,7 @@
 package br.unitins.mapper;
 
-import br.unitins.dto.EditoraRequestDTO;
-import br.unitins.dto.EditoraResponseDTO;
+import br.unitins.dto.editora.EditoraRequestDTO;
+import br.unitins.dto.editora.EditoraResponseDTO;
 import br.unitins.model.Editora;
 
 public class EditoraMapper {

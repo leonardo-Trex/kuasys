@@ -1,9 +1,10 @@
 package br.unitins.mapper;
 
-import br.unitins.dto.ItemCarrinhoDTO;
-import br.unitins.dto.CarrinhoResponseDTO;
-import br.unitins.model.ItemCarrinho;
+import br.unitins.dto.carrinho.CarrinhoResponseDTO;
+import br.unitins.dto.carrinho.ItemCarrinhoDTO;
 import br.unitins.model.Carrinho;
+import br.unitins.model.ItemCarrinho;
+
 import java.util.stream.Collectors;
 
 public class CarrinhoMapper {

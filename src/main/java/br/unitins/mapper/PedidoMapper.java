@@ -1,9 +1,10 @@
 package br.unitins.mapper;
 
-import br.unitins.dto.ItemPedidoDTO;
-import br.unitins.dto.PedidoResponseDTO;
+import br.unitins.dto.itempedido.ItemPedidoDTO;
+import br.unitins.dto.pedido.PedidoResponseDTO;
 import br.unitins.model.ItemPedido;
 import br.unitins.model.Pedido;
+
 import java.util.List;
 import java.util.stream.Collectors;
 

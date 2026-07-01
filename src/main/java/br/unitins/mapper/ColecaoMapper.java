@@ -1,7 +1,7 @@
 package br.unitins.mapper;
 
-import br.unitins.dto.ColecaoRequestDTO;
-import br.unitins.dto.ColecaoResponseDTO;
+import br.unitins.dto.colecao.ColecaoRequestDTO;
+import br.unitins.dto.colecao.ColecaoResponseDTO;
 import br.unitins.model.Colecao;
 
 public class ColecaoMapper {
