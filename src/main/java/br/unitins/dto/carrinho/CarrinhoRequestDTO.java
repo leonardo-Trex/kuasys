@@ -1,4 +1,4 @@
-package br.unitins.dto;
+package br.unitins.dto.carrinho;
 
 public record CarrinhoRequestDTO(
         String produtoId,

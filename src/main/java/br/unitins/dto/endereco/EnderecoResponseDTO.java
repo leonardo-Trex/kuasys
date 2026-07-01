@@ -1,4 +1,4 @@
-package br.unitins.dto;
+package br.unitins.dto.endereco;
 
 public record EnderecoResponseDTO(
         Long id,

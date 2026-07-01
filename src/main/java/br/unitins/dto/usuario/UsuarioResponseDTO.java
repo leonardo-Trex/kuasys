@@ -1,4 +1,4 @@
-package br.unitins.dto;
+package br.unitins.dto.usuario;
 
 import br.unitins.model.enums.Perfil;
 
@@ -10,7 +10,5 @@ public record UsuarioResponseDTO(
         Perfil perfil,
         Boolean ativo,
         String cpf,
-        String telefone,
-        String keycloakId) {
-
+        String telefone) {
 }

@@ -1,4 +1,4 @@
-package br.unitins.dto;
+package br.unitins.dto.editora;
 
 public record EditoraResponseDTO(
         Long id,

@@ -1,4 +1,4 @@
-package br.unitins.dto;
+package br.unitins.dto.editora;
 
 import jakarta.validation.constraints.NotBlank;
 
