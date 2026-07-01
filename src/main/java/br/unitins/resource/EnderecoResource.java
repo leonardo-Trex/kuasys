@@ -1,8 +1,8 @@
 //package br.unitins.resource;
 //
 //import br.unitins.service.interfaces.EnderecoService;
-//import br.unitins.dto.EnderecoRequestDTO;
-//import br.unitins.dto.EnderecoResponseDTO;
+//import br.unitins.dto.endereco.EnderecoRequestDTO;
+//import br.unitins.dto.endereco.EnderecoResponseDTO;
 //import jakarta.annotation.security.RolesAllowed;
 //import jakarta.inject.Inject;
 //import jakarta.validation.Valid;
@@ -25,18 +25,18 @@
 //    @Inject
 //    EnderecoService enderecoService;
 //
-////    @Inject
-////    JsonWebToken jwt;
+/// /    @Inject
+/// /    JsonWebToken jwt;
 //
-////    @GET
-////    @RolesAllowed({"usuario", "customer"})
-////    public Response listarEnderecosDoCliente() {
-////        String keycloakId = jwt.getSubject();
-////
-////        List<EnderecoResponseDTO> enderecos = enderecoService.listarEnderecosDoCliente(keycloakId);
-////
-////        return Response.ok(enderecos).build();
-////    }
+/// /    @GET
+/// /    @RolesAllowed({"usuario", "customer"})
+/// /    public Response listarEnderecosDoCliente() {
+/// /        String keycloakId = jwt.getSubject();
+/// /
+/// /        List<EnderecoResponseDTO> enderecos = enderecoService.listarEnderecosDoCliente(keycloakId);
+/// /
+/// /        return Response.ok(enderecos).build();
+/// /    }
 //
 ////    @GET
 ////    @Path("/{id}")

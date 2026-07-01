@@ -1,7 +1,7 @@
 package br.unitins.resource;
 
-import br.unitins.dto.PessoaRequestDTO;
-import br.unitins.dto.PessoaResponseDTO;
+import br.unitins.dto.quadrinista.PessoaRequestDTO;
+import br.unitins.dto.quadrinista.PessoaResponseDTO;
 import br.unitins.mapper.PessoaMapper;
 import br.unitins.model.Quadrinista;
 import br.unitins.service.interfaces.PessoaService;

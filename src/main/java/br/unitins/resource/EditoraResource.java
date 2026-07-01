@@ -1,27 +1,18 @@
 package br.unitins.resource;
 
-import java.util.List;
-
-import br.unitins.service.interfaces.EditoraService;
-import br.unitins.dto.EditoraRequestDTO;
-import br.unitins.dto.EditoraResponseDTO;
+import br.unitins.dto.editora.EditoraRequestDTO;
+import br.unitins.dto.editora.EditoraResponseDTO;
 import br.unitins.mapper.EditoraMapper;
 import br.unitins.model.Editora;
-import jakarta.annotation.security.PermitAll;
-import jakarta.annotation.security.RolesAllowed;
+import br.unitins.service.interfaces.EditoraService;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.DELETE;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.PUT;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
+
+import java.util.List;
 
 @Path("/editoras")
 @Produces(MediaType.APPLICATION_JSON)

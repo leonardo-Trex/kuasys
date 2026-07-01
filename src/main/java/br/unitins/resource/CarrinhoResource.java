@@ -1,8 +1,8 @@
 //package br.unitins.resource;
 //
 //import br.unitins.service.interfaces.CarrinhoService;
-//import br.unitins.dto.CarrinhoRequestDTO;
-//import br.unitins.dto.CarrinhoVincularDTO;
+//import br.unitins.dto.carrinho.CarrinhoRequestDTO;
+//import br.unitins.dto.carrinho.CarrinhoVincularDTO;
 //import br.unitins.mapper.CarrinhoMapper;
 //import br.unitins.model.Carrinho;
 //import io.quarkus.security.Authenticated;
@@ -23,9 +23,9 @@
 //    @Inject
 //    CarrinhoService carrinhoService;
 //
-////    @Inject
-////    @Nullable
-////    JsonWebToken jwt;
+/// /    @Inject
+/// /    @Nullable
+/// /    JsonWebToken jwt;
 //
 //    /**
 //     * POST /carrinho/itens

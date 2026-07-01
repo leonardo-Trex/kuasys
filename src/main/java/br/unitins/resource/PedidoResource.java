@@ -1,7 +1,7 @@
 //package br.unitins.resource;
 //
 //import br.unitins.service.interfaces.PedidoService;
-//import br.unitins.dto.PedidoResponseDTO;
+//import br.unitins.dto.pedido.PedidoResponseDTO;
 //import jakarta.annotation.security.RolesAllowed;
 //import jakarta.inject.Inject;
 //import jakarta.ws.rs.POST;

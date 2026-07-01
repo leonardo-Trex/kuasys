@@ -3,7 +3,7 @@
 // import java.util.List;
 
 // import br.unitins.Service.interfaces.EdicaoService;
-// import br.unitins.dto.ProdutoResponseDTO;
+// import br.unitins.dto.produto.ProdutoResponseDTO;
 // import br.unitins.mapper.ProdutoMapper;
 // import jakarta.annotation.security.PermitAll;
 // import jakarta.inject.Inject;

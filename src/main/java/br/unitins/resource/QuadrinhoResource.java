@@ -1,27 +1,18 @@
 package br.unitins.resource;
 
-import java.util.List;
-
-import br.unitins.service.interfaces.QuadrinhoService;
-import br.unitins.dto.QuadrinhoRequestDTO;
-import br.unitins.dto.QuadrinhoResponseDTO;
+import br.unitins.dto.quadrinho.QuadrinhoRequestDTO;
+import br.unitins.dto.quadrinho.QuadrinhoResponseDTO;
 import br.unitins.mapper.QuadrinhoMapper;
 import br.unitins.model.Quadrinho;
+import br.unitins.service.interfaces.QuadrinhoService;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
-import jakarta.annotation.security.RolesAllowed;
-import io.quarkus.security.Authenticated;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.DELETE;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.PUT;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
+
+import java.util.List;
 
 @Path("/quadrinhos")
 @Produces(MediaType.APPLICATION_JSON)
