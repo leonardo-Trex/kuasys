@@ -9,14 +9,16 @@ import jakarta.enterprise.context.ApplicationScoped;
 public class UsuarioRepository implements PanacheRepository<Usuario> {
 
     public PanacheQuery<Usuario> findByNome(String nome) {
-        return find("SELECT u FROM Usuario u WHERE UPPER(u.nome) LIKE UPPER(?1)", "%" + nome + "%");
+        return find("UPPER(nome) LIKE UPPER(?1)", "%" + nome + "%");
     }
 
     public Usuario findByEmail(String email) {
+
         return find("email", email).firstResult();
     }
 
     public Usuario findByLogin(String login) {
+        
         return find("login", login).firstResult();
     }
 

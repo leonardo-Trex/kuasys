@@ -9,6 +9,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 public class EditoraRepository implements PanacheRepository<Editora> {
 
     public PanacheQuery<Editora> findByNome(String nome) {
-        return find("SELECT e FROM tb_editora e WHERE UPPER(e.nome) LIKE UPPER(?1)", "%" + nome + "%");
+        return find("UPPER(nome) LIKE UPPER(?1)", "%" + nome + "%");
     }
 }

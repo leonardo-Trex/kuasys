@@ -9,6 +9,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 public class QuadrinistaRepository implements PanacheRepository<Quadrinista> {
 
     public PanacheQuery<Quadrinista> findByNome(String nome) {
-        return find("SELECT q FROM tb_quadrinista q WHERE UPPER(q.nome) LIKE UPPER(?1)", "%" + nome + "%");
+        return find("UPPER(nome) LIKE UPPER(?1)", "%" + nome + "%");
     }
 }

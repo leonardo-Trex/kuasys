@@ -9,6 +9,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 public class ColecaoRepository implements PanacheRepository<Colecao> {
 
     public PanacheQuery<Colecao> findByNome(String nome) {
-        return find("SELECT e FROM tb_edicao e WHERE UPPER(e.nome) LIKE UPPER(?1)", "%" + nome + "%");
+        return find("UPPER(nome) LIKE UPPER(?1)", "%" + nome + "%");
     }
 }

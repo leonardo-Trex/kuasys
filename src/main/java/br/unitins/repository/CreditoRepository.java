@@ -9,6 +9,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 public class CreditoRepository implements PanacheRepository<Credito> {
 
     public PanacheQuery<Credito> findByFuncao(String funcao) {
-        return find("SELECT c FROM Credito c WHERE UPPER(c.funcao) LIKE UPPER(?1)", "%" + funcao + "%");
+        return find("UPPER(funcao) LIKE UPPER(?1)", "%" + funcao + "%");
     }
 }

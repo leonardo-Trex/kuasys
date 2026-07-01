@@ -9,6 +9,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 public class QuadrinhoRepository implements PanacheRepository<Quadrinho> {
 
     public PanacheQuery<Quadrinho> findByTitulo(String titulo) {
-        return find("SELECT q FROM Quadrinho q WHERE UPPER(q.titulo) LIKE UPPER(?1)", "%" + titulo + "%");
+        return find("UPPER(titulo) LIKE UPPER(?1)", "%" + titulo + "%");
     }
 }

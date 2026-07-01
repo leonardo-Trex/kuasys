@@ -10,8 +10,9 @@ import java.util.List;
 public class PedidoRepository implements PanacheRepository<Pedido> {
 
 
-    public List<Pedido> findByUsuarioId(String usuarioId) {
-        return find("usuario_id", usuarioId).list();
+    public List<Pedido> findByUsuarioId(Long id) {
+
+        return find("usuario.id", id).list();
     }
 
 //    TODO: Entender o funcionamento das sessões na minha aplicação
