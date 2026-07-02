@@ -1,4 +1,7 @@
 package br.unitins.dto.colecao;
 
-public record ColecaoResumoDTO() {
+public record ColecaoResumoDTO(
+        Long id,
+        String nome
+) {
 }

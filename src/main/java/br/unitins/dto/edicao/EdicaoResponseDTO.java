@@ -1,8 +1,10 @@
 package br.unitins.dto.edicao;
 
-import br.unitins.dto.colecao.ColecaoResponseDTO;
-import br.unitins.dto.editora.EditoraResponseDTO;
-import br.unitins.dto.quadrinho.QuadrinhoResponseDTO;
+import br.unitins.dto.colecao.ColecaoResumoDTO;
+import br.unitins.dto.editora.EditoraResumoDTO;
+import br.unitins.dto.quadrinho.QuadrinhoResumoDTO;
+import br.unitins.model.enums.GeneroQuadrinho;
+import br.unitins.model.enums.TipoCapa;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -17,12 +19,14 @@ public record EdicaoResponseDTO(
         LocalDate dataPublicacao,
         String isbn,
         Integer tiragem,
-        String tipoCapa,
-        String genero,
+        Long tipoCapaId,
+        TipoCapa tipoCapa,
+        Long generoId,
+        GeneroQuadrinho genero,
         String dimensoes,
         LocalDateTime dataCadastro,
-        ColecaoResponseDTO colecao,
-        EditoraResponseDTO editora,
-        QuadrinhoResponseDTO quadrinho) {
+        ColecaoResumoDTO colecao,
+        EditoraResumoDTO editora,
+        QuadrinhoResumoDTO quadrinho) {
 
 }

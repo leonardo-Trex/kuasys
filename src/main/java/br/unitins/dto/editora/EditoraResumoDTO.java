@@ -1,4 +1,7 @@
 package br.unitins.dto.editora;
 
-public record EditoraResumoDTO() {
+public record EditoraResumoDTO(
+        Long id,
+        Long nome
+) {
 }

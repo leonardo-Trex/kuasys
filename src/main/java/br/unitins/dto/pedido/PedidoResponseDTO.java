@@ -1,20 +1,19 @@
 package br.unitins.dto.pedido;
 
-import br.unitins.dto.itempedido.ItemPedidoDTO;
-import br.unitins.model.enums.StatusPedido;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 public record PedidoResponseDTO(
         Long id,
         String usuarioId,
-        String tokenSessao,
+//      TODO: vai ser necessário somente na integração do keycloak
+//        String tokenSessao,
         LocalDateTime dataPedido,
-        StatusPedido statusPedido,
-        BigDecimal valorTotal,
-        List<ItemPedidoDTO> itens
+        Long statusPedidoID,
+        String statusPedido,
+        BigDecimal valorTotal
+//      TODO isso vai ficar pra daqui a pouco
+//        List<ItemPedidoDTO> itens
 ) {
 
 }

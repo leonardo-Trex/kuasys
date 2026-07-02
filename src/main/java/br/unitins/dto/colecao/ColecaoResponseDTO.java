@@ -1,6 +1,6 @@
 package br.unitins.dto.colecao;
 
-import br.unitins.model.Edicao;
+import br.unitins.dto.edicao.EdicaoResumoDTO;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -11,5 +11,5 @@ public record ColecaoResponseDTO(
         String descricao,
         LocalDate dataInicioPublicacao,
         LocalDate dataFimPublicacao,
-        List<Edicao> edicoes) {
+        List<EdicaoResumoDTO> edicoes) {
 }

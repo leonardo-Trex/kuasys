@@ -7,6 +7,7 @@ public record UsuarioResponseDTO(
         String login,
         String nome,
         String email,
+        Long perfilId,
         Perfil perfil,
         Boolean ativo,
         String cpf,
