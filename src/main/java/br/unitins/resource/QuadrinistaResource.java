@@ -1,10 +1,10 @@
 package br.unitins.resource;
 
-import br.unitins.dto.quadrinista.PessoaRequestDTO;
-import br.unitins.dto.quadrinista.PessoaResponseDTO;
-import br.unitins.mapper.PessoaMapper;
+import br.unitins.dto.quadrinista.QuadrinistaCreateDTO;
+import br.unitins.dto.quadrinista.QuadrinistaResponseDTO;
+import br.unitins.mapper.QuadrinistaMapper;
 import br.unitins.model.Quadrinista;
-import br.unitins.service.interfaces.PessoaService;
+import br.unitins.service.interfaces.QuadrinistaService;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
@@ -21,13 +21,13 @@ import java.util.List;
 public class PessoaResource {
 
     @Inject
-    PessoaService service;
+    QuadrinistaService service;
 
     @GET
     public Response buscarTodo() {
-        List<PessoaResponseDTO> lista = service.findAll()
+        List<QuadrinistaResponseDTO> lista = service.findAll()
                 .stream()
-                .map(PessoaMapper::toResponseDTO)
+                .map(QuadrinistaMapper::toResponseDTO)
                 .toList();
 
         return Response.ok(lista).build();
@@ -36,7 +36,7 @@ public class PessoaResource {
     @GET
 //    @Path("/{id}")
     public Response buscarPeloId(@PathParam("id") Long id) {
-        return Response.ok(PessoaMapper.toResponseDTO(service.findById(id))).build();
+        return Response.ok(QuadrinistaMapper.toResponseDTO(service.findById(id))).build();
     }
 
     @DELETE
@@ -50,20 +50,20 @@ public class PessoaResource {
 
     @POST
 //    @RolesAllowed("admin")
-    public Response incluir(@Valid PessoaRequestDTO dto) {
-        Quadrinista quadrinista = service.create(PessoaMapper.toEntity(dto));
+    public Response incluir(@Valid QuadrinistaCreateDTO dto) {
+        Quadrinista quadrinista = service.create(QuadrinistaMapper.toEntity(dto));
 
         return Response
                 .status(Status.CREATED)
-                .entity(PessoaMapper.toResponseDTO(quadrinista))
+                .entity(QuadrinistaMapper.toResponseDTO(quadrinista))
                 .build();
     }
 
     @PUT
     @Path("/{id}")
 //    @RolesAllowed("admin")
-    public Response alterar(@PathParam("id") Long id, PessoaRequestDTO dto) {
-        service.update(id, PessoaMapper.toEntity(dto));
+    public Response alterar(@PathParam("id") Long id, QuadrinistaCreateDTO dto) {
+        service.update(id, QuadrinistaMapper.toEntity(dto));
 
         return Response.ok().build();
     }
