@@ -18,6 +18,7 @@ public enum GeneroQuadrinho {
         this.nome = nome;
     }
 
+    //    TODO: melhorar essa verificação de null, retorno deve ser algo do tipo status inválido!
     public static GeneroQuadrinho valueOf(Long id) {
         if (id == null)
             return null;

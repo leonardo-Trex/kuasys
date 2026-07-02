@@ -2,6 +2,7 @@ package br.unitins.model.enums;
 
 import lombok.Getter;
 
+
 @Getter
 public enum StatusPedido {
     PENDENTE(1L, "Pendente"),
@@ -19,6 +20,7 @@ public enum StatusPedido {
         this.nome = nome;
     }
 
+    //    TODO: melhorar essa verificação de null, retorno deve ser algo do tipo status inválido!
     public static StatusPedido valueOf(Long id) {
         if (id == null)
             return null;
