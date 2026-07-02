@@ -4,39 +4,17 @@ import br.unitins.dto.itempedido.ItemPedidoDTO;
 import br.unitins.dto.pedido.PedidoResponseDTO;
 import br.unitins.model.ItemPedido;
 import br.unitins.model.Pedido;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingConstants;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class PedidoMapper {
+@Mapper(componentModel = MappingConstants.ComponentModel.CDI, uses = EnumMapper.class)
+public interface PedidoMapper {
 
-    public static ItemPedidoDTO toItemDTO(ItemPedido item) {
-        return new ItemPedidoDTO(
-                item.getId(),
-                Long.parseLong(item.getProdutoId()),
-                "",
-                item.getQuantidade(),
-                item.getPrecoUnitario()
-        );
-    }
+    public ItemPedidoDTO toItemDTO(ItemPedido item);
 
-    public static PedidoResponseDTO toResponseDTO(Pedido pedido) {
-        return new PedidoResponseDTO(
-                pedido.getId(),
-                pedido.getUsuarioId(),
-                pedido.getTokenSessao(),
-                pedido.getDataPedido(),
-                pedido.getStatusPedido(),
-                pedido.getValorTotal(),
-                pedido.getItens().stream()
-                        .map(PedidoMapper::toItemDTO)
-                        .collect(Collectors.toList())
-        );
-    }
+    public PedidoResponseDTO toResponseDTO(Pedido pedido);
 
-    public static List<PedidoResponseDTO> toResponseDTOList(List<Pedido> pedidos) {
-        return pedidos.stream()
-                .map(PedidoMapper::toResponseDTO)
-                .collect(Collectors.toList());
-    }
+    public List<PedidoResponseDTO> toResponseDTOList(List<Pedido> pedidos);
 }

@@ -1,34 +1,24 @@
 package br.unitins.mapper;
 
-import br.unitins.dto.colecao.ColecaoRequestDTO;
+import br.unitins.dto.colecao.ColecaoCreateDTO;
 import br.unitins.dto.colecao.ColecaoResponseDTO;
+import br.unitins.dto.colecao.ColecaoResumoDTO;
 import br.unitins.model.Colecao;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingConstants;
 
-public class ColecaoMapper {
+import java.util.List;
 
-    public static Colecao toEntity(ColecaoRequestDTO dto) {
-        if (dto == null)
-            return null;
+@Mapper(componentModel = MappingConstants.ComponentModel.CDI, uses = EdicaoMapper.class)
+public interface ColecaoMapper {
 
-        Colecao colecao = new Colecao();
-        colecao.setNome(dto.nome());
-        colecao.setDescricao(dto.descricao());
-        colecao.setDataInicioPublicacao(dto.dataInicioPublicacao());
-        colecao.setDataFimPublicacao(dto.dataFimPublicacao());
+    public Colecao toEntity(ColecaoCreateDTO dto);
 
-        return colecao;
-    }
+    public ColecaoResponseDTO toResponseDTO(Colecao colecao);
 
-    public static ColecaoResponseDTO toResponseDTO(Colecao colecao) {
-        if (colecao == null)
-            return null;
+    public List<ColecaoResponseDTO> toResponseDTO(List<Colecao> colecoes);
 
-        return new ColecaoResponseDTO(
-                colecao.getId(),
-                colecao.getNome(),
-                colecao.getDescricao(),
-                colecao.getDataInicioPublicacao(),
-                colecao.getDataFimPublicacao(),
-                colecao.getEdicoes());
-    }
+    public ColecaoResumoDTO toResumoDTO(Colecao colecao);
+
+    public List<ColecaoResumoDTO> toResumoDTO(List<Colecao> colecoes);
 }

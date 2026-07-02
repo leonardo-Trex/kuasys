@@ -1,53 +1,31 @@
 package br.unitins.mapper;
 
-import br.unitins.dto.edicao.EdicaoRequestDTO;
+import br.unitins.dto.edicao.EdicaoCreateDTO;
 import br.unitins.dto.edicao.EdicaoResponseDTO;
+import br.unitins.dto.edicao.EdicaoResumoDTO;
 import br.unitins.model.Edicao;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingConstants;
 
-public class EdicaoMapper {
+import java.util.List;
 
-    public static Edicao toEntity(EdicaoRequestDTO dto) {
-        if (dto == null)
-            return null;
+@Mapper(componentModel = MappingConstants.ComponentModel.CDI,
+        uses = {
+                QuadrinhoMapper.class,
+                ColecaoMapper.class,
+                EdicaoMapper.class,
+                EnumMapper.class
+        }
+)
+public interface EdicaoMapper {
 
-        Edicao edicao = new Edicao();
+    public Edicao toEntity(EdicaoCreateDTO dto);
 
-        edicao.setNome(dto.nome());
-        edicao.setDescricao(dto.descricao());
-        edicao.setPreco(dto.preco());
+    public EdicaoResponseDTO toResponseDTO(Edicao edicao);
 
-        edicao.setNumero(dto.numero());
-        edicao.setDataPublicacao(dto.dataPublicacao());
+    public List<EdicaoResponseDTO> toResponseDTO(List<Edicao> edicoes);
 
-        edicao.setIsbn(dto.isbnLimpo());
+    public EdicaoResumoDTO toResumoDTO(Edicao edicao);
 
-        edicao.setTiragem(dto.tiragem());
-        edicao.setTipoCapa(dto.tipoCapa());
-        edicao.setDimensoes(dto.dimensoes());
-        edicao.setGenero(dto.genero());
-
-        return edicao;
-    }
-
-    public static EdicaoResponseDTO toResponseDTO(Edicao edicao) {
-        if (edicao == null)
-            return null;
-
-        return new EdicaoResponseDTO(
-                edicao.getId(),
-                edicao.getNome(),
-                edicao.getDescricao(),
-                edicao.getPreco(),
-                edicao.getNumero(),
-                edicao.getDataPublicacao(),
-                edicao.getIsbn(),
-                edicao.getTiragem(),
-                edicao.getTipoCapa().name(),
-                edicao.getGenero().name(),
-                edicao.getDimensoes(),
-                edicao.getDataCadastro(),
-                ColecaoMapper.toResponseDTO(edicao.getColecao()),
-                EditoraMapper.toResponseDTO(edicao.getEditora()),
-                QuadrinhoMapper.toResponseDTO(edicao.getQuadrinho()));
-    }
+    public List<EdicaoResumoDTO> toResumoDTO(List<Edicao> edicao);
 }

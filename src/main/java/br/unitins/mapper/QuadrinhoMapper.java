@@ -1,32 +1,22 @@
 package br.unitins.mapper;
 
-import br.unitins.dto.quadrinho.QuadrinhoRequestDTO;
+import br.unitins.dto.quadrinho.QuadrinhoCreateDTO;
 import br.unitins.dto.quadrinho.QuadrinhoResponseDTO;
+import br.unitins.dto.quadrinho.QuadrinhoResumoDTO;
 import br.unitins.model.Quadrinho;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingConstants;
 
-public class QuadrinhoMapper {
+import java.util.List;
 
-    public static Quadrinho toEntity(QuadrinhoRequestDTO dto) {
-        if (dto == null)
-            return null;
+@Mapper(componentModel = MappingConstants.ComponentModel.CDI)
+public interface QuadrinhoMapper {
 
-        Quadrinho quadrinho = new Quadrinho();
+    public Quadrinho toEntity(QuadrinhoCreateDTO dto);
 
-        quadrinho.setTitulo(dto.titulo());
-        quadrinho.setSinopse(dto.sinopse());
-        quadrinho.setGenero(dto.genero());
+    public QuadrinhoResponseDTO toResponseDTO(Quadrinho quadrinho);
 
-        return quadrinho;
-    }
+    public List<QuadrinhoResponseDTO> toResponseDTO(List<Quadrinho> quadrinho);
 
-    public static QuadrinhoResponseDTO toResponseDTO(Quadrinho quadrinho) {
-        if (quadrinho == null)
-            return null;
-
-        return new QuadrinhoResponseDTO(
-                quadrinho.getId(),
-                quadrinho.getTitulo(),
-                quadrinho.getSinopse(),
-                quadrinho.getGenero().name());
-    }
+    public QuadrinhoResumoDTO toResumoDTO(Quadrinho quadrinho);
 }

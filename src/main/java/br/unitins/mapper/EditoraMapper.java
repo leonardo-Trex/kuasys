@@ -1,29 +1,19 @@
 package br.unitins.mapper;
 
-import br.unitins.dto.editora.EditoraRequestDTO;
+import br.unitins.dto.editora.EditoraCreateDTO;
 import br.unitins.dto.editora.EditoraResponseDTO;
 import br.unitins.model.Editora;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingConstants;
 
-public class EditoraMapper {
+import java.util.List;
 
-    public static Editora toEntity(EditoraRequestDTO dto) {
-        if (dto == null)
-            return null;
+@Mapper(componentModel = MappingConstants.ComponentModel.CDI)
+public interface EditoraMapper {
 
-        Editora editora = new Editora();
-        editora.setNome(dto.nome());
-        editora.setCnpj(dto.cnpj());
+    public Editora toEntity(EditoraCreateDTO dto);
 
-        return editora;
-    }
+    public EditoraResponseDTO toResponseDTO(Editora editora);
 
-    public static EditoraResponseDTO toResponseDTO(Editora editora) {
-        if (editora == null)
-            return null;
-
-        return new EditoraResponseDTO(
-                editora.getId(),
-                editora.getNome(),
-                editora.getCnpj());
-    }
+    public List<EditoraResponseDTO> toResponseDTO(List<Editora> editoras);
 }
