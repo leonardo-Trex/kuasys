@@ -1,17 +1,14 @@
 package br.unitins.service;
 
-import br.unitins.dto.endereco.EnderecoRequestDTO;
+import br.unitins.dto.endereco.EnderecoCreateDTO;
 import br.unitins.dto.endereco.EnderecoResponseDTO;
 import br.unitins.mapper.EnderecoMapper;
 import br.unitins.model.Endereco;
-import br.unitins.model.Usuario;
 import br.unitins.repository.EnderecoRepository;
-import br.unitins.repository.UsuarioRepository;
 import br.unitins.service.interfaces.EnderecoService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
-import jakarta.ws.rs.NotFoundException;
+import org.keycloak.admin.client.resource.ServerInfoResource;
 
 import java.util.List;
 
@@ -22,58 +19,38 @@ public class EnderecoServiceImpl implements EnderecoService {
     EnderecoRepository repository;
 
     @Inject
-    UsuarioRepository usuarioRepository;
+    EnderecoMapper mapper;
+    @Inject
+    ServerInfoResource serverInfoResource;
 
-    /**
-     * Busca o usuário local a partir do keycloakId (UUID vindo do JWT).
-     * Padrão idêntico ao usado em WishlistServiceImpl.
-     */
-    private Usuario findUsuarioByKeycloakId(String keycloakId) {
-        Usuario usuario = usuarioRepository.findByKeycloakId(keycloakId);
-        if (usuario == null) {
-            throw new NotFoundException("Usuário não encontrado para o keycloakId informado.");
-        }
-        return usuario;
+    @Override
+    public List<EnderecoResponseDTO> findAll() {
+
+        List<Endereco> lista = repository.findAll().list();
+        return mapper.toResponseDTO(lista);
     }
 
     @Override
-    public List<EnderecoResponseDTO> listarEnderecosDoCliente(String keycloakId) {
-        Usuario usuario = findUsuarioByKeycloakId(keycloakId);
-        List<Endereco> enderecos = repository.findByUsuarioId(usuario.getId());
-        return enderecos.stream()
-                .map(EnderecoMapper::toResponseDTO)
-                .toList();
+    public EnderecoResponseDTO findById(Long id) {
+
+        Endereco e = repository.findById(id);
+        return mapper.toResponseDTO(e);
     }
 
     @Override
-    public EnderecoResponseDTO buscarPorIdECliente(Long id, String keycloakId) {
-        Usuario usuario = findUsuarioByKeycloakId(keycloakId);
-        Endereco endereco = repository.findById(id);
+    public List<EnderecoResponseDTO> findByUsuarioId(Long id) {
 
-        if (endereco == null) {
-            throw new NotFoundException("Endereço não encontrado");
-        }
-
-        if (!endereco.getUsuario().getId().equals(usuario.getId())) {
-            throw new NotFoundException("Endereço não pertence ao usuário");
-        }
-
-        return EnderecoMapper.toResponseDTO(endereco);
+        List<Endereco> lista = repository.findByUsuarioId(id);
+        return mapper.toResponseDTO(lista);
     }
 
     @Override
-    @Transactional
-    public EnderecoResponseDTO salvar(String keycloakId, EnderecoRequestDTO dto) {
-        Usuario usuario = findUsuarioByKeycloakId(keycloakId);
+    public EnderecoResponseDTO create(EnderecoCreateDTO dto) {
 
-        // Converte o DTO para entidade, associando ao usuário autenticado
-        Endereco endereco = EnderecoMapper.toEntity(dto, usuario);
-
-        // Sincroniza o lado bidirecional
-        usuario.getEnderecos().add(endereco);
-
-        repository.persist(endereco);
-
-        return EnderecoMapper.toResponseDTO(endereco);
+        Endereco e = mapper.toEntity(dto);
+        repository.persist(e);
+        return mapper.toResponseDTO(e);
     }
+
+
 }

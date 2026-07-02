@@ -1,15 +1,18 @@
 package br.unitins.service.interfaces;
 
-import br.unitins.dto.endereco.EnderecoRequestDTO;
+import br.unitins.dto.endereco.EnderecoCreateDTO;
 import br.unitins.dto.endereco.EnderecoResponseDTO;
 
 import java.util.List;
 
 public interface EnderecoService {
 
-    List<EnderecoResponseDTO> listarEnderecosDoCliente(String keycloakId);
+    List<EnderecoResponseDTO> findAll();
 
-    EnderecoResponseDTO buscarPorIdECliente(Long id, String keycloakId);
+    EnderecoResponseDTO findById(Long id);
 
-    EnderecoResponseDTO salvar(String keycloakId, EnderecoRequestDTO dto);
+    List<EnderecoResponseDTO> findByUsuarioId(Long id);
+
+    //    TODO: talvez esse cara precise de um Id de Usuário também
+    EnderecoResponseDTO create(EnderecoCreateDTO dto);
 }
