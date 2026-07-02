@@ -1,19 +1,20 @@
 package br.unitins.service.interfaces;
 
+import br.unitins.dto.colecao.ColecaoCreateDTO;
+import br.unitins.dto.colecao.ColecaoResponseDTO;
+
 import java.util.List;
 
-import br.unitins.model.Colecao;
-
 public interface ColecaoService {
-    List<Colecao> findAll();
+    List<ColecaoResponseDTO> findAll();
 
-    Colecao findById(Long id);
+    ColecaoResponseDTO findById(Long id);
 
-    List<Colecao> findByNome(String nome);
+    List<ColecaoResponseDTO> findByNome(String nome);
 
-    Colecao create(Colecao colecao);
+    ColecaoResponseDTO create(ColecaoCreateDTO colecao);
 
-    void update(Long id, Colecao Edicao);
+//    void update(Long id, ColecaoCreateDTO colecao);
 
     void delete(Long id);
 

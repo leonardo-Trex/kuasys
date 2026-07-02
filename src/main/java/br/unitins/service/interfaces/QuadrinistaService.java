@@ -14,7 +14,7 @@ public interface QuadrinistaService {
 
     QuadrinistaResponseDTO create(QuadrinistaCreateDTO dto);
 
-    void update(Long id, QuadrinistaCreateDTO dto);
+//    void update(Long id, QuadrinistaCreateDTO dto);
 
     void delete(Long id);
 }

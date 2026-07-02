@@ -1,19 +1,20 @@
 package br.unitins.service.interfaces;
 
+import br.unitins.dto.editora.EditoraCreateDTO;
+import br.unitins.dto.editora.EditoraResponseDTO;
+
 import java.util.List;
 
-import br.unitins.model.Editora;
-
 public interface EditoraService {
-    List<Editora> findAll();
+    List<EditoraResponseDTO> findAll();
 
-    Editora findById(Long id);
+    EditoraResponseDTO findById(Long id);
 
-    List<Editora> findByNome(String nome);
+    List<EditoraResponseDTO> findByNome(String nome);
 
-    Editora create(Editora editora);
+    EditoraResponseDTO create(EditoraCreateDTO editora);
 
-    void update(Long id, Editora editora);
+//    void update(Long id, Editora editora);
 
     void delete(Long id);
 }

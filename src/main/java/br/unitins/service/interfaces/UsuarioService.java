@@ -8,7 +8,7 @@ import java.util.List;
 public interface UsuarioService {
     UsuarioResponseDTO create(UsuarioCreateDTO dto);
 
-    UsuarioResponseDTO update(Long id, UsuarioCreateDTO dto);
+//    UsuarioResponseDTO update(Long id, UsuarioCreateDTO dto);
 
     List<UsuarioResponseDTO> findAll();
 

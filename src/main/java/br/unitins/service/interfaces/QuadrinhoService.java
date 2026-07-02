@@ -1,19 +1,20 @@
 package br.unitins.service.interfaces;
 
+import br.unitins.dto.quadrinho.QuadrinhoCreateDTO;
+import br.unitins.dto.quadrinho.QuadrinhoResponseDTO;
+
 import java.util.List;
 
-import br.unitins.model.Quadrinho;
-
 public interface QuadrinhoService {
-    List<Quadrinho> findAll();
+    List<QuadrinhoResponseDTO> findAll();
 
-    Quadrinho findById(Long id);
+    QuadrinhoResponseDTO findById(Long id);
 
-    List<Quadrinho> findByTitulo(String titulo);
+    List<QuadrinhoResponseDTO> findByTitulo(String titulo);
 
-    Quadrinho create(Quadrinho quadrinho);
+    QuadrinhoResponseDTO create(QuadrinhoCreateDTO quadrinho);
 
-    void update(Long id, Quadrinho quadrinho);
+//    void update(Long id, Quadrinho quadrinho);
 
     void delete(Long id);
 }

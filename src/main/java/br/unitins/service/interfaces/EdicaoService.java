@@ -1,20 +1,20 @@
 package br.unitins.service.interfaces;
 
-import br.unitins.dto.edicao.EdicaoRequestDTO;
-import br.unitins.model.Edicao;
+import br.unitins.dto.edicao.EdicaoCreateDTO;
+import br.unitins.dto.edicao.EdicaoResponseDTO;
 
 import java.util.List;
 
 public interface EdicaoService {
-    List<Edicao> findAll();
+    List<EdicaoResponseDTO> findAll();
 
-    Edicao findById(Long id);
+    EdicaoResponseDTO findById(Long id);
 
-    List<Edicao> findByNome(String nome);
+    List<EdicaoResponseDTO> findByNome(String nome);
 
-    Edicao create(EdicaoRequestDTO dto);
+    EdicaoResponseDTO create(EdicaoCreateDTO dto);
 
-    void update(Long id, EdicaoRequestDTO dto);
+//    void update(Long id, EdicaoCreateDTO dto);
 
     void delete(Long id);
 

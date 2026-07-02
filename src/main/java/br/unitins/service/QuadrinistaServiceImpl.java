@@ -50,12 +50,7 @@ public class QuadrinistaServiceImpl implements QuadrinistaService {
         repository.persist(q);
         return mapper.toResponseDTO(q);
     }
-
-    //    TODO: Esse cara existe para evitar o erro da IDE
-    @Override
-    public void update(Long id, QuadrinistaCreateDTO dto) {
-
-    }
+    
 
 //  TODO:  Consertar esse cara quando existir o UpdateDTO.
 //    @Override

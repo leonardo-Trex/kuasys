@@ -1,19 +1,21 @@
-package br.unitins.service.interfaces;
-
-import java.util.List;
-
-import br.unitins.model.Credito;
-
-public interface CreditoService {
-    List<Credito> findAll();
-
-    Credito findById(Long id);
-
-    List<Credito> findByFuncao(String funcao);
-
-    Credito create(Credito credito);
-
-    void update(Long id, Credito credito);
-
-    void delete(Long id);
-}
+//package br.unitins.service.interfaces;
+//
+//import br.unitins.dto.credito.CreditoResponseDTO;
+//import br.unitins.model.Credito;
+//
+//import java.util.List;
+//
+/// / TODO: não sei muito bem como lidar com Credito ainda
+//public interface CreditoService {
+//    List<CreditoResponseDTO> findAll();
+//
+//    CreditoResponseDTO findById(Long id);
+//
+//    List<CreditoResponseDTO> findByFuncao(String funcao);
+//
+//    CreditoResponseDTO create(Credito credito);
+//
+////    void update(Long id, Credito credito);
+//
+//    void delete(Long id);
+//}
