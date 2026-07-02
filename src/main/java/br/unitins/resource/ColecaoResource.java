@@ -1,6 +1,6 @@
 package br.unitins.resource;
 
-import br.unitins.dto.colecao.ColecaoRequestDTO;
+import br.unitins.dto.colecao.ColecaoCreateDTO;
 import br.unitins.dto.colecao.ColecaoResponseDTO;
 import br.unitins.mapper.ColecaoMapper;
 import br.unitins.model.Colecao;
@@ -26,11 +26,8 @@ public class ColecaoResource {
     @GET
 //    @RolesAllowed("usuario")
     public Response buscarTodo() {
-        List<ColecaoResponseDTO> lista = service.findAll()
-                .stream()
-                .map(ColecaoMapper::toResponseDTO)
-                .toList();
 
+        List<ColecaoResponseDTO> lista = service.findAll();
         return Response.ok(lista).build();
     }
 
@@ -56,7 +53,7 @@ public class ColecaoResource {
 
     @POST
 //    @RolesAllowed("usuario")
-    public Response incluir(@Valid ColecaoRequestDTO dto) {
+    public Response incluir(@Valid ColecaoCreateDTO dto) {
         Colecao colecao = service.create(ColecaoMapper.toEntity(dto));
 
         return Response
@@ -68,7 +65,7 @@ public class ColecaoResource {
     @PUT
     @Path("/{id}")
 //    @RolesAllowed("usuario")
-    public Response alterar(@PathParam("id") Long id, ColecaoRequestDTO dto) {
+    public Response alterar(@PathParam("id") Long id, ColecaoCreateDTO dto) {
         service.update(id, ColecaoMapper.toEntity(dto));
 
         return Response.ok().build();

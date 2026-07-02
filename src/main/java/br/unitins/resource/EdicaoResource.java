@@ -1,6 +1,6 @@
 package br.unitins.resource;
 
-import br.unitins.dto.edicao.EdicaoRequestDTO;
+import br.unitins.dto.edicao.EdicaoCreateDTO;
 import br.unitins.dto.edicao.EdicaoResponseDTO;
 import br.unitins.mapper.EdicaoMapper;
 import br.unitins.model.Edicao;
@@ -59,7 +59,7 @@ public class EdicaoResource {
 
     @POST
 //    @RolesAllowed("admin")
-    public Response incluir(@Valid EdicaoRequestDTO dto) {
+    public Response incluir(@Valid EdicaoCreateDTO dto) {
         Edicao edicao = service.create(dto);
 
         return Response
@@ -71,7 +71,7 @@ public class EdicaoResource {
     @PUT
     @Path("/{id}")
 //    @RolesAllowed("admin")
-    public Response alterar(@PathParam("id") Long id, @Valid EdicaoRequestDTO dto) {
+    public Response alterar(@PathParam("id") Long id, @Valid EdicaoCreateDTO dto) {
         service.update(id, dto);
 
         return Response.ok().build();

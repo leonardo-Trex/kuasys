@@ -1,6 +1,6 @@
 package br.unitins.resource;
 
-import br.unitins.dto.quadrinho.QuadrinhoRequestDTO;
+import br.unitins.dto.quadrinho.QuadrinhoCreateDTO;
 import br.unitins.dto.quadrinho.QuadrinhoResponseDTO;
 import br.unitins.mapper.QuadrinhoMapper;
 import br.unitins.model.Quadrinho;
@@ -50,7 +50,7 @@ public class QuadrinhoResource {
 
     @POST
 //    @RolesAllowed("admin")
-    public Response incluir(@Valid QuadrinhoRequestDTO dto) {
+    public Response incluir(@Valid QuadrinhoCreateDTO dto) {
         Quadrinho quadrinho = service.create(QuadrinhoMapper.toEntity(dto));
 
         return Response
@@ -62,7 +62,7 @@ public class QuadrinhoResource {
     @PUT
     @Path("/{id}")
 //    @RolesAllowed("admin")
-    public Response alterar(@PathParam("id") Long id, QuadrinhoRequestDTO dto) {
+    public Response alterar(@PathParam("id") Long id, QuadrinhoCreateDTO dto) {
         service.update(id, QuadrinhoMapper.toEntity(dto));
 
         return Response.ok().build();

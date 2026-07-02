@@ -1,6 +1,6 @@
 package br.unitins.resource;
 
-import br.unitins.dto.editora.EditoraRequestDTO;
+import br.unitins.dto.editora.EditoraCreateDTO;
 import br.unitins.dto.editora.EditoraResponseDTO;
 import br.unitins.mapper.EditoraMapper;
 import br.unitins.model.Editora;
@@ -50,7 +50,7 @@ public class EditoraResource {
 
     @POST
 //    @RolesAllowed("admin")
-    public Response incluir(@Valid EditoraRequestDTO dto) {
+    public Response incluir(@Valid EditoraCreateDTO dto) {
         Editora editora = service.create(EditoraMapper.toEntity(dto));
 
         return Response
@@ -62,7 +62,7 @@ public class EditoraResource {
     @PUT
     @Path("/{id}")
 //    @RolesAllowed("admin")
-    public Response alterar(@PathParam("id") Long id, EditoraRequestDTO dto) {
+    public Response alterar(@PathParam("id") Long id, EditoraCreateDTO dto) {
         service.update(id, EditoraMapper.toEntity(dto));
 
         return Response.ok().build();
