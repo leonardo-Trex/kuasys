@@ -1,34 +1,20 @@
 package br.unitins.mapper;
 
-import br.unitins.dto.quadrinista.PessoaRequestDTO;
-import br.unitins.dto.quadrinista.PessoaResponseDTO;
+import br.unitins.dto.quadrinista.QuadrinistaCreateDTO;
+import br.unitins.dto.quadrinista.QuadrinistaResponseDTO;
 import br.unitins.model.Quadrinista;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingConstants;
 
-public class PessoaMapper {
+import java.util.List;
 
-    public static Quadrinista toEntity(PessoaRequestDTO dto) {
-        if (dto == null) {
-            return null;
-        }
+// O que é CDI? é o singleton desse cara mas qual o contexto por trás?
+@Mapper(componentModel = MappingConstants.ComponentModel.CDI)
+public interface QuadrinistaMapper {
 
-        Quadrinista quadrinista = new Quadrinista();
+    public Quadrinista toEntity(QuadrinistaCreateDTO dto);
 
-        quadrinista.setNome(dto.nome());
-        quadrinista.setNacionalidade(dto.nacionalidade());
-        quadrinista.setDataNascimento(dto.dataNascimento());
+    public QuadrinistaResponseDTO toResponseDTO(Quadrinista quadrinista);
 
-        return quadrinista;
-    }
-
-    public static PessoaResponseDTO toResponseDTO(Quadrinista quadrinista) {
-        if (quadrinista == null) {
-            return null;
-        }
-
-        return new PessoaResponseDTO(
-                quadrinista.getId(),
-                quadrinista.getNome(),
-                quadrinista.getNacionalidade(),
-                quadrinista.getDataNascimento());
-    }
+    public List<QuadrinistaResponseDTO> toResponseDTO(List<Quadrinista> lista);
 }

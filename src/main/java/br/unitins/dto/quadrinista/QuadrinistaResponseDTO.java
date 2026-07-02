@@ -2,7 +2,7 @@ package br.unitins.dto.quadrinista;
 
 import java.time.LocalDate;
 
-public record PessoaResponseDTO(
+public record QuadrinistaResponseDTO(
         Long id,
         String nome,
         String nacionalidade,
