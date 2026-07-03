@@ -5,13 +5,21 @@ import br.unitins.dto.colecao.ColecaoResponseDTO;
 import br.unitins.dto.colecao.ColecaoResumoDTO;
 import br.unitins.model.Colecao;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
 import java.util.List;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.JAKARTA_CDI, uses = EdicaoMapper.class)
+@Mapper(componentModel = MappingConstants.ComponentModel.JAKARTA_CDI,
+        uses = {
+                EdicaoMapper.class,
+                EditoraMapper.class
+        })
 public interface ColecaoMapper {
 
+    //    O service usa o id do dto para buscar os objetos associados!
+    @Mapping(target = "editora", ignore = true)
+    @Mapping(target = "edicoes", ignore = true)
     public Colecao toEntity(ColecaoCreateDTO dto);
 
     public ColecaoResponseDTO toResponseDTO(Colecao colecao);

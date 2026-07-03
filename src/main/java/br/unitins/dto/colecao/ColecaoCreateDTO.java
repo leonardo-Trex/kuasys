@@ -7,6 +7,8 @@ public record ColecaoCreateDTO(
 
         String descricao,
 
+        Long editoraId,
+
         LocalDate dataInicioPublicacao,
 
         LocalDate dataFimPublicacao) {
