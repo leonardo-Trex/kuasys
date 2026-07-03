@@ -3,7 +3,6 @@ package br.unitins.resource;
 import br.unitins.dto.edicao.EdicaoCreateDTO;
 import br.unitins.dto.edicao.EdicaoResponseDTO;
 import br.unitins.mapper.EdicaoMapper;
-import br.unitins.model.Edicao;
 import br.unitins.service.interfaces.EdicaoService;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
@@ -20,60 +19,52 @@ import java.util.List;
 //@PermitAll
 public class EdicaoResource {
 
-    //sdflknçlknfaslkn
     @Inject
     EdicaoService service;
 
+    @Inject
+    EdicaoMapper mapper;
+
     @GET
-    public Response buscarTodo(@QueryParam("nome") String nome) {
-        if (nome != null && !nome.isEmpty()) {
-            List<EdicaoResponseDTO> lista = service.findByNome(nome)
-                    .stream()
-                    .map(EdicaoMapper::toResponseDTO)
-                    .toList();
-            return Response.ok(lista).build();
-        }
+    public Response buscarTodo() {
 
-        List<EdicaoResponseDTO> listaCompleta = service.findAll()
-                .stream()
-                .map(EdicaoMapper::toResponseDTO)
-                .toList();
-
-        return Response.ok(listaCompleta).build();
+        List<EdicaoResponseDTO> lista = service.findAll();
+        return Response.ok(lista).build();
     }
 
     @GET
     @Path("/{id}")
     public Response buscarPeloId(@PathParam("id") Long id) {
-        return Response.ok(EdicaoMapper.toResponseDTO(service.findById(id))).build();
+
+        return Response.ok(service.findById(id)).build();
     }
 
     @DELETE
     @Path("/{id}")
 //    @RolesAllowed("admin")
     public Response deletar(@PathParam("id") Long id) {
-        service.delete(id);
 
+        service.delete(id);
         return Response.noContent().build();
     }
 
     @POST
 //    @RolesAllowed("admin")
     public Response incluir(@Valid EdicaoCreateDTO dto) {
-        Edicao edicao = service.create(dto);
+        EdicaoResponseDTO edicao = service.create(dto);
 
         return Response
                 .status(Status.CREATED)
-                .entity(EdicaoMapper.toResponseDTO(edicao))
+                .entity(edicao)
                 .build();
     }
 
-    @PUT
-    @Path("/{id}")
-//    @RolesAllowed("admin")
-    public Response alterar(@PathParam("id") Long id, @Valid EdicaoCreateDTO dto) {
-        service.update(id, dto);
-
-        return Response.ok().build();
-    }
+//    @PUT
+//    @Path("/{id}")
+////    @RolesAllowed("admin")
+//    public Response alterar(@PathParam("id") Long id, @Valid EdicaoCreateDTO dto) {
+//        service.update(id, dto);
+//
+//        return Response.ok().build();
+//    }
 }

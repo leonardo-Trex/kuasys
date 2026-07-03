@@ -2,8 +2,6 @@ package br.unitins.resource;
 
 import br.unitins.dto.quadrinho.QuadrinhoCreateDTO;
 import br.unitins.dto.quadrinho.QuadrinhoResponseDTO;
-import br.unitins.mapper.QuadrinhoMapper;
-import br.unitins.model.Quadrinho;
 import br.unitins.service.interfaces.QuadrinhoService;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
@@ -24,47 +22,46 @@ public class QuadrinhoResource {
     QuadrinhoService service;
 
     @GET
-    public Response buscarTodo() {
-        List<QuadrinhoResponseDTO> lista = service.findAll()
-                .stream()
-                .map(QuadrinhoMapper::toResponseDTO)
-                .toList();
+    public Response buscarTodos() {
 
+        List<QuadrinhoResponseDTO> lista = service.findAll();
         return Response.ok(lista).build();
     }
 
     @GET
     @Path("/{id}")
     public Response buscarPeloId(@PathParam("id") Long id) {
-        return Response.ok(QuadrinhoMapper.toResponseDTO(service.findById(id))).build();
+
+        return Response.ok(service.findById(id)).build();
     }
 
     @DELETE
     @Path("/{id}")
 //    @RolesAllowed("admin")
     public Response deletar(@PathParam("id") Long id) {
-        service.delete(id);
 
+        service.delete(id);
         return Response.noContent().build();
     }
 
     @POST
 //    @RolesAllowed("admin")
     public Response incluir(@Valid QuadrinhoCreateDTO dto) {
-        Quadrinho quadrinho = service.create(QuadrinhoMapper.toEntity(dto));
+
+        QuadrinhoResponseDTO q = service.create(dto);
 
         return Response
                 .status(Status.CREATED)
-                .entity(QuadrinhoMapper.toResponseDTO(quadrinho))
+                .entity(q)
                 .build();
     }
 
-    @PUT
-    @Path("/{id}")
-//    @RolesAllowed("admin")
-    public Response alterar(@PathParam("id") Long id, QuadrinhoCreateDTO dto) {
-        service.update(id, QuadrinhoMapper.toEntity(dto));
-
-        return Response.ok().build();
-    }
+//    @PUT
+//    @Path("/{id}")
+////    @RolesAllowed("admin")
+//    public Response alterar(@PathParam("id") Long id, QuadrinhoCreateDTO dto) {
+//        service.update(id, QuadrinhoMapper.toEntity(dto));
+//
+//        return Response.ok().build();
+//    }
 }

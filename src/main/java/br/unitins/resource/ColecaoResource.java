@@ -2,8 +2,6 @@ package br.unitins.resource;
 
 import br.unitins.dto.colecao.ColecaoCreateDTO;
 import br.unitins.dto.colecao.ColecaoResponseDTO;
-import br.unitins.mapper.ColecaoMapper;
-import br.unitins.model.Colecao;
 import br.unitins.service.interfaces.ColecaoService;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
@@ -39,35 +37,36 @@ public class ColecaoResource {
     @Path("/{id}")
 //    @RolesAllowed("usuario")
     public Response buscarPeloId(@PathParam("id") Long id) {
-        return Response.ok(ColecaoMapper.toResponseDTO(service.findById(id))).build();
+
+        return Response.ok(service.findById(id)).build();
     }
 
     @DELETE
     @Path("/{id}")
 //    @RolesAllowed("usuario")
     public Response deletar(@PathParam("id") Long id) {
-        service.delete(id);
 
+        service.delete(id);
         return Response.noContent().build();
     }
 
     @POST
 //    @RolesAllowed("usuario")
     public Response incluir(@Valid ColecaoCreateDTO dto) {
-        Colecao colecao = service.create(ColecaoMapper.toEntity(dto));
+        ColecaoResponseDTO colecao = service.create(dto);
 
         return Response
                 .status(Status.CREATED)
-                .entity(ColecaoMapper.toResponseDTO(colecao))
+                .entity(colecao)
                 .build();
     }
 
-    @PUT
-    @Path("/{id}")
-//    @RolesAllowed("usuario")
-    public Response alterar(@PathParam("id") Long id, ColecaoCreateDTO dto) {
-        service.update(id, ColecaoMapper.toEntity(dto));
-
-        return Response.ok().build();
-    }
+//    @PUT
+//    @Path("/{id}")
+////    @RolesAllowed("usuario")
+//    public Response alterar(@PathParam("id") Long id, ColecaoCreateDTO dto) {
+//        service.update(id, ColecaoMapper.toEntity(dto));
+//
+//        return Response.ok().build();
+//    }
 }
