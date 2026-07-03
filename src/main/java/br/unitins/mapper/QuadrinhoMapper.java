@@ -9,7 +9,7 @@ import org.mapstruct.MappingConstants;
 
 import java.util.List;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.CDI)
+@Mapper(componentModel = MappingConstants.ComponentModel.JAKARTA_CDI)
 public interface QuadrinhoMapper {
 
     public Quadrinho toEntity(QuadrinhoCreateDTO dto);

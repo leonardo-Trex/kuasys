@@ -7,7 +7,7 @@ import br.unitins.model.enums.TipoCapa;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.CDI)
+@Mapper(componentModel = MappingConstants.ComponentModel.JAKARTA_CDI)
 public interface EnumMapper {
 
     default StatusPedido mapStatusPedido(Long id) {

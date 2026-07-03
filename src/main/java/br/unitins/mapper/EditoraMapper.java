@@ -8,7 +8,7 @@ import org.mapstruct.MappingConstants;
 
 import java.util.List;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.CDI)
+@Mapper(componentModel = MappingConstants.ComponentModel.JAKARTA_CDI)
 public interface EditoraMapper {
 
     public Editora toEntity(EditoraCreateDTO dto);

@@ -9,7 +9,7 @@ import org.mapstruct.MappingConstants;
 
 import java.util.List;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.CDI, uses = EnumMapper.class)
+@Mapper(componentModel = MappingConstants.ComponentModel.JAKARTA_CDI, uses = EnumMapper.class)
 public interface PedidoMapper {
 
     public ItemPedidoDTO toItemDTO(ItemPedido item);

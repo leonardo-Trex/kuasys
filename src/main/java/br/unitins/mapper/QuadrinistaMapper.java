@@ -9,7 +9,7 @@ import org.mapstruct.MappingConstants;
 import java.util.List;
 
 // O que é CDI? é o singleton desse cara mas qual o contexto por trás?
-@Mapper(componentModel = MappingConstants.ComponentModel.CDI)
+@Mapper(componentModel = MappingConstants.ComponentModel.JAKARTA_CDI)
 public interface QuadrinistaMapper {
 
     public Quadrinista toEntity(QuadrinistaCreateDTO dto);

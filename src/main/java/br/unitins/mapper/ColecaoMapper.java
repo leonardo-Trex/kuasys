@@ -9,7 +9,7 @@ import org.mapstruct.MappingConstants;
 
 import java.util.List;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.CDI, uses = EdicaoMapper.class)
+@Mapper(componentModel = MappingConstants.ComponentModel.JAKARTA_CDI, uses = EdicaoMapper.class)
 public interface ColecaoMapper {
 
     public Colecao toEntity(ColecaoCreateDTO dto);
