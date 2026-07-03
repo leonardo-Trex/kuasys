@@ -8,7 +8,6 @@ import br.unitins.repository.EnderecoRepository;
 import br.unitins.service.interfaces.EnderecoService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import org.keycloak.admin.client.resource.ServerInfoResource;
 
 import java.util.List;
 
@@ -20,8 +19,6 @@ public class EnderecoServiceImpl implements EnderecoService {
 
     @Inject
     EnderecoMapper mapper;
-    @Inject
-    ServerInfoResource serverInfoResource;
 
     @Override
     public List<EnderecoResponseDTO> findAll() {
