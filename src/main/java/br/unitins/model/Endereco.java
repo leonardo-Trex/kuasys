@@ -9,6 +9,7 @@ import lombok.Setter;
 @Table(name = "tb_endereco")
 @Getter
 @NoArgsConstructor()
+// TODO resolver a questão do endereço principal!
 public class Endereco extends BaseEntity {
 
     @Setter

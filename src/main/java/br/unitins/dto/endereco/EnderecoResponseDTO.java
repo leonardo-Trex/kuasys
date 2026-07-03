@@ -9,7 +9,7 @@ public record EnderecoResponseDTO(
         String cidade,
         String estado,
         String cep,
-        Boolean isPrincipal,
+//        Boolean isPrincipal, TODO fica desativado até eu resolver a lógica de principal
         Long usuarioId
 ) {
 
