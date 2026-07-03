@@ -1,12 +1,15 @@
 services:
   # Serviço do Banco de Dados
+
+
   postgres-db:
+
+    env_file:
+      - .env
+
     image: postgres:15-alpine
     container_name: postgres-ecommerce
-    environment:
-      - POSTGRES_USER=kuasys
-      - POSTGRES_PASSWORD=123456
-      - POSTGRES_DB=kuasys_db
+
     ports:
       - "5432:5432"
     volumes:
@@ -14,41 +17,43 @@ services:
     networks:
       - ecommerce-network
 
-#  # Serviço do Keycloak
-#  keycloak:
-#    image: quay.io/keycloak/keycloak:latest
-#    container_name: keycloak-ecommerce
-#    command: start-dev
-#    environment:
-#      - KC_BOOTSTRAP_ADMIN_USERNAME=admin
-#      - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
-#      - KC_DB=postgres
-#      - KC_DB_URL=jdbc:postgresql://postgres-db:5432/kuasys_db
-#      - KC_DB_USERNAME=kuasys
-#      - KC_DB_PASSWORD=123456
-#      - KC_DB_SCHEMA=keycloak
-#    ports:
-#      - "8080:8080"
-#    depends_on:
-#      - postgres-db
-#    networks:
-#      - ecommerce-network
+      #  # Serviço do Keycloak
+      #  keycloak:
+      #    image: quay.io/keycloak/keycloak:latest
+      #    container_name: keycloak-ecommerce
+      #    command: start-dev
+      #    environment:
+      #      - KC_BOOTSTRAP_ADMIN_USERNAME=admin
+      #      - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
+      #      - KC_DB=postgres
+      #      - KC_DB_URL=jdbc:postgresql://postgres-db:5432/kuasys_db
+      #      - KC_DB_USERNAME=kuasys
+      #      - KC_DB_PASSWORD=123456
+      #      - KC_DB_SCHEMA=keycloak
+      #    ports:
+      #      - "8080:8080"
+      #    depends_on:
+      #      - postgres-db
+      #    networks:
+      #      - ecommerce-network
       # Servidor de E-mail de Testes (Mailpit)
-#  mailpit:
-#    image: axllent/mailpit:latest
-#    container_name: mailpit-ecommerce
-#    ports:
-#      - "1025:1025" # Porta SMTP para o Keycloak enviar os e-mails
-#      - "8025:8025" # Porta Web UI para você abrir no navegador e ver as caixas de entrada
-#    networks:
-#      - ecommerce-network
+      #  mailpit:
+      #    image: axllent/mailpit:latest
+      #    container_name: mailpit-ecommerce
+      #    ports:
+      #      - "1025:1025" # Porta SMTP para o Keycloak enviar os e-mails
+      #      - "8025:8025" # Porta Web UI para você abrir no navegador e ver as caixas de entrada
+      #    networks:
+      #      - ecommerce-network
       # Interface Visual do Banco de Dados (Adicionado para a apresentação)
   pgadmin:
+
+    env_file:
+      - .env
+
     image: dpage/pgadmin4
     container_name: pgadmin-ecommerce
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
-      - PGADMIN_DEFAULT_PASSWORD=admin
+
     ports:
       - "8085:80" # Acessível em http://localhost:8085
     depends_on:
