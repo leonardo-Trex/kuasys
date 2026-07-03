@@ -1,8 +1,5 @@
 package br.unitins.dto.edicao;
 
-import br.unitins.model.enums.GeneroQuadrinho;
-import br.unitins.model.enums.TipoCapa;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -21,17 +18,15 @@ public record EdicaoCreateDTO(
 
         Integer tiragem,
 
-        TipoCapa tipoCapa,
+        Long tipoCapaId,
 
         String dimensoes,
 
-        GeneroQuadrinho genero,
+        Long colecaoId,
 
-        Long idColecao,
+        Long editoraId,
 
-        Long idEditora,
-
-        Long idQuadrinho) {
+        Long quadrinhoId) {
 
 
 }
