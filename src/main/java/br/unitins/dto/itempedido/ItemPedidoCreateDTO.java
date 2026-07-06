@@ -2,7 +2,7 @@ package br.unitins.dto.itempedido;
 
 import java.math.BigDecimal;
 
-public record ItemPedidoDTO(
+public record ItemPedidoCreateDTO(
         Long id,
         Long edicaoId,
         String nome,

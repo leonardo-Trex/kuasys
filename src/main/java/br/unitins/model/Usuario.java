@@ -35,10 +35,6 @@ public class Usuario extends BaseEntity {
     @Column(length = 20)
     private String telefone;
 
-    @Setter
-    @Column(nullable = false, unique = true, length = 50)
-    private String login;
-
     //    TODO: Entender o fluxo de autenticação para entender o que fazer com esse cara
     @Transient
 //    @Convert(converter = PerfilConverter.class)

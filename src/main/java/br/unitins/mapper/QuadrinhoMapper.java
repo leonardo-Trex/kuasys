@@ -5,6 +5,7 @@ import br.unitins.dto.quadrinho.QuadrinhoResponseDTO;
 import br.unitins.dto.quadrinho.QuadrinhoResumoDTO;
 import br.unitins.model.Quadrinho;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
 import java.util.List;
@@ -12,6 +13,8 @@ import java.util.List;
 @Mapper(componentModel = MappingConstants.ComponentModel.JAKARTA_CDI)
 public interface QuadrinhoMapper {
 
+    @Mapping(target = "edicoes", ignore = true)
+    @Mapping(target = "creditos", ignore = true)
     public Quadrinho toEntity(QuadrinhoCreateDTO dto);
 
     public QuadrinhoResponseDTO toResponseDTO(Quadrinho quadrinho);

@@ -9,7 +9,7 @@ public record PedidoResponseDTO(
 //      TODO: vai ser necessário somente na integração do keycloak
 //        String tokenSessao,
         LocalDateTime dataPedido,
-        Long statusPedidoID,
+        Long statusPedidoId,
         String statusPedido,
         BigDecimal valorTotal
 //      TODO isso vai ficar pra daqui a pouco
