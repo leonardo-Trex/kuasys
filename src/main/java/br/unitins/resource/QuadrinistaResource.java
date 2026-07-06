@@ -11,7 +11,7 @@ import jakarta.ws.rs.core.Response.Status;
 
 import java.util.List;
 
-@Path("/pessoas")
+@Path("/quadrinistas")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 //@Authenticated
