@@ -33,7 +33,7 @@ public class Pedido extends BaseEntity {
     @Column(name = "status_pedido", nullable = false, length = 50)
     @Setter
     @Convert(converter = StatusPedidoConverter.class)
-    private StatusPedido statusPedido;
+    private StatusPedido statusPedido = StatusPedido.PENDENTE;
 
     @Column(name = "valor_total", precision = 19, scale = 2, nullable = false)
     @Setter
@@ -42,6 +42,9 @@ public class Pedido extends BaseEntity {
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ItemPedido> itens = new ArrayList<>();
 
+    public Pedido(Usuario u) {
+        this.usuario = u;
+    }
 
     public void addItem(ItemPedido item) {
         if (item != null) {
@@ -60,4 +63,16 @@ public class Pedido extends BaseEntity {
     public List<ItemPedido> getItens() {
         return Collections.unmodifiableList(this.itens);
     }
+
+    public void calcularTotal() {
+        BigDecimal soma = BigDecimal.ZERO;
+
+        for (ItemPedido ip : this.itens) {
+            soma = soma.add(ip.calcularSubTotal());
+        }
+
+        this.valorTotal = soma;
+    }
+
+
 }
