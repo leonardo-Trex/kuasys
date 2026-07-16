@@ -97,10 +97,11 @@ VALUES (CURRENT_DATE, CURRENT_DATE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1, 'Hq
 --===================================================================================================================================================================
 -- TODO EU PRECISO DE COLEÇÕES!
 INSERT INTO tb_produto (data_publicacao, numero, preco, tiragem, codigo_tipo_capa, colecao_id, data_atualizacao,
-                        data_cadastro, editora_id, quadrinho_id, isbn, tipo_produto, dimensoes, descricao, nome)
+                        data_cadastro, editora_id, quadrinho_id, isbn, tipo_produto, dimensoes, descricao, nome,
+                        estoque)
 VALUES (CURRENT_DATE, 1, '143.85', 15, 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1, 1, '32412', 'EDICAO', '123x23',
-        'aff', 'Porradaria'),
+        'aff', 'Porradaria', 100),
        (CURRENT_DATE, 1, '143.85', 15, 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1, 2, '8412', 'EDICAO', '123x23',
-        'Luta', 'Porradaria'),
+        'Luta', 'Porradaria', 100),
        (CURRENT_DATE, 1, '143.85', 15, 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 2, 1, '39412', 'EDICAO', '123x23',
-        'Descrição', 'Porradaria');
+        'Descrição', 'Porradaria', 100);

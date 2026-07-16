@@ -20,10 +20,15 @@ public abstract class Produto extends BaseEntity {
 
     @Column(nullable = false)
     private String nome;
+
     @Column(length = 1000, nullable = false)
     private String descricao;
+
     @Column(precision = 10, scale = 2, nullable = false)
     private BigDecimal preco;
+
+    @Column(nullable = false)
+    private Integer estoque;
 
     @Column(name = "nome_imagem")
     private String nomeImagem;
