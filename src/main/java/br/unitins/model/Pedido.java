@@ -27,8 +27,9 @@ public class Pedido extends BaseEntity {
     @Column(name = "token_sessao")
     private String tokenSessao;
 
+    //    TODO entender como lidar com esse caraq
     @Column(name = "data_pedido", nullable = false)
-    private LocalDateTime dataPedido;
+    private LocalDateTime dataPedido = LocalDateTime.now();
 
     @Column(name = "status_pedido", nullable = false, length = 50)
     @Setter

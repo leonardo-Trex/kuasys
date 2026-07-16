@@ -1,6 +1,7 @@
 package br.unitins.resource;
 
 import br.unitins.dto.pedido.PedidoCreateDTO;
+import br.unitins.dto.pedido.PedidoResponseDTO;
 import br.unitins.service.interfaces.PedidoService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.POST;
@@ -18,12 +19,23 @@ public class PedidoResource {
 //    @Inject
 //    JsonWebToken jwt;
 
+//    @POST
+////    @RolesAllowed({"usuario", "customer"})
+//    public Response finalizarCompra(PedidoCreateDTO dto) {
+
+    /// /        String usuarioId = jwt.getSubject();
+    /// /        PedidoResponseDTO pedido = pedidoService.finalizarCompra(usuarioId);
+//
+//        return Response.status(Response.Status.CREATED).build();
+//    }
     @POST
-//    @RolesAllowed({"usuario", "customer"})
-    public Response finalizarCompra(PedidoCreateDTO dto) {
-//        String usuarioId = jwt.getSubject();
-//        PedidoResponseDTO pedido = pedidoService.finalizarCompra(usuarioId);
-        
-        return Response.status(Response.Status.CREATED).build();
+    public Response criarPedido(PedidoCreateDTO dto) {
+
+        PedidoResponseDTO responseDTO = pedidoService.createPedido(dto);
+
+        return Response
+                .status(Response.Status.CREATED)
+                .entity(responseDTO)
+                .build();
     }
 }

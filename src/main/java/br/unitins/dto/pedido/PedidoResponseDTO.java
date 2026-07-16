@@ -9,6 +9,7 @@ public record PedidoResponseDTO(
 //      TODO: vai ser necessário somente na integração do keycloak
 //        String tokenSessao,
         LocalDateTime dataPedido,
+//        FIXME esse cara chego null, acho que pode ser o mapper
         Long statusPedidoId,
         String statusPedido,
         BigDecimal valorTotal

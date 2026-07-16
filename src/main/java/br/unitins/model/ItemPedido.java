@@ -14,12 +14,16 @@ import java.math.BigDecimal;
 public class ItemPedido extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "produto_id", nullable = false)
+    @Setter
     private Produto produto;
 
     @Column(nullable = false)
+    @Setter
+//    TODO talvez um Long para evitar pequenas conversões?
     private Integer quantidade;
 
     @Column(name = "preco_unitario", precision = 19, scale = 2, nullable = false)
+    @Setter
     private BigDecimal precoUnitario;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -27,5 +31,8 @@ public class ItemPedido extends BaseEntity {
     @Setter
     private Pedido pedido;
 
+    BigDecimal calcularSubTotal() {
+        return precoUnitario.multiply(BigDecimal.valueOf(quantidade));
+    }
 
 }
