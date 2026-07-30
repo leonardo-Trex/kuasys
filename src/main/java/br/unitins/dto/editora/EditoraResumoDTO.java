@@ -2,6 +2,6 @@ package br.unitins.dto.editora;
 
 public record EditoraResumoDTO(
         Long id,
-        Long nome
+        String nome
 ) {
 }

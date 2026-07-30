@@ -22,6 +22,7 @@ public interface EdicaoMapper {
     @Mapping(target = "editora", ignore = true)
     @Mapping(target = "quadrinho", ignore = true)
     @Mapping(target = "tipoCapa", source = "tipoCapaId")
+    @Mapping(target = "nome", source = "nomeEdicao")
     public Edicao toEntity(EdicaoCreateDTO dto);
 
     @Mapping(target = "tipoCapaId", source = "tipoCapa")

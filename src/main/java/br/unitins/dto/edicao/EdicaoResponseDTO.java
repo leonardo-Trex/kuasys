@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 public record EdicaoResponseDTO(
         Long id,
-//        String nome, TODO organizar isso.
+        String nome, //TODO organizar isso.
         String descricao,
         BigDecimal preco,
         Integer numero,

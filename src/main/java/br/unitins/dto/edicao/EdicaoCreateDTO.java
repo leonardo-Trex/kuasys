@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public record EdicaoCreateDTO(
-        String nome,
+        String nomeEdicao,
 
         String descricao,
 
@@ -31,4 +31,5 @@ public record EdicaoCreateDTO(
         Integer estoque,
 
         String nomeImagem
-){}
+) {
+}

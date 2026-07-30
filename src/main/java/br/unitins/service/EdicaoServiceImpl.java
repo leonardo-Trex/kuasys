@@ -25,12 +25,12 @@ public class EdicaoServiceImpl implements EdicaoService {
     @Override
     public List<EdicaoResponseDTO> findAll() {
 
-//        return repository.findAll().list()
-//                .stream()
-//                .map(c -> mapper.toResponseDTO(c))
-//                .toList();
+        return repository.findAll().list()
+                .stream()
+                .map(c -> mapper.toResponseDTO(c))
+                .toList();
 
-        return null;
+//        return null;
     }
 
     @Override
