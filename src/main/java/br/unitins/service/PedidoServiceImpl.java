@@ -39,6 +39,7 @@ public class PedidoServiceImpl implements PedidoService {
 
     @Inject
     PedidoMapper mapper;
+
     @Inject
     PedidoRepository pedidoRepository;
 

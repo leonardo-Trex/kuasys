@@ -1,7 +1,6 @@
 package br.unitins.model;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,7 +13,7 @@ import java.math.BigDecimal;
 @DiscriminatorColumn(name = "tipo_produto", discriminatorType = DiscriminatorType.STRING)
 @Table(name = "tb_produto")
 @Getter
-@Setter(AccessLevel.PROTECTED)
+@Setter // TODO mexi nisso, tirei o protected.
 @NoArgsConstructor
 public abstract class Produto extends BaseEntity {
 

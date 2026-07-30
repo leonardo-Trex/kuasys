@@ -40,8 +40,6 @@ public class Edicao extends Produto {
     private String dimensoes;
 
 
-    //    TODO: testar a efetividade dessa tag
-//    @JsonIgnore
     @JoinColumn(name = "colecao_id")
     @ManyToOne(fetch = FetchType.LAZY)
     @Setter

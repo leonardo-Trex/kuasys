@@ -26,7 +26,7 @@ public record EdicaoCreateDTO(
 
         Long editoraId,
 
-        Long quadrinhoId) {
+        Long quadrinhoId,
 
-
-}
+        Integer estoque
+){}
