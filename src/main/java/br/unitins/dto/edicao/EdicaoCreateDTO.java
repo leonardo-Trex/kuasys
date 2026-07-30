@@ -28,5 +28,7 @@ public record EdicaoCreateDTO(
 
         Long quadrinhoId,
 
-        Integer estoque
+        Integer estoque,
+
+        String nomeImagem
 ){}
