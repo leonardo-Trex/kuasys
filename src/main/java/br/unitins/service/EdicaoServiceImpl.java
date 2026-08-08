@@ -3,7 +3,14 @@ package br.unitins.service;
 import br.unitins.dto.edicao.EdicaoCreateDTO;
 import br.unitins.dto.edicao.EdicaoResponseDTO;
 import br.unitins.mapper.EdicaoMapper;
+import br.unitins.model.Colecao;
+import br.unitins.model.Edicao;
+import br.unitins.model.Editora;
+import br.unitins.model.Quadrinho;
+import br.unitins.repository.ColecaoRepository;
 import br.unitins.repository.EdicaoRepository;
+import br.unitins.repository.EditoraRepository;
+import br.unitins.repository.QuadrinhoRepository;
 import br.unitins.service.interfaces.EdicaoService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -16,7 +23,16 @@ import java.util.List;
 public class EdicaoServiceImpl implements EdicaoService {
 
     @Inject
-    EdicaoRepository repository;
+    EdicaoRepository edicaoRepository;
+
+    @Inject
+    QuadrinhoRepository quadrinhoRepository;
+
+    @Inject
+    EditoraRepository editoraRepository;
+
+    @Inject
+    ColecaoRepository colecaoRepository;
 
     @Inject
     EdicaoMapper mapper;
@@ -25,7 +41,7 @@ public class EdicaoServiceImpl implements EdicaoService {
     @Override
     public List<EdicaoResponseDTO> findAll() {
 
-        return repository.findAll().list()
+        return edicaoRepository.findAll().list()
                 .stream()
                 .map(c -> mapper.toResponseDTO(c))
                 .toList();
@@ -34,7 +50,7 @@ public class EdicaoServiceImpl implements EdicaoService {
     @Override
     public EdicaoResponseDTO findById(Long id) {
 
-        return mapper.toResponseDTO(repository.findById(id));
+        return mapper.toResponseDTO(edicaoRepository.findById(id));
     }
 
     @Override
@@ -48,12 +64,21 @@ public class EdicaoServiceImpl implements EdicaoService {
         return null;
     }
 
-    //    TODO: Esse cara é muito denso, a lógica de implementação vem depois
     @Override
     @Transactional
     public EdicaoResponseDTO create(EdicaoCreateDTO dto) {
 
-        return null;
+        Edicao edicao = mapper.toEntity(dto);
+        Editora editora = editoraRepository.findById(dto.editoraId());
+        Quadrinho quadrinho = quadrinhoRepository.findById(dto.quadrinhoId());
+        Colecao colecao = colecaoRepository.findById(dto.colecaoId());
+
+        edicao.setColecao(colecao);
+        edicao.setQuadrinho(quadrinho);
+        edicao.setEditora(editora);
+
+        edicaoRepository.persist(edicao);
+        return mapper.toResponseDTO(edicao);
     }
 
 //    @Override
@@ -82,7 +107,7 @@ public class EdicaoServiceImpl implements EdicaoService {
     @Transactional
     public void delete(Long id) {
 
-        repository.deleteById(id);
+        edicaoRepository.deleteById(id);
     }
 
 }
