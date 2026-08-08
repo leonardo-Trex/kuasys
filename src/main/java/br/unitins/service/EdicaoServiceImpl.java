@@ -7,7 +7,6 @@ import br.unitins.model.Colecao;
 import br.unitins.model.Edicao;
 import br.unitins.model.Editora;
 import br.unitins.model.Quadrinho;
-import br.unitins.model.enums.GeneroQuadrinho;
 import br.unitins.model.enums.TipoCapa;
 import br.unitins.repository.ColecaoRepository;
 import br.unitins.repository.EdicaoRepository;
@@ -58,12 +57,10 @@ public class EdicaoServiceImpl implements EdicaoService {
     @Override
     public List<EdicaoResponseDTO> findByNome(String nome) {
 
-//        return repository.findByNome(nome).list()
-//                .stream()
-//                .map(c -> mapper.toResponseDTO(c))
-//                .toList();
-
-        return null;
+        return edicaoRepository.findByNome(nome).list()
+                .stream()
+                .map(e -> mapper.toResponseDTO(e))
+                .toList();
     }
 
     @Override

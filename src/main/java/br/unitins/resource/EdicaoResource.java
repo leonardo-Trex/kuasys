@@ -2,7 +2,6 @@ package br.unitins.resource;
 
 import br.unitins.dto.edicao.EdicaoCreateDTO;
 import br.unitins.dto.edicao.EdicaoResponseDTO;
-import br.unitins.mapper.EdicaoMapper;
 import br.unitins.service.interfaces.EdicaoService;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
@@ -22,11 +21,8 @@ public class EdicaoResource {
     @Inject
     EdicaoService service;
 
-    @Inject
-    EdicaoMapper mapper;
-
     @GET
-    public Response buscarTodo() {
+    public Response buscarTodos() {
 
         List<EdicaoResponseDTO> lista = service.findAll();
         return Response.ok(lista).build();
@@ -37,6 +33,16 @@ public class EdicaoResource {
     public Response buscarPeloId(@PathParam("id") Long id) {
 
         return Response.ok(service.findById(id)).build();
+    }
+
+    @GET
+    @Path("/buscar")
+    public Response buscarPeloNome(@QueryParam("nome") String nome) {
+
+        return Response
+                .ok()
+                .entity(service.findByNome(nome))
+                .build();
     }
 
     @DELETE
