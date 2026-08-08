@@ -14,7 +14,7 @@ public interface EdicaoService {
 
     EdicaoResponseDTO create(EdicaoCreateDTO dto);
 
-//    void update(Long id, EdicaoCreateDTO dto);
+    void update(Long id, EdicaoCreateDTO dto);
 
     void delete(Long id);
 

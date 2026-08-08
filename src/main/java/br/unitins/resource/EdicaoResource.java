@@ -59,12 +59,13 @@ public class EdicaoResource {
                 .build();
     }
 
-//    @PUT
-//    @Path("/{id}")
-////    @RolesAllowed("admin")
-//    public Response alterar(@PathParam("id") Long id, @Valid EdicaoCreateDTO dto) {
-//        service.update(id, dto);
-//
-//        return Response.ok().build();
-//    }
+    @PUT
+    @Path("/{id}")
+//    @RolesAllowed("admin")
+    public Response alterar(@PathParam("id") Long id, @Valid EdicaoCreateDTO dto) {
+
+        service.update(id, dto);
+
+        return Response.ok().build();
+    }
 }

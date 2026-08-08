@@ -7,6 +7,8 @@ import br.unitins.model.Colecao;
 import br.unitins.model.Edicao;
 import br.unitins.model.Editora;
 import br.unitins.model.Quadrinho;
+import br.unitins.model.enums.GeneroQuadrinho;
+import br.unitins.model.enums.TipoCapa;
 import br.unitins.repository.ColecaoRepository;
 import br.unitins.repository.EdicaoRepository;
 import br.unitins.repository.EditoraRepository;
@@ -67,6 +69,7 @@ public class EdicaoServiceImpl implements EdicaoService {
     @Override
     @Transactional
     public EdicaoResponseDTO create(EdicaoCreateDTO dto) {
+//    FIXME valores invalidos para ids!
 
         Edicao edicao = mapper.toEntity(dto);
         Editora editora = editoraRepository.findById(dto.editoraId());
@@ -81,27 +84,27 @@ public class EdicaoServiceImpl implements EdicaoService {
         return mapper.toResponseDTO(edicao);
     }
 
-//    @Override
-//    @Transactional
-//    public void update(Long id, EdicaoCreateDTO dto) {
-//        Edicao e = findById(id);
-//        if (e == null) {
-//            throw new NotFoundException("Edição não encontrada");
-//        }
-//        e.setNome(dto.nome());
-//        e.setDescricao(dto.descricao());
-//        e.setPreco(dto.preco());
-//        e.setNumero(dto.numero());
-//        e.setDataPublicacao(dto.dataPublicacao());
-//        e.setIsbn(dto.isbnLimpo());
-//        e.setTiragem(dto.tiragem());
-//        e.setTipoCapa(dto.tipoCapa());
-//        e.setDimensoes(dto.dimensoes());
-//        e.setGenero(dto.genero());
-//        e.setColecao(colecaoRepository.findByIdOptional(dto.idColecao()).orElseThrow(() -> new NotFoundException("Coleção não encontrada")));
-//        e.setEditora(editoraRepository.findByIdOptional(dto.idEditora()).orElseThrow(() -> new NotFoundException("Editora não encontrada")));
-//        e.setQuadrinho(quadrinhoRepository.findByIdOptional(dto.idQuadrinho()).orElseThrow(() -> new NotFoundException("Quadrinho não encontrado")));
-//    }
+    @Override
+    @Transactional
+    public void update(Long id, EdicaoCreateDTO dto) {
+        Edicao e = edicaoRepository.findById(id);
+
+        e.setNome(dto.nomeEdicao());
+        e.setDescricao(dto.descricao());
+        e.setPreco(dto.preco());
+        e.setNumero(dto.numero());
+        e.setDataPublicacao(dto.dataPublicacao());
+        e.setIsbn(dto.isbn());
+        e.setTiragem(dto.tiragem());
+
+
+        e.setTipoCapa(TipoCapa.valueOf(dto.tipoCapaId()));
+        e.setDimensoes(dto.dimensoes());
+
+        e.setColecao(colecaoRepository.findById(dto.colecaoId()));
+        e.setEditora(editoraRepository.findById(dto.editoraId()));
+        e.setQuadrinho(quadrinhoRepository.findById(dto.quadrinhoId()));
+    }
 
     @Override
     @Transactional
