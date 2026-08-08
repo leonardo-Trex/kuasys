@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @DiscriminatorValue("EDICAO")
 public class Edicao extends Produto {
+// TODO add Genero support
 
     @Column(nullable = false)
     @Setter
