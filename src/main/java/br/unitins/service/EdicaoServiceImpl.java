@@ -29,15 +29,12 @@ public class EdicaoServiceImpl implements EdicaoService {
                 .stream()
                 .map(c -> mapper.toResponseDTO(c))
                 .toList();
-
-//        return null;
     }
 
     @Override
     public EdicaoResponseDTO findById(Long id) {
 
-//        return repository.findById(id);
-        return null;
+        return mapper.toResponseDTO(repository.findById(id));
     }
 
     @Override
