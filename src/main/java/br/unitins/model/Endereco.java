@@ -47,8 +47,4 @@ public class Endereco extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
-
-    protected void updateUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
 }
