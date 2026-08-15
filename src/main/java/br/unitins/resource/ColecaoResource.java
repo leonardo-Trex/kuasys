@@ -26,7 +26,9 @@ public class ColecaoResource {
     public Response buscarTodo() {
 
         List<ColecaoResponseDTO> lista = service.findAll();
-        return Response.ok(lista).build();
+        return Response
+                .ok(lista)
+                .build();
     }
 
     // public Response buscarPeloNome() {
@@ -38,7 +40,9 @@ public class ColecaoResource {
 //    @RolesAllowed("usuario")
     public Response buscarPeloId(@PathParam("id") Long id) {
 
-        return Response.ok(service.findById(id)).build();
+        return Response
+                .ok(service.findById(id))
+                .build();
     }
 
     @DELETE
@@ -47,7 +51,9 @@ public class ColecaoResource {
     public Response deletar(@PathParam("id") Long id) {
 
         service.delete(id);
-        return Response.noContent().build();
+        return Response
+                .noContent()
+                .build();
     }
 
     @POST

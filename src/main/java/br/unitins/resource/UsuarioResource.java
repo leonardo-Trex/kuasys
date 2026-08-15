@@ -23,14 +23,18 @@ public class UsuarioResource {
     public Response buscarTodos() {
 
         List<UsuarioResponseDTO> lista = service.findAll();
-        return Response.ok(lista).build();
+        return Response
+                .ok(lista)
+                .build();
     }
 
     @GET
     @Path("/{id}")
     public Response buscarPorId(@PathParam("id") Long id) {
 
-        return Response.ok(service.findById(id)).build();
+        return Response
+                .ok(service.findById(id))
+                .build();
     }
 
     @GET
@@ -38,7 +42,9 @@ public class UsuarioResource {
     public Response buscarPorNome(@PathParam("nome") String nome) {
 
         List<UsuarioResponseDTO> lista = service.findByNome(nome);
-        return Response.ok(lista).build();
+        return Response
+                .ok(lista)
+                .build();
     }
 
     @GET
@@ -52,7 +58,9 @@ public class UsuarioResource {
     @Path("/email/{email}")
     public Response buscarPorEmail(@PathParam("email") String email) {
 
-        return Response.ok(service.findByEmail(email)).build();
+        return Response
+                .ok(service.findByEmail(email))
+                .build();
     }
 
     @POST
@@ -80,6 +88,8 @@ public class UsuarioResource {
     public Response deletar(@PathParam("id") Long id) {
 
         service.delete(id);
-        return Response.noContent().build();
+        return Response
+                .noContent()
+                .build();
     }
 }

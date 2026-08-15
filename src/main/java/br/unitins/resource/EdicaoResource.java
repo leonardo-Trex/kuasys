@@ -25,14 +25,18 @@ public class EdicaoResource {
     public Response buscarTodos() {
 
         List<EdicaoResponseDTO> lista = service.findAll();
-        return Response.ok(lista).build();
+        return Response
+                .ok(lista)
+                .build();
     }
 
     @GET
     @Path("/{id}")
     public Response buscarPeloId(@PathParam("id") Long id) {
 
-        return Response.ok(service.findById(id)).build();
+        return Response
+                .ok(service.findById(id))
+                .build();
     }
 
     @GET
@@ -51,7 +55,9 @@ public class EdicaoResource {
     public Response deletar(@PathParam("id") Long id) {
 
         service.delete(id);
-        return Response.noContent().build();
+        return Response
+                .noContent()
+                .build();
     }
 
     @POST
@@ -72,6 +78,8 @@ public class EdicaoResource {
 
         service.update(id, dto);
 
-        return Response.ok().build();
+        return Response
+                .ok()
+                .build();
     }
 }

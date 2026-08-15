@@ -24,30 +24,36 @@ public class QuadrinistaResource {
     public Response buscarTodo() {
 
         List<QuadrinistaResponseDTO> lista = service.findAll();
-        return Response.ok(lista).build();
+        return Response
+                .ok(lista)
+                .build();
     }
 
     @GET
     @Path("/{id}")
     public Response buscarPeloId(@PathParam("id") Long id) {
 
-        return Response.ok(service.findById(id)).build();
+        return Response
+                .ok(service.findById(id))
+                .build();
     }
 
     @DELETE
     @Path("/{id}")
 //    @RolesAllowed("admin")
     public Response deletar(@PathParam("id") Long id) {
-        service.delete(id);
 
-        return Response.noContent().build();
+        service.delete(id);
+        return Response
+                .noContent()
+                .build();
     }
 
     @POST
 //    @RolesAllowed("admin")
     public Response incluir(QuadrinistaCreateDTO dto) {
-        QuadrinistaResponseDTO response = service.create(dto);
 
+        QuadrinistaResponseDTO response = service.create(dto);
         return Response
                 .status(Status.CREATED)
                 .entity(response)
@@ -61,6 +67,8 @@ public class QuadrinistaResource {
 //        TODO: Consertar esse cara quando o UpdateDTO existir
 //        service.update(id, QuadrinistaMapper.toEntity(dto));
 
-        return Response.ok().build();
+        return Response
+                .ok()
+                .build();
     }
 }

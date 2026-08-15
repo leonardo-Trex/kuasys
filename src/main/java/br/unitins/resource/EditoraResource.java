@@ -29,14 +29,18 @@ public class EditoraResource {
     public Response buscarTodo() {
 
         List<EditoraResponseDTO> lista = service.findAll();
-        return Response.ok(lista).build();
+        return Response
+                .ok(lista)
+                .build();
     }
 
     @GET
     @Path("/{id}")
     public Response buscarPeloId(@PathParam("id") Long id) {
 
-        return Response.ok(service.findById(id)).build();
+        return Response
+                .ok(service.findById(id))
+                .build();
     }
 
     @DELETE
@@ -45,7 +49,9 @@ public class EditoraResource {
     public Response deletar(@PathParam("id") Long id) {
 
         service.delete(id);
-        return Response.noContent().build();
+        return Response
+                .noContent()
+                .build();
     }
 
     @POST
