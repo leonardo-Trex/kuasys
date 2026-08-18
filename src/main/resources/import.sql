@@ -59,6 +59,26 @@ VALUES (CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, true, '111.222.333-01', '(11) 9888
        (CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, true, '111.222.333-05', '(31) 98888-0005', 'kc-usr-0005',
         'lucas.pereira@email.com', 'Lucas Pereira');
 
+--===================================================================================================================================================================
+--=                                                                        ENDEREÇO!                                                                                =
+--===================================================================================================================================================================
+INSERT INTO tb_endereco (data_cadastro, data_atualizacao, logradouro, numero, complemento, bairro, cidade, estado,
+                         cep, is_principal, usuario_id)
+VALUES (CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'Rua das Acácias', '120', 'Apto 302', 'Jardim Paulista', 'São Paulo',
+        'SP', '01415-001', true, 1),
+       (CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'Avenida Paulista', '1578', 'Bloco B', 'Bela Vista', 'São Paulo',
+        'SP', '01310-200', false, 1),
+       (CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'Rua das Laranjeiras', '45', null, 'Laranjeiras', 'Rio de Janeiro',
+        'RJ', '22240-003', true, 2),
+       (CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'Avenida Atlântica', '1702', 'Apto 801', 'Copacabana',
+        'Rio de Janeiro', 'RJ', '22021-001', false, 2),
+       (CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'Quadra 204 Sul, Alameda 10', 'Lote 15', 'Casa 2', 'Plano Diretor Sul',
+        'Palmas', 'TO', '77020-488', true, 3),
+       (CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'Rua da Bahia', '900', 'Sala 12', 'Centro', 'Belo Horizonte', 'MG',
+        '30160-011', true, 4),
+       (CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'Avenida Afonso Pena', '2500', null, 'Funcionários', 'Belo Horizonte',
+        'MG', '30130-007', true, 5);
+
 
 
 --===================================================================================================================================================================
