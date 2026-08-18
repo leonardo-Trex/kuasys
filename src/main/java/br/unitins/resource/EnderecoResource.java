@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -61,6 +62,16 @@ public class EnderecoResource {
         return Response
                 .status(Status.CREATED)
                 .entity(endereco)
+                .build();
+    }
+
+    @PUT
+    @Path("/{id}")
+    public Response alterar(@PathParam("id") Long id, @Valid EnderecoCreateDTO dto) {
+        service.update(id, dto);
+
+        return Response
+                .ok()
                 .build();
     }
 }

@@ -8,6 +8,7 @@ import br.unitins.repository.EnderecoRepository;
 import br.unitins.service.interfaces.EnderecoService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 
@@ -49,5 +50,18 @@ public class EnderecoServiceImpl implements EnderecoService {
         return mapper.toResponseDTO(e);
     }
 
+    @Override
+    @Transactional
+    public void update(Long id, EnderecoCreateDTO dto) {
+        Endereco e = repository.findById(id);
+
+        e.setLogradouro(dto.logradouro());
+        e.setNumero(dto.numero());
+        e.setComplemento(dto.complemento());
+        e.setBairro(dto.bairro());
+        e.setCidade(dto.cidade());
+        e.setEstado(dto.estado());
+        e.setCep(dto.cep());
+    }
 
 }

@@ -13,6 +13,7 @@ public interface EnderecoService {
 
     List<EnderecoResponseDTO> findByUsuarioId(Long id);
 
-    //    TODO: talvez esse cara precise de um Id de Usuário também
     EnderecoResponseDTO create(EnderecoCreateDTO dto);
+
+    void update(Long id, EnderecoCreateDTO dto);
 }
