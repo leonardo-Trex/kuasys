@@ -12,9 +12,9 @@ public interface EditoraService {
 
     List<EditoraResponseDTO> findByNome(String nome);
 
-    EditoraResponseDTO create(EditoraCreateDTO editora);
+    EditoraResponseDTO create(EditoraCreateDTO dto);
 
-//    void update(Long id, Editora editora);
+    void update(Long id, EditoraCreateDTO dto);
 
     void delete(Long id);
 }

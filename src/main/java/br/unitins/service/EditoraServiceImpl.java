@@ -56,13 +56,14 @@ public class EditoraServiceImpl implements EditoraService {
         return mapper.toResponseDTO(e);
     }
 
-//    @Override
-//    @Transactional
-//    public void update(Long id, Editora editora) {
-//        Editora e = findById(id);
-//        e.setNome(editora.getNome());
-//        e.setCnpj(editora.getCnpj());
-//    }
+    @Override
+    @Transactional
+    public void update(Long id, EditoraCreateDTO dto) {
+        Editora e = repository.findById(id);
+
+        e.setNome(dto.nome());
+        e.setCnpj(dto.cnpj());
+    }
 
     @Override
     @Transactional

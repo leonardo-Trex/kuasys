@@ -6,6 +6,7 @@ import br.unitins.mapper.EditoraMapper;
 import br.unitins.model.Editora;
 import br.unitins.service.interfaces.EditoraService;
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -66,12 +67,14 @@ public class EditoraResource {
                 .build();
     }
 
-//    @PUT
-//    @Path("/{id}")
-////    @RolesAllowed("admin")
-//    public Response alterar(@PathParam("id") Long id, EditoraCreateDTO dto) {
-//        service.update(id, EditoraMapper.toEntity(dto));
-//
-//        return Response.ok().build();
-//    }
+    @PUT
+    @Path("/{id}")
+//    @RolesAllowed("admin")
+    public Response alterar(@PathParam("id") Long id, @Valid EditoraCreateDTO dto) {
+        service.update(id, dto);
+
+        return Response
+                .ok()
+                .build();
+    }
 }
