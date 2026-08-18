@@ -47,4 +47,16 @@ public class Endereco extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
+
+    /**
+     * Mantém o lado proprietário do relacionamento sincronizado com os métodos
+     * {@link Usuario#addEndereco(Endereco)} e
+     * {@link Usuario#removeEndereco(Endereco)}.
+     *
+     * O acesso é restrito ao pacote para que a associação seja alterada pelos
+     * métodos auxiliares de {@code Usuario}, evitando mudanças unilaterais.
+     */
+    void updateUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }
