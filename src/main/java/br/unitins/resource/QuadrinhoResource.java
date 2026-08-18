@@ -62,12 +62,14 @@ public class QuadrinhoResource {
                 .build();
     }
 
-//    @PUT
-//    @Path("/{id}")
-////    @RolesAllowed("admin")
-//    public Response alterar(@PathParam("id") Long id, QuadrinhoCreateDTO dto) {
-//        service.update(id, QuadrinhoMapper.toEntity(dto));
-//
-//        return Response.ok().build();
-//    }
+    @PUT
+    @Path("/{id}")
+//    @RolesAllowed("admin")
+    public Response alterar(@PathParam("id") Long id, @Valid QuadrinhoCreateDTO dto) {
+        service.update(id, dto);
+
+        return Response
+                .ok()
+                .build();
+    }
 }
