@@ -67,12 +67,14 @@ public class ColecaoResource {
                 .build();
     }
 
-//    @PUT
-//    @Path("/{id}")
-////    @RolesAllowed("usuario")
-//    public Response alterar(@PathParam("id") Long id, ColecaoCreateDTO dto) {
-//        service.update(id, ColecaoMapper.toEntity(dto));
-//
-//        return Response.ok().build();
-//    }
+    @PUT
+    @Path("/{id}")
+//    @RolesAllowed("usuario")
+    public Response alterar(@PathParam("id") Long id, @Valid ColecaoCreateDTO dto) {
+        service.update(id, dto);
+
+        return Response
+                .ok()
+                .build();
+    }
 }
