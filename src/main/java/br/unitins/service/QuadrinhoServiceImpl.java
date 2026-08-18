@@ -55,14 +55,15 @@ public class QuadrinhoServiceImpl implements QuadrinhoService {
         return mapper.toResponseDTO(q);
     }
 
-//    @Override
-//    @Transactional
-//    public void update(Long id, Quadrinho quadrinho) {
-//        Quadrinho q = findById(id);
-//        q.setTitulo(quadrinho.getTitulo());
-//        q.setSinopse(quadrinho.getSinopse());
-//        q.setGenero(quadrinho.getGenero());
-//    }
+    @Override
+    @Transactional
+    public void update(Long id, QuadrinhoCreateDTO dto) {
+        Quadrinho q = repository.findById(id);
+
+        q.setTitulo(dto.titulo());
+        q.setSinopse(dto.sinopse());
+        q.setGenero(dto.genero());
+    }
 
     @Override
     @Transactional

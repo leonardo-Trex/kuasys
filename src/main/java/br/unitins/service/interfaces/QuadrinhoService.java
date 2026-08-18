@@ -12,9 +12,9 @@ public interface QuadrinhoService {
 
     List<QuadrinhoResponseDTO> findByTitulo(String titulo);
 
-    QuadrinhoResponseDTO create(QuadrinhoCreateDTO quadrinho);
+    QuadrinhoResponseDTO create(QuadrinhoCreateDTO dto);
 
-//    void update(Long id, Quadrinho quadrinho);
+    void update(Long id, QuadrinhoCreateDTO dto);
 
     void delete(Long id);
 }

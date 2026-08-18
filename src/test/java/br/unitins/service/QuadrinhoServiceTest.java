@@ -122,6 +122,26 @@ class QuadrinhoServiceTest {
     }
 
     @Test
+    void update_deveAtualizarOsDadosDoQuadrinho() {
+        Quadrinho quadrinho = novoQuadrinho("Título antigo", GeneroQuadrinho.ACAO);
+        QuadrinhoCreateDTO dto = new QuadrinhoCreateDTO(
+                "Título atualizado",
+                "Sinopse atualizada",
+                GeneroQuadrinho.TERROR
+        );
+        when(repository.findById(9L)).thenReturn(quadrinho);
+
+        service.update(9L, dto);
+
+        assertEquals("Título atualizado", quadrinho.getTitulo());
+        assertEquals("Sinopse atualizada", quadrinho.getSinopse());
+        assertEquals(GeneroQuadrinho.TERROR, quadrinho.getGenero());
+        verify(repository).findById(9L);
+        verifyNoMoreInteractions(repository);
+        verifyNoMoreInteractions(mapper);
+    }
+
+    @Test
     void delete_deveExcluirQuadrinhoPeloId() {
         service.delete(12L);
 

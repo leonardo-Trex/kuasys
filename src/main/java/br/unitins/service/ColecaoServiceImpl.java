@@ -5,6 +5,7 @@ import br.unitins.dto.colecao.ColecaoResponseDTO;
 import br.unitins.mapper.ColecaoMapper;
 import br.unitins.model.Colecao;
 import br.unitins.repository.ColecaoRepository;
+import br.unitins.repository.EditoraRepository;
 import br.unitins.service.interfaces.ColecaoService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -17,6 +18,9 @@ public class ColecaoServiceImpl implements ColecaoService {
 
     @Inject
     ColecaoRepository repository;
+
+    @Inject
+    EditoraRepository editoraRepository;
 
     @Inject
     ColecaoMapper mapper;
@@ -55,15 +59,17 @@ public class ColecaoServiceImpl implements ColecaoService {
         return mapper.toResponseDTO(c);
     }
 
-//    @Override
-//    @Transactional
-//    public void update(Long id, Colecao colecao) {
-//        Colecao c = findById(id);
-//        c.setNome(colecao.getNome());
-//        c.setDescricao(colecao.getDescricao());
-//        c.setDataInicioPublicacao(colecao.getDataInicioPublicacao());
-//        c.setDataFimPublicacao(colecao.getDataFimPublicacao());
-//    }
+    @Override
+    @Transactional
+    public void update(Long id, ColecaoCreateDTO dto) {
+        Colecao c = repository.findById(id);
+
+        c.setNome(dto.nome());
+        c.setDescricao(dto.descricao());
+        c.setDataInicioPublicacao(dto.dataInicioPublicacao());
+        c.setDataFimPublicacao(dto.dataFimPublicacao());
+        c.setEditora(editoraRepository.findById(dto.editoraId()));
+    }
 
     @Override
     @Transactional

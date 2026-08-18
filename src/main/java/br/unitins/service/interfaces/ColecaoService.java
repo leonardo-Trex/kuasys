@@ -12,9 +12,9 @@ public interface ColecaoService {
 
     List<ColecaoResponseDTO> findByNome(String nome);
 
-    ColecaoResponseDTO create(ColecaoCreateDTO colecao);
+    ColecaoResponseDTO create(ColecaoCreateDTO dto);
 
-//    void update(Long id, ColecaoCreateDTO colecao);
+    void update(Long id, ColecaoCreateDTO dto);
 
     void delete(Long id);
 
