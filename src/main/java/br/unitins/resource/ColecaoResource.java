@@ -3,6 +3,7 @@ package br.unitins.resource;
 import br.unitins.dto.colecao.ColecaoCreateDTO;
 import br.unitins.dto.colecao.ColecaoResponseDTO;
 import br.unitins.service.interfaces.ColecaoService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
@@ -15,15 +16,14 @@ import java.util.List;
 @Path("/colecoes")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-//@PermitAll
 public class ColecaoResource {
 
     @Inject
     ColecaoService service;
 
     @GET
-//    @RolesAllowed("usuario")
-    public Response buscarTodo() {
+    @RolesAllowed("user")
+    public Response buscarTodos() {
 
         List<ColecaoResponseDTO> lista = service.findAll();
         return Response

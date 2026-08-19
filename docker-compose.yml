@@ -1,70 +1,83 @@
 services:
-  # Serviço do Banco de Dados
-
-
-  postgres-db:
-
-    env_file:
-      - .env
-
+  # Serviço do Banco de Dados da Aplicação (Quarkus)
+  postgres-app:
     image: postgres:15-alpine
-    container_name: postgres-ecommerce
-
+    container_name: postgres-app-ecommerce
+    environment:
+      POSTGRES_DB: ${APP_DB_NAME}
+      POSTGRES_USER: ${APP_DB_USER}
+      POSTGRES_PASSWORD: ${APP_DB_PASSWORD}
     ports:
       - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - pgdata-app:/var/lib/postgresql/data
     networks:
       - ecommerce-network
 
-      #  # Serviço do Keycloak
-      #  keycloak:
-      #    image: quay.io/keycloak/keycloak:latest
-      #    container_name: keycloak-ecommerce
-      #    command: start-dev
-      #    environment:
-      #      - KC_BOOTSTRAP_ADMIN_USERNAME=admin
-      #      - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
-      #      - KC_DB=postgres
-      #      - KC_DB_URL=jdbc:postgresql://postgres-db:5432/kuasys_db
-      #      - KC_DB_USERNAME=kuasys
-      #      - KC_DB_PASSWORD=123456
-      #      - KC_DB_SCHEMA=keycloak
-      #    ports:
-      #      - "8080:8080"
-      #    depends_on:
-      #      - postgres-db
-      #    networks:
-      #      - ecommerce-network
-      # Servidor de E-mail de Testes (Mailpit)
-      #  mailpit:
-      #    image: axllent/mailpit:latest
-      #    container_name: mailpit-ecommerce
-      #    ports:
-      #      - "1025:1025" # Porta SMTP para o Keycloak enviar os e-mails
-      #      - "8025:8025" # Porta Web UI para você abrir no navegador e ver as caixas de entrada
-      #    networks:
-      #      - ecommerce-network
-      # Interface Visual do Banco de Dados (Adicionado para a apresentação)
+  # Serviço do Banco de Dados do Keycloak
+  postgres-keycloak:
+    image: postgres:15-alpine
+    container_name: postgres-keycloak-ecommerce
+    environment:
+      POSTGRES_DB: ${KC_DB_NAME}
+      POSTGRES_USER: ${KC_DB_USER}
+      POSTGRES_PASSWORD: ${KC_DB_PASSWORD}
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata-keycloak:/var/lib/postgresql/data
+    networks:
+      - ecommerce-network
+
+  # Serviço do Keycloak
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak-ecommerce
+    command: start-dev
+    restart: unless-stopped
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres-keycloak:5432/${KC_DB_NAME}
+      KC_DB_USERNAME: ${KC_DB_USER}
+      KC_DB_PASSWORD: ${KC_DB_PASSWORD}
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres-keycloak
+    networks:
+      - ecommerce-network
+
+  # Servidor de E-mail de Testes (Mailpit)
+  # mailpit:
+  #   image: axllent/mailpit:latest
+  #   container_name: mailpit-ecommerce
+  #   ports:
+  #     - "1025:1025"
+  #     - "8025:8025"
+  #   networks:
+  #     - ecommerce-network
+
+  # Interface Visual do Banco de Dados (pgAdmin)
   pgadmin:
-
-    env_file:
-      - .env
-
     image: dpage/pgadmin4
     container_name: pgadmin-ecommerce
-
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
     ports:
-      - "8085:80" # Acessível em http://localhost:8085
+      - "8085:80"
     depends_on:
-      - postgres-db
+      - postgres-app
+      - postgres-keycloak
     networks:
       - ecommerce-network
 
-# Definição dos recursos globais (Redes e Volumes)
 networks:
   ecommerce-network:
     driver: bridge
 
 volumes:
-  pgdata:
+  pgdata-app:
+  pgdata-keycloak:
