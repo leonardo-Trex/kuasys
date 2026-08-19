@@ -6,13 +6,13 @@ info:
 components:
   securitySchemes:
     # Usando o nome exato que o Quarkus gera, nós engolimos o esquema automático dele!
-    SecurityScheme: 
+    SecurityScheme:
       type: oauth2
       description: Insira as credenciais do Keycloak para a apresentação
       flows:
         password:
-          tokenUrl: http://localhost:8080/realms/realm-kuasys/protocol/openid-connect/token
+          tokenUrl: http://localhost:8080/realms/kuasys-realm/protocol/openid-connect/token
 
 # Aplica o nosso cadeado unificado globalmente
 security:
-  - SecurityScheme: []
+  - SecurityScheme: [ ]
