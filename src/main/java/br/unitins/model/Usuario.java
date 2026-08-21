@@ -47,9 +47,7 @@ public class Usuario extends BaseEntity {
     // CascadeType.ALL + orphanRemoval garante que ao remover um endereço da lista, ele seja deletado do BD
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private final List<Endereco> enderecos = new ArrayList<>();
-
-    @Transient
-    private String senha;
+    
 
     // Construtor customizado para inicializar o usuário já com o id obrigatório do Keycloak
     public Usuario(String keycloakId) {
