@@ -2,9 +2,8 @@ package br.unitins.resource;
 
 import br.unitins.dto.editora.EditoraCreateDTO;
 import br.unitins.dto.editora.EditoraResponseDTO;
-import br.unitins.mapper.EditoraMapper;
-import br.unitins.model.Editora;
 import br.unitins.service.interfaces.EditoraService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
@@ -17,17 +16,14 @@ import java.util.List;
 @Path("/editoras")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-//@PermitAll
 public class EditoraResource {
 
     @Inject
     EditoraService service;
 
-    @Inject
-    EditoraMapper mapper;
-
     @GET
-    public Response buscarTodo() {
+    @RolesAllowed("user")
+    public Response buscarTodos() {
 
         List<EditoraResponseDTO> lista = service.findAll();
         return Response
@@ -57,13 +53,12 @@ public class EditoraResource {
 
     @POST
 //    @RolesAllowed("admin")
-    public Response incluir(EditoraCreateDTO dto) {
-
-        Editora editora = mapper.toEntity(dto);
+    public Response incluir(@Valid EditoraCreateDTO dto) {
+        EditoraResponseDTO editora = service.create(dto);
 
         return Response
                 .status(Status.CREATED)
-                .entity(mapper.toResponseDTO(editora))
+                .entity(editora)
                 .build();
     }
 
